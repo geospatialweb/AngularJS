@@ -7,8 +7,8 @@ var express = require('express'),
 app.use(favicon(join(__dirname, 'public/images/favicon.ico')));
 app.use(express.static(join(__dirname, 'public')));
 
-app.use('/google',
-    require('./routes/google'));
+//app.use('/google',
+//    require('./routes/google'));
 app.use('/mapbox',
     require('./routes/mapbox'));
 app.use('/office',
