@@ -26,7 +26,7 @@ body {
 		#header {
 			float: left;
 			font-size: 1.4em;
-			padding: 1% 0 0 0.6%;
+			padding: 0.7% 0 0 0.6%;
 		}
 
 			.char15 {
@@ -38,7 +38,7 @@ body {
 			}
 
 		.subHeader {
-			color: rgb(255,0,100);
+			color: rgb(255, 0, 115);
 			font-size: 0.95em;
 			padding: 1% 0 0 0;
 			text-align: center;
