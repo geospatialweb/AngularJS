@@ -1,4 +1,5 @@
 var express = require('express'),
+	parse = require('pg-connection-string').parse,
 	pg = require('pg');
 
 pg.logError = function (error, res, sql) {
@@ -8,7 +9,7 @@ pg.logError = function (error, res, sql) {
 };
 
 module.exports = express.Router().get('/', function(req, res) {
-	var connection = 'postgres://postgres:admin@localhost/fabr';
+	var connection = parse('postgres://postgres:admin@localhost/fabr');
 
 	pg.connect(connection, function (error, client, release) {
 		var sql = 'SELECT lat, lng FROM region';
