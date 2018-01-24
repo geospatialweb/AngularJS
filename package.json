@@ -1,16 +1,19 @@
 {
-  "name": "geospatialweb",
-  "version": "0.0.1",
+  "name": "geospatial_web",
+  "version": "0.1.0",
   "author": "John Campbell <johncampbell@geospatialweb.ca>",
-  "description": "Node.js / Express.js / Mapbox.js Open Source Web Mapping",
+  "description": "Node / Express / Mapbox / PostGIS Web Mapping",
   "main": "app.js",
   "private": true,
+  "scripts": {
+      "start": "node app.js"
+  },
   "dependencies": {
-    "@mapbox/togeojson": "^0.16.0",
-    "express": "^4.16.0",
-    "jsdom-nogyp": "^0.8.3",
-    "pg": "4.5.7",
-    "request": "^2.83.0",
-    "serve-favicon": "^2.4.5"
+      "@mapbox/togeojson": "^0.16.0",
+      "express": "^4.16.2",
+      "jsdom-nogyp": "^0.8.3",
+      "pg": "4.5.7",
+      "request": "^2.83.0",
+      "serve-favicon": "^2.4.5"
   }
 }
