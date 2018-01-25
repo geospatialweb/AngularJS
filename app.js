@@ -1,7 +1,8 @@
 var express = require('express'),
     favicon = require('serve-favicon'),
     join = require('path').join,
-    port = 80,
+    host = '0.0.0.0',
+    port = 8080,
     app = express();
 
 app.use(favicon(join(__dirname, 'public/images/favicon.ico')));
@@ -16,5 +17,5 @@ app.use('/placename',
 app.use('/trail',
     require('./routes/kml').trail);
 
-app.listen(port);
-console.log('Server is listening at http://127.0.0.1:' + port +'\n');
+app.listen(port, host);
+console.log('Running on http://' + host + ':' + port +'\n');
