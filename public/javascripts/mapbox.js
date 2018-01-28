@@ -28,8 +28,7 @@ L.control.layers({
 	'Aerial':  L.mapbox.tileLayer('mapbox.streets-satellite'),
 	'Black':   L.mapbox.tileLayer('examples.map-cnkhv76j').addTo(map),
 	'Streets': L.mapbox.tileLayer('mapbox.streets'),
-	'Terrain': L.mapbox.tileLayer('mapbox.run-bike-hike'),
-	'Warden':  L.mapbox.tileLayer('mapbox.mapbox-warden')
+	'Terrain': L.mapbox.tileLayer('mapbox.run-bike-hike')
 })
 	.addTo(map);
 /*

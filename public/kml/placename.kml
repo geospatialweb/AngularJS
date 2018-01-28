@@ -21,7 +21,7 @@
       </Placemark>
       <Placemark id="2">
         <name>Gananoque</name>
-        <description>Seemingly, Gananoque has the highest teenage pregnancy rate in Canada. I wonder why? Good thing I didn't spend my teenage years here...</description>
+        <description>An awesome weekend getaway destination...</description>
         <styleUrl>#placename_Style</styleUrl>
         <Point>
           <coordinates>-76.162479,44.330009</coordinates>

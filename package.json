@@ -5,6 +5,10 @@
   "description": "Node / Express / Mapbox / PostGIS Web Mapping",
   "main": "app.js",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geospatialweb/devops.git"
+  },
   "scripts": {
       "start": "node app.js"
   },
