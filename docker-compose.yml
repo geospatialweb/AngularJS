@@ -2,7 +2,7 @@ version: '2'
 services:
   node:
     container_name: devops
-    build: ./build/node
+    build: .
     command: npm start
     restart: always
     ports:
@@ -18,7 +18,7 @@ services:
     image: postgres:9.6.6-alpine
     restart: always
     volumes:
-      - ./build/postgres/pg.sql:/docker-entrypoint-initdb.d/pg.sql
+      - ./data/pg.sql:/docker-entrypoint-initdb.d/pg.sql
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
