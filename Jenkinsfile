@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    dockerfile {
-      filename 'docker-compose.yml'
-    }
-    
-  }
+  agent { dockerfile true }
   stages {
     stage('Build') {
       steps {
