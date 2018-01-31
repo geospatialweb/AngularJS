@@ -1,7 +1,13 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'node:carbon-alpine'
+      args '-p 80:80'
+    }
+    
+  }
   stages {
-    stage('') {
+    stage('build') {
       steps {
         sh 'npm install'
       }
