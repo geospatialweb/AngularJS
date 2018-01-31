@@ -12,9 +12,9 @@ pipeline {
         sh 'npm install'
       }
     }
-    stage('delpoy') {
+    stage('deploy') {
       steps {
-        sh 'docker-compose up'
+        sh 'npm start'
       }
     }
   }
