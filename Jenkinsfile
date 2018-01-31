@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        dir(path: '/usr/src/app')
+        dir(path: '/var/jenkins_home/workspace/devops/src')
         sh 'docker-compose up'
       }
     }
