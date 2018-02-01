@@ -13,8 +13,11 @@ pipeline {
       }
     }
     stage('deploy') {
+      environment {
+        CI = 'true'
+      }
       steps {
-        sh 'node app.js'
+        sh 'npm start'
       }
     }
   }
