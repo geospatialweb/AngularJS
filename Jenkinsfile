@@ -17,6 +17,7 @@ pipeline {
         CI = 'true'
       }
       steps {
+        sh 'set -x'
         sh 'npm start &'
       }
     }
