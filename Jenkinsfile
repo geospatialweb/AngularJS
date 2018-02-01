@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       image 'node:carbon-alpine'
-      args '-p 8000:8000'
+      args '-p 80:80'
     }
     
   }
