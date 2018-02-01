@@ -17,7 +17,7 @@ pipeline {
         CI = 'true'
       }
       steps {
-        sh './jenkins/scripts/deploy.sh'
+        sh 'npm start &'
       }
     }
   }
