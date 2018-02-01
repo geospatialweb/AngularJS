@@ -13,12 +13,12 @@ pipeline {
       }
     }
     stage('Deploy') {
-      environment {
-        CI = 'true'
-      }
       steps {
         sh 'npm start &'
       }
     }
+  }
+  environment {
+    CI = 'true'
   }
 }
