@@ -2,7 +2,7 @@ version: '2'
 services:
   node:
     container_name: devops
-    #build: ./build                   # local build
+    #build: ./build                   # local image build
     image: geospatialweb/devops:test  # pre-built docker hub repository image
     command: npm start
     restart: always
