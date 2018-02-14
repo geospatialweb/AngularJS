@@ -9,8 +9,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      #- ./usr/src/app/
-      - .:/usr/app/
+      - ./usr/src/app
     links:
       - postgres
     environment:
