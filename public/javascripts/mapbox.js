@@ -12,23 +12,25 @@ map = L.mapbox.map('mapContainer', undefined, {
 	},
 	center: [44.495222, -76.280833],
 	closePopupOnClick: true,
-	doubleClickZoom: true,
-	zoom: 9,
-	zoomControl: true
+	doubleClickZoom: false,
+	zoom: 11,
+	zoomControl: false
 })
 	.on('mousemove', function(event) {
 		document.getElementById('latlng').innerHTML = event.latlng.toString();
 	});
-/*
-	.on('dblclick', function(event) {
-		map.setView(event.latlng, map.getZoom() + 2);
-	});
-*/
+
+	// .on('dblclick', function(event) {
+	// 	map.setView(event.latlng, map.getZoom() + 2);
+	// });
+
 L.control.layers({
 	'Aerial':  L.mapbox.tileLayer('mapbox.streets-satellite'),
 	'Black':   L.mapbox.tileLayer('examples.map-cnkhv76j').addTo(map),
 	'Streets': L.mapbox.tileLayer('mapbox.streets'),
 	'Terrain': L.mapbox.tileLayer('mapbox.run-bike-hike')
+}, null, {
+	'position': 'topleft'
 })
 	.addTo(map);
 /*
@@ -72,10 +74,10 @@ $.ajax({
 $.get('/mapbox').done(function(data) {
 	region = L.geoJson($.parseJSON(data), {
 		style: { 'color': '#000000', 'weight': 1.5, 'opacity': 0.5, 'fillColor': '#ffffff', 'fillOpacity': 0.4 }
-	})
-		.on('dblclick', function(event) {
-			map.setView(event.latlng, map.getZoom() + 2);
-		});
+	});
+		// .on('dblclick', function(event) {
+		// 	map.setView(event.latlng, map.getZoom() + 2);
+		// });
 });
 
 $.get('/office').done(function(data) {
