@@ -2,8 +2,8 @@ version: '2'
 services:
   node:
     container_name: devops
-    build: .                         # local image build - copy Dockerfile to root
-    #image: geospatialweb/devops:test  # pre-built docker hub repository image
+    #build: .                         # local image build - copy Dockerfile to root
+    image: geospatialweb/devops:test  # pre-built docker hub repository image
     command: npm start
     restart: always
     ports:
