@@ -13,7 +13,7 @@ map = L.mapbox.map('mapContainer', undefined, {
 	center: [44.495222, -76.280833],
 	closePopupOnClick: true,
 	doubleClickZoom: false,
-	zoom: 11,
+	zoom: 9,
 	zoomControl: false
 })
 	.on('mousemove', function(event) {
