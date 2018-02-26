@@ -1,28 +1,17 @@
-var map,
-	office,
-	placeName,
-	region,
-	trail;
+var map, office, placeName,	region,	trail;
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiZ2Vvc3BhdGlhbHdlYiIsImEiOiJ6WGdOUFRvIn0.GoVRwZq5EfVsLNGyCqgZTw';
 
-map = L.mapbox.map('mapContainer', undefined, {
+map = L.mapbox.map('map', null, {
 	attributionControl: {
 		compact: true
 	},
-	center: [44.495222, -76.280833],
+	center: [44.6, -76.2],
 	closePopupOnClick: true,
-	doubleClickZoom: false,
-	zoom: 9,
-	zoomControl: false
-})
-	.on('mousemove', function(event) {
-		document.getElementById('latlng').innerHTML = event.latlng.toString();
-	});
-
-	// .on('dblclick', function(event) {
-	// 	map.setView(event.latlng, map.getZoom() + 2);
-	// });
+	doubleClickZoom: true,
+	zoomControl: false,
+	zoom: 8
+});
 
 L.control.layers({
 	'Aerial':  L.mapbox.tileLayer('mapbox.streets-satellite'),
@@ -33,51 +22,11 @@ L.control.layers({
 	'position': 'topleft'
 })
 	.addTo(map);
-/*
-L.control.layers({
-	'Aerial':  L.mapbox.tileLayer('examples.map-qfyrx5r8'),
-	'Black':   L.mapbox.tileLayer('examples.map-cnkhv76j').addTo(map),
-	'Streets': L.mapbox.tileLayer('examples.map-i87786ca'),
-	'Terrain': L.mapbox.tileLayer('examples.map-i875mjb7'),
-	'Warden':  L.mapbox.tileLayer('mapbox.mapbox-warden')
-}).addTo(map);
 
-/* geocode origin & destination input, then pass respective coordinates to determine route, returned as geoJSON array
-$.ajax({
-	type: 'GET',
-	data: { q: 'kingston ontario', locale: 'en', debug: 'true', key: '44c39ada-58c2-4ed4-ad99-e2032387671f' },
-	url: 'http://graphhopper.com/api/1/geocode',
-	success: function(data) {
-		var orig = {'lat': data.hits[0].point.lat, 'lng': data.hits[0].point.lng};
-
-		$.ajax({
-			type: 'GET',
-			data: { q: 'brockville ontario', locale: 'en', debug: 'true', key: '44c39ada-58c2-4ed4-ad99-e2032387671f' },
-			url: 'http://graphhopper.com/api/1/geocode',
-			success: function(data) {
-				var dest = {'lat': data.hits[0].point.lat, 'lng': data.hits[0].point.lng};
-
-				$.ajax({
-					type: 'GET',
-					url:'http://graphhopper.com/api/1/route?point=' + orig.lat + ',' + orig.lng + '&point=' + dest.lat + ',' + dest.lng + '&vehicle=car&locale=en&key=196v82Q2c6eJ9Td7GFa9upjn8bW4LgUf6Tby1sn6&points_encoded=false&debug=true',
-					success: function(data) {
-						L.marker([ orig.lat, orig.lng ]).addTo(map);
-						L.marker([ dest.lat, dest.lng ]).addTo(map);
-						L.geoJson(data.paths[0].points, {style: { 'color': 'purple', 'weight': 4 }}).addTo(map);
-					}
-				});
-			}
-		});
-	}
-});
-*/
 $.get('/mapbox').done(function(data) {
 	region = L.geoJson($.parseJSON(data), {
 		style: { 'color': '#000000', 'weight': 1.5, 'opacity': 0.5, 'fillColor': '#ffffff', 'fillOpacity': 0.4 }
 	});
-		// .on('dblclick', function(event) {
-		// 	map.setView(event.latlng, map.getZoom() + 2);
-		// });
 });
 
 $.get('/office').done(function(data) {
@@ -140,26 +89,51 @@ $.get('/trail').done(function(data) {
 function displayTrail(n) {
 	switch (n) {
 		case 1:
-			map.setView([ 44.512528, -76.038974 ], 13);
+			map.setView([ 44.515, -76.042 ], 13);
 			break;
 
 		case 2:
-			map.setView([ 44.512528, -76.038974 ], 13);
+			map.setView([ 44.515, -76.042 ], 13);
 			break;
 
 		case 3:
-			map.setView([ 44.226044, -76.605531 ], 14);
+			map.setView([ 44.228, -76.609 ], 14);
 			break;
 
 		case 4:
-			map.setView([ 44.580219, -75.753434 ], 12);
+			map.setView([ 44.579, -75.753 ], 12);
 			break;
 
 		case 5:
-			map.setView([ 44.580219, -75.753434 ], 12);
+			map.setView([ 44.579, -75.753 ], 12);
 			break;
 
 		case 6:
-			map.setView([ 44.485748, -76.213444 ], 14);
+			map.setView([ 44.492, -76.213 ], 13);
+			break;
 	}
 }
+
+$('#regionLayer').click(function() {
+	if (map.hasLayer(region)) map.removeLayer(region);
+	else map.addLayer(region);
+});
+
+$('#officeLayer').click(function() {
+	if (map.hasLayer(office)) map.removeLayer(office);
+	else map.addLayer(office);
+});
+
+$('#placeNameLayer').click(function() {
+	if (map.hasLayer(placeName)) map.removeLayer(placeName);
+	else map.addLayer(placeName);
+});
+
+$('#trailLayer').click(function() {
+	if (map.hasLayer(trail)) map.removeLayer(trail);
+	else map.addLayer(trail);
+});
+
+$('#resetMap').click(function() {
+	location.reload(true);
+});

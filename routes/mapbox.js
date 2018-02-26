@@ -2,15 +2,15 @@ var express = require('express'),
 	parse = require('pg-connection-string').parse,
 	pg = require('pg');
 
-pg.logError = function (error, res, sql) {
+pg.logError = function (err, res, sql) {
 	console.log("ERROR!");
-	console.log((error.stack || error) + '\n' + sql);
-	return res.status(500).send({"Error": error});
+	console.log((err.stack || err) + '\n' + sql);
+	return res.status(500).send({"Error": err});
 };
 
 module.exports = express.Router().get('/', function(req, res) {
-	var connection = parse('postgres://postgres:admin@postgres/postgres');
-	//var connection = parse('postgres://postgres:admin@localhost/fabr');
+	//var connection = parse('postgres://postgres:admin@postgres/postgres');
+	var connection = parse('postgres://postgres:admin@localhost/fabr');
 
 	pg.connect(connection, function (error, client, release) {
 		var sql = 'SELECT lat, lng FROM region';
@@ -18,11 +18,11 @@ module.exports = express.Router().get('/', function(req, res) {
 		if (error)
 			pg.logError(error, res, sql);
 		else
-			client.query(sql, function (error, result) {
+			client.query(sql, function (err, result) {
 				release();
 
-				if (error)
-					 pg.logError(error, res, sql);
+				if (err)
+					 pg.logError(err, res, sql);
 
 				else if (result.rows[0] !== undefined) {
 					var geojson = '{"type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[';
