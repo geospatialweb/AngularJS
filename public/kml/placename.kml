@@ -53,7 +53,7 @@
       </Placemark>
       <Placemark id="6">
         <name>Sydenham</name>
-        <description>The abandoned CPR/Grand Trunk Railway right-of-way is now part of the Trans-Canada Trail.<br /><br />Great ice cream parlor after another rewarding day hiking the Frontenac Challenge during the autumn months...<br /><br />Trousdale's, Canada's oldest general store, has been located here for five generations!</description>
+        <description>The abandoned CPR/Grand Trunk Railway right-of-way is now part of the Trans-Canada Trail. Great ice cream parlor after another rewarding day hiking the Frontenac Challenge during the autumn months... Trousdale's, Canada's oldest general store, has been located here for five generations!</description>
         <styleUrl>#placename_Style</styleUrl>
         <Point>
           <coordinates>-76.596745,44.411096</coordinates>
@@ -101,7 +101,7 @@
       </Placemark>
       <Placemark id="12">
         <name>Hayes Corner</name>
-        <description>Have you ever wondered how places get their unique names?<br /><br />Place names (toponyms) have from the beginning of time been assigned to cultural and natural features on the landscape including cities, towns, rivers, lakes and islands.<br /><br />Place names are not just labels on maps and signs, but vital communication tools that reflect patterns of settlement, exploration, migration, heritage, culture and natural resources that may otherwise be overlooked by residents, visitors, and future generations.</description>
+        <description>Have you ever wondered how places get their unique names? Place names (toponyms) have from the beginning of time been assigned to cultural and natural features on the landscape including cities, towns, rivers, lakes and islands. Place names are not just labels on maps and signs, but vital communication tools that reflect patterns of settlement, exploration, migration, heritage, culture and natural resources that may otherwise be overlooked by residents, visitors, and future generations.</description>
         <styleUrl>#placename_Style</styleUrl>
         <Point>
           <coordinates>-75.920904,44.592884</coordinates>
@@ -189,7 +189,7 @@
       </Placemark>
       <Placemark id="23">
         <name>Newboro</name>
-        <description>Founded during the construction of the Rideau Canal and hosts the annual Rideau Lakes Cup Dog Sled Races.<br /><br />Shorter to spell than Newborough. Helps save on toner!</description>
+        <description>Founded during the construction of the Rideau Canal and hosts the annual Rideau Lakes Cup Dog Sled Races. Shorter to spell than Newborough. Helps save on toner!</description>
         <styleUrl>#placename_Style</styleUrl>
         <Point>
           <coordinates>-76.318122,44.651617</coordinates>
@@ -197,7 +197,7 @@
       </Placemark>
       <Placemark id="24">
         <name>Landon Bay</name>
-        <description>Tranquility and a sense of spiritual presence are experienced as one walks the trails and meadows.<br /><br /><b> I would love to live here someday...</b></description>
+        <description>Tranquility and a sense of spiritual presence are experienced as one walks the trails and meadows. I would love to live here someday...</description>
         <styleUrl>#placename_Style</styleUrl>
         <Point>
           <coordinates>-76.064780,44.353725</coordinates>
@@ -341,7 +341,7 @@
       </Placemark>
       <Placemark id="42">
         <name>Black Rapids</name>
-        <description>One of the many locks in the Rideau Canal system. A dam was built adjacent to the lock to raise the water level by 6 feet (1.8m). When the dam was completed, it was soon found that with the river flowing over it during spring flood, erosion of the bedrock on the downstream side of the dam threatened to undermine it.<br /><br /> Sounds to me like they could have used a GIS!</description>
+        <description>One of the many locks in the Rideau Canal system. A dam was built adjacent to the lock to raise the water level by 6 feet (1.8m). When the dam was completed, it was soon found that with the river flowing over it during spring flood, erosion of the bedrock on the downstream side of the dam threatened to undermine it.  Sounds to me like they could have used a GIS!</description>
         <styleUrl>#placename_Style</styleUrl>
         <Point>
           <coordinates>-76.089451,44.509962</coordinates>
@@ -365,7 +365,7 @@
       </Placemark>
       <Placemark id="45">
         <name>Napanee</name>
-        <description>Napanee is the home of now famous "La Pizzeria", made famous by Avril Lavinge's declaration that her "favourite pizza" is served there.<br /><br />My favourite biker chick Audrey also calls Napanee home, but like many others, commutes daily to Kingston to make money.</description>
+        <description>Napanee is the home of now famous "La Pizzeria", made famous by Avril Lavinge's declaration that her "favourite pizza" is served there. My favourite biker chick Audrey also calls Napanee home, but like many others, commutes daily to Kingston to make money.</description>
         <styleUrl>#placename_Style</styleUrl>
         <Point>
           <coordinates>-76.951717,44.249381</coordinates>

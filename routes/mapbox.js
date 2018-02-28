@@ -1,3 +1,6 @@
+(function () {
+'use strict';
+
 var express = require('express'),
 	parse = require('pg-connection-string').parse,
 	pg = require('pg');
@@ -9,7 +12,10 @@ pg.logError = function (err, res, sql) {
 };
 
 module.exports = express.Router().get('/', function(req, res) {
+	//container database - delete Dockerfile in root
 	var connection = parse('postgres://postgres:admin@postgres/postgres');
+
+	//local database - copy /images/Dockerfile to root
 	//var connection = parse('postgres://postgres:admin@localhost/fabr');
 
 	pg.connect(connection, function (error, client, release) {
@@ -17,6 +23,7 @@ module.exports = express.Router().get('/', function(req, res) {
 
 		if (error)
 			pg.logError(error, res, sql);
+
 		else
 			client.query(sql, function (err, result) {
 				release();
@@ -27,9 +34,9 @@ module.exports = express.Router().get('/', function(req, res) {
 				else if (result.rows[0] !== undefined) {
 					var geojson = '{"type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[';
 
-					for (var i = 0; i < result.rows.length; i++) {
-						geojson += '[' + result.rows[i].lng + ',' + result.rows[i].lat + '],';
-					}
+					result.rows.forEach(function (row) {
+						geojson += '[' + row.lng + ',' + row.lat + '],';
+					});
 
 					res.status(200).send(geojson.substr(0, geojson.length - 1) + ']]}}');
 				}
@@ -47,3 +54,6 @@ module.exports = express.Router().get('/', function(req, res) {
 
 	return true;
 });
+
+return true;
+})();

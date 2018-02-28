@@ -17,7 +17,7 @@
       <name>FABR Trails</name>
       <Placemark id="1">
         <name>Blue Mountain Trail</name>
-        <description>Moderate 5km<br />Steep terrain. Awesome romantic views!</description>
+        <description>Moderate 5km. Steep terrain. Awesome romantic views!</description>
         <styleUrl>#trail_Style</styleUrl>
         <Point>
           <coordinates>-76.025152,44.494558</coordinates>
@@ -31,7 +31,7 @@
       </Placemark>
       <Placemark id="2">
         <name>Charleston Lake East Trail</name>
-        <description>Moderate 10km<br />Real Canadian Shield wilderness!</description>
+        <description>Moderate 10km. Real Canadian Shield wilderness!</description>
         <styleUrl>#trail_Style</styleUrl>
         <Point>
           <coordinates>-76.043048,44.499439</coordinates>
@@ -45,7 +45,7 @@
       </Placemark>
       <Placemark id="3">
         <name>Charleston Lake West Trail</name>
-        <description>Difficult 15km<br />Real Canadian Shield wilderness!</description>
+        <description>Difficult 15km. Real Canadian Shield wilderness!</description>
         <styleUrl>#trail_Style</styleUrl>
         <Point>
           <coordinates>-76.064538,44.500868</coordinates>
@@ -59,7 +59,7 @@
       </Placemark>
       <Placemark id="4">
         <name>Lemoine Point Conservation Trail</name>
-        <description>Easy 2km<br />Great view of Collins Bay. Be wary of low flying aircraft!</description>
+        <description>Easy 2km. Great view of Collins Bay. Be wary of low flying aircraft!</description>
         <styleUrl>#trail_Style</styleUrl>
         <Point>
           <coordinates>-76.606428,44.216086</coordinates>
@@ -73,7 +73,7 @@
       </Placemark>
       <Placemark id="5">
         <name>Lyn Valley Conservation Trail</name>
-        <description>Easy - Moderate 5km<br /> Bring a camera or a paintbrush and canvas!</description>
+        <description>Easy - Moderate 5km. Bring a camera or a paintbrush and canvas!</description>
         <styleUrl>#trail_Style</styleUrl>
         <Point>
           <coordinates>-75.781781,44.572347</coordinates>
@@ -87,7 +87,7 @@
       </Placemark>
       <Placemark id="6">
         <name>Mac Johnson Wildlife Trail</name>
-        <description>Easy 4km<br />Go geocaching with the kids!</description>
+        <description>Easy 4km. Go geocaching with the kids!</description>
         <styleUrl>#trail_Style</styleUrl>
         <Point>
           <coordinates>-75.723585,44.602382</coordinates>
@@ -101,7 +101,7 @@
       </Placemark>
       <Placemark id="7">
         <name>Seeley's Bay Fitness Trail</name>
-        <description>Light - Rigorous 4km<br />14 fitness exercise stations.<br />No fitness club membership necessary!</description>
+        <description>Light - Rigorous 4km. 14 fitness exercise stations. No fitness club membership necessary!</description>
         <styleUrl>#trail_Style</styleUrl>
         <Point>
           <coordinates>-76.195031,44.486368</coordinates>

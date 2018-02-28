@@ -1,3 +1,6 @@
+(function () {
+'use strict';
+
 var express = require('express'),
     fs = require('fs'),
     gj = require('@mapbox/togeojson'),
@@ -17,3 +20,6 @@ exports.trail = express.Router().get('/', function(req, res) {
     res.send(gj.kml(jsdom(fs.readFileSync('./public/kml/trail.kml', 'utf8'))));
     return true;
 });
+
+return true;
+})();

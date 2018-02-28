@@ -1,3 +1,6 @@
+(function () {
+'use strict';
+
 var express = require('express'),
     favicon = require('serve-favicon'),
     join = require('path').join,
@@ -20,3 +23,6 @@ app.use('/trail',
 
 app.listen(PORT, HOST);
 console.log('Running on http://' + HOST + ':' + PORT +'\n');
+
+return true;
+})();

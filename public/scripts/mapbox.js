@@ -1,6 +1,10 @@
-var map, office, placeName,	region,	trail;
+'use strict';
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiZ2Vvc3BhdGlhbHdlYiIsImEiOiJ6WGdOUFRvIn0.GoVRwZq5EfVsLNGyCqgZTw';
+
+var map, office, placeName,	region,	trail;
+
+trailList.selectedIndex = 0;
 
 map = L.mapbox.map('map', null, {
 	attributionControl: {
@@ -24,8 +28,8 @@ L.control.layers({
 	.addTo(map);
 
 $.get('/mapbox').done(function(data) {
-	region = L.geoJson($.parseJSON(data), {
-		style: { 'color': '#000000', 'weight': 1.5, 'opacity': 0.5, 'fillColor': '#ffffff', 'fillOpacity': 0.4 }
+	region = L.geoJson(JSON.parse(data), {
+		style: { 'color': '#000000', 'weight': 1, 'opacity': .5, 'fillColor': '#ffffff', 'fillOpacity': .25 }
 	});
 });
 

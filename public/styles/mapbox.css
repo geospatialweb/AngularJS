@@ -4,10 +4,36 @@
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-	padding: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
-#map {       
+#headerContainer {
+    background-color: rgb(120,110,100);
+    font-family: 'Orbitron', sans-serif;
+    height: 45px;
+}
+
+    .logo {
+        float: left;
+        margin: 0;
+        padding: 4px 0 0 4px;
+        height: 40px;
+        width: 40px;
+    }
+
+    .header {
+        float: left;
+        font-size: 1.25em;
+        padding: 16px 0 0 8px;
+    }
+
+#mapContainer {
+    height: 100%;
+    width: 100%;
+}
+
+#map {
     position: absolute;
     top: 45px;
     height: 100%;
@@ -80,25 +106,13 @@ body {
     background: #eee;
     border-style: none;
     right: 12px;
-    top: 58px;
+    top: 14px;
 }
 
-#headerContainer {
-    background-color: rgb(120,110,100);
-    font-family: 'Orbitron', sans-serif;
-    height: 45px;
+.leaflet-bottom.leaflet-right {
+    bottom: 45px;
 }
 
-    .logo {
-        float: left;
-        margin: 0;
-        padding: 4px 0 0 4px;
-        height: 40px;
-        width: 40px;
-    }
-
-    #header {
-        float: left;
-        font-size: 1.25em;
-        padding: 16px 0 0 8px;
-    }
+.leaflet-popup-content-wrapper {
+    width: 225px;
+}
