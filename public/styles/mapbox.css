@@ -9,7 +9,7 @@ body {
 }
 
 #headerContainer {
-    background-color: rgb(120,110,100);
+    background: rgb(120,110,100);
     font-family: 'Orbitron', sans-serif;
     height: 45px;
 }
@@ -55,7 +55,7 @@ body {
     background: rgb(160,150,140);
     border: 1px solid #bbb;
     border-bottom-width: 0;
-    color: #3C4E5A;
+    color: #3c4e5a;
     font-size: 0.95em;
     padding: 5px 0 5px 40px;
     text-decoration: none;
@@ -106,7 +106,8 @@ body {
     background: #eee;
     border-style: none;
     right: 12px;
-    top: 14px;
+    top: 58px;
+    width: 120px;
 }
 
 .leaflet-bottom.leaflet-right {

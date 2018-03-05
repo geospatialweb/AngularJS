@@ -28,9 +28,14 @@ L.control.layers({
 	.addTo(map);
 
 $.get('/mapbox').done(function(data) {
-	region = L.geoJson(JSON.parse(data), {
-		style: { 'color': '#000000', 'weight': 1, 'opacity': .5, 'fillColor': '#ffffff', 'fillOpacity': .25 }
-	});
+	data = JSON.parse(data);
+
+	if (data.features.length)
+		region = L.geoJson(data, {
+			style: { 'color': '#000', 'weight': 1, 'opacity': .5, 'fillColor': '#fff', 'fillOpacity': .25 }
+		});
+
+	return true;
 });
 
 $.get('/office').done(function(data) {
@@ -47,8 +52,12 @@ $.get('/office').done(function(data) {
 		onEachFeature: function(feature, layer) {
 			if (feature.properties.name && feature.properties.description)
 				layer.bindPopup('<b>' + feature.properties.name + '</b><br>' + feature.properties.description);
+
+			return true;
 		}
 	});
+
+	return true;
 });
 
 $.get('/placename').done(function(data) {
@@ -65,8 +74,12 @@ $.get('/placename').done(function(data) {
 		onEachFeature: function(feature, layer) {
 			if (feature.properties.name && feature.properties.description)
 				layer.bindPopup('<b>' + feature.properties.name + '</b><br>' + feature.properties.description);
+
+			return true;
 		}
 	});
+
+	return true;
 });
 
 $.get('/trail').done(function(data) {
@@ -85,9 +98,13 @@ $.get('/trail').done(function(data) {
 		onEachFeature: function(feature, layer) {
 			if (feature.properties.name && feature.properties.description)
 				layer.bindPopup('<b>' + feature.properties.name + '</b><br>' + feature.properties.description);
+
+			return true;
 		}
 	})
 		.addTo(map);
+
+	return true;
 });
 
 function displayTrail(n) {
@@ -116,28 +133,38 @@ function displayTrail(n) {
 			map.setView([ 44.492, -76.213 ], 13);
 			break;
 	}
+
+	return true;
 }
 
 $('#regionLayer').click(function() {
-	if (map.hasLayer(region)) map.removeLayer(region);
-	else map.addLayer(region);
+	if (region) {
+		if (map.hasLayer(region)) map.removeLayer(region);
+		else map.addLayer(region);
+	}
+
+	return true;
 });
 
 $('#officeLayer').click(function() {
 	if (map.hasLayer(office)) map.removeLayer(office);
 	else map.addLayer(office);
+	return true;
 });
 
 $('#placeNameLayer').click(function() {
 	if (map.hasLayer(placeName)) map.removeLayer(placeName);
 	else map.addLayer(placeName);
+	return true;
 });
 
 $('#trailLayer').click(function() {
 	if (map.hasLayer(trail)) map.removeLayer(trail);
 	else map.addLayer(trail);
+	return true;
 });
 
 $('#resetMap').click(function() {
 	location.reload(true);
+	return true;
 });

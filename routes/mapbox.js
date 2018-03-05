@@ -2,6 +2,7 @@
 'use strict';
 
 var express = require('express'),
+	geoJSON = require('../modules/geoJSON'),
 	parse = require('pg-connection-string').parse,
 	pg = require('pg');
 
@@ -31,15 +32,8 @@ module.exports = express.Router().get('/', function(req, res) {
 				if (err)
 					 pg.logError(err, res, sql);
 
-				else if (result.rows[0] !== undefined) {
-					var geojson = '{"type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[';
-
-					result.rows.forEach(function (row) {
-						geojson += '[' + row.lng + ',' + row.lat + '],';
-					});
-
-					res.status(200).send(geojson.substr(0, geojson.length - 1) + ']]}}');
-				}
+				else if (result.rowCount > 0)
+					res.status(200).send(JSON.stringify(geoJSON(result.rows)));
 
 				else {
 					console.log('No rows received for: \n' + sql);
