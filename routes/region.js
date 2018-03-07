@@ -14,10 +14,10 @@ pg.logError = function (err, res, sql) {
 
 module.exports = express.Router().get('/', function(req, res) {
 	//container database - delete Dockerfile in root
-	var connection = parse('postgres://postgres:admin@postgres/postgres');
+	//var connection = parse('postgres://postgres:admin@postgres/postgres');
 
 	//local database - copy /images/Dockerfile to root
-	//var connection = parse('postgres://postgres:admin@localhost/fabr');
+	var connection = parse('postgres://postgres:admin@localhost/fabr');
 
 	pg.connect(connection, function (error, client, release) {
 		var sql = 'SELECT lat, lng FROM region';
@@ -30,15 +30,13 @@ module.exports = express.Router().get('/', function(req, res) {
 				release();
 
 				if (err)
-					 pg.logError(err, res, sql);
+					pg.logError(err, res, sql);
 
 				else if (result.rowCount > 0)
 					res.status(200).send(JSON.stringify(geoJSON(result.rows)));
 
-				else {
+				else
 					console.log('No rows received for: \n' + sql);
-					res.status(200).send([]);
-				}
 
 				return true;
 			});

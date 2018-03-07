@@ -1,0 +1,140 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:300);
+@import url(http://fonts.googleapis.com/css?family=Orbitron:700);
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+}
+
+#map {
+    position: absolute;
+    top: 45px;
+    height: 100%;
+    width: 100%;
+}
+
+#trailList {
+    position: absolute;
+    background: #eee;
+    border-style: none;
+    left: 10px;
+    top: 320px;
+    width: 127px;
+}
+
+.headerContainer {
+    background: rgb(120,110,100);
+    font-family: 'Orbitron', sans-serif;
+    height: 45px;
+}
+
+.logo {
+    margin: 0;
+    padding: 4px 0 0 4px;
+    float: left;
+    height: 40px;
+    width: 40px;
+}
+
+.header {
+    padding: 12px 0 0 8px;
+    float: left;
+    font-size: 1.25em;
+}
+
+.mapContainer {
+    height: 100%;
+    width: 100%;
+}
+
+.map-ui {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    list-style-type: none;
+    left: 10px;
+    top: 160px;
+}
+
+.map-ui a {
+    display: block;
+    padding: 5px 0 5px 40px;
+    background: rgb(160,150,140);
+    border: 1px solid #bbb;
+    border-bottom-width: 0;
+    color: #3c4e5a;
+    font-size: 0.95em;
+    text-decoration: none;
+    width: 85px;
+}
+
+.map-ui a:hover {
+    background: rgb(120,110,100);
+}
+
+.map-ui li:first-child a {
+    border-radius: 3px 3px 0 0;
+    -webkit-border-radius: 3px 3px 0 0;
+}
+
+.map-ui li:last-child a {
+    border-bottom-width: 1px;
+    border-radius: 0 0 3px 3px;
+    -webkit-border-radius: 0 0 3px 3px;
+}
+
+.regionMarker {
+    position: absolute;
+    left: 22px;
+    top: 166px;
+}
+
+.officeMarker {
+    position: absolute;
+    left: 22px;
+    top: 194px;
+}
+
+.office_marker {
+    background-image: url('/images/office.png');
+    cursor: pointer;
+    height: 25px;
+    width: 22px;
+}
+
+.placeMarker {
+    position: absolute;
+    left: 22px;
+    top:223px;
+}
+
+.place_marker {
+    background-image: url('/images/place.png');
+    cursor: pointer;
+    height: 25px;
+    width: 22px;
+}
+
+.trailMarker {
+    position: absolute;
+    left: 22px;
+    top: 253px;
+}
+
+.trail_marker {
+    background-image: url('/images/trail.png');
+    cursor: pointer;
+    height: 25px;
+    width: 22px;
+}
+
+.mapboxgl-ctrl-bottom-left, .mapboxgl-ctrl-bottom-right {
+    bottom: 45px;
+}
+
+.mapboxgl-popup {
+    max-width: 250px;
+}

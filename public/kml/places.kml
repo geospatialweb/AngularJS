@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <kml xmlns="http://earth.google.com/kml/2.1">
   <Document>
-    <name>placenames.kml</name>
+    <name>places.kml</name>
     <Style id="placename_Style">
       <IconStyle>
         <Icon>
-          <href>http://127.0.0.1/images/placename.png</href>
+          <href>http://127.0.0.1/images/place.png</href>
         </Icon>
       </IconStyle>
     </Style>
