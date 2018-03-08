@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html ng-app='app'>
 	<head>
 		<meta charset='utf-8'>
 		<meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1'>
@@ -10,18 +10,19 @@
 		<title>Geospatial Web</title>
 
 		<link href='//api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet'>
-		<link href='/styles/app.css' rel='stylesheet'>
+		<link href='styles/app.css' rel='stylesheet'>
 
+		<script src='//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js'></script>
 		<script src='//api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
 		<script src='//code.jquery.com/jquery-3.2.1.min.js'></script>
 	</head>
 	<body>
 		<section class='headerContainer'>
-			<img class='logo' src='/images/logo.png' alt='Geospatial Web'>
+			<img class='logo' src='images/logo.png' alt='Geospatial Web'>
 			<div class='header'>Geospatial Web</div>
 		</section>
 
-		<section class='mapContainer'>
+		<section class='mapContainer'ng-controller="mapController">
 			<div id='map'></div>
 			<ul class='map-ui'>
 				<li id='regionLayer'><a href='#'>Region</a></li>
@@ -32,16 +33,16 @@
 				<li id='resetMap'><a href='#'>Reset Map</a></li>
 			</ul>
 			<div class='regionMarker'>
-				<img src='/images/region.png' height='18' width='18'>
+				<img src='images/region.png' height='18' width='18'>
 			</div>
 			<div class='officeMarker'>
-				<img src='/images/office.png' height='20' width='18'>
+				<img src='images/office.png' height='20' width='18'>
 			</div>
 			<div class='placeMarker'>
-				<img src='/images/place.png' height='20' width='18'>
+				<img src='images/place.png' height='20' width='18'>
 			</div>
 			<div class='trailMarker'>
-				<img src='/images/trail.png' height='20' width='18'>
+				<img src='images/trail.png' height='20' width='18'>
 			</div>
 			<select id='trailList' onchange='displayTrail(trailList.selectedIndex)'>
 				<option>Select Trail</option>
@@ -53,6 +54,10 @@
 				<option>Seeley's Bay</option>
 			</select>
 		</section>
+
+		<script src='modules/app.js'></script>
+		<script src='modules/controllers/mapController.js'></script>
+		<script src='modules/services/mapService.js'></script>
+		<!--script src='scripts/app.js'></script-->
 	</body>
-	<script src='/scripts/app.js'></script>
 </html>
