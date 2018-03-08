@@ -72,7 +72,7 @@ body {
 }
 
 .map-ui a:hover {
-    background: rgb(120,110,100);
+    background: rgb(140,130,120);
 }
 
 .map-ui li:first-child a {
@@ -84,6 +84,15 @@ body {
     border-bottom-width: 1px;
     border-radius: 0 0 3px 3px;
     -webkit-border-radius: 0 0 3px 3px;
+}
+
+.map-ui li#regionLayer a.active,
+.map-ui li#officeLayer a.active,
+.map-ui li#placesLayer a.active,
+.map-ui li#trailsLayer a.active
+/*.map-ui li#aerialView a.active*/
+{
+    background: rgb(120,110,100);
 }
 
 .regionMarker {

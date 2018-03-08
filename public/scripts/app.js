@@ -3,6 +3,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ2Vvc3BhdGlhbHdlYiIsImEiOiJ6WGdOUFRvIn0.GoVRwZq5EfVsLNGyCqgZTw';
 
 var map, office,
+//	basemap = 0,
 	places = [],
 	trails = [];
 
@@ -179,11 +180,14 @@ function displayTrail(n) {
 $('#regionLayer').click(function() {
 	var visibility = map.getLayoutProperty(this.id, 'visibility');
 
-	if (visibility === 'none')
+	if (visibility === 'none') {
+		this.children[0].className = 'active';
 		map.setLayoutProperty(this.id, 'visibility', 'visible');
 
-	else
+	} else {
+		this.children[0].className = '';
 		map.setLayoutProperty(this.id, 'visibility', 'none');
+	}
 
 	return true;
 });
@@ -191,11 +195,14 @@ $('#regionLayer').click(function() {
 $('#officeLayer').click(function() {
 	var el = office.getElement();
 
-	if (el.hidden)
+	if (el.hidden) {
+		this.children[0].className = 'active';
 		office.addTo(map);
 
-	else
+	} else {
+		this.children[0].className = '';
 		office.remove();
+	}
 
 	el.hidden = !el.hidden;
 
@@ -203,6 +210,13 @@ $('#officeLayer').click(function() {
 });
 
 $('#placesLayer').click(function() {
+	if (this.children[0].className === '') {
+		this.children[0].className = 'active';
+
+	} else {
+		this.children[0].className = '';
+	}
+
 	places.forEach(function(place) {
 		var el = place.getElement();
 
@@ -223,11 +237,14 @@ $('#placesLayer').click(function() {
 $('#trailsLayer').click(function() {
 	var visibility = map.getLayoutProperty(this.id, 'visibility');
 
-	if (visibility === 'none')
+	if (visibility === 'none') {
+		this.children[0].className = 'active';
 		map.setLayoutProperty(this.id, 'visibility', 'visible');
 
-	else
+	} else {
+		this.children[0].className = '';
 		map.setLayoutProperty(this.id, 'visibility', 'none');
+	}
 
 	trails.forEach(function(trail) {
 		var el = trail.getElement();
@@ -245,7 +262,22 @@ $('#trailsLayer').click(function() {
 
 	return true;
 });
+/*
+$('#aerialView').click(function() {
+	if (basemap === 0) {
+		basemap = 1;
+		this.children[0].className = 'active';
+		map.setStyle('mapbox://styles/mapbox/satellite-v9');
 
+	} else {
+		basemap = 0;
+		this.children[0].className = '';
+		map.setStyle('mapbox://styles/mapbox/dark-v9');
+	}
+
+	return true;
+});
+*/
 $('#resetMap').click(function() {
 	return location.reload(true);
 });
