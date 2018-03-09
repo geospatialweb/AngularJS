@@ -2,8 +2,8 @@ version: '2'
 services:
   node:
     container_name: devops
-    #build: .                         # local image build - copy /images/Dockerfile to root
-    image: geospatialweb/devops:test  # pre-built docker cloud repository image - delect Dockerfile in root
+    #build: .                         # local image build - copy /images/Dockerfile to root directory
+    image: geospatialweb/devops:test  # pre-built docker cloud repository image - delete Dockerfile in root directory
     command: npm start
     restart: always
     ports:

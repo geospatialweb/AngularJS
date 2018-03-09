@@ -66,7 +66,7 @@ function mapService($http) {
 
 			$http.get('/places')
 				.then(function success(data) {
-					data.data.features.forEach(function(marker) {
+					data.data.features.forEach(function (marker) {
 						var el = document.createElement('div');
 
 						el.className = 'place_marker';
@@ -110,7 +110,7 @@ function mapService($http) {
 
 					mapService.map.addLayer(trails);
 
-					data.data.features.forEach(function(marker) {
+					data.data.features.forEach(function (marker) {
 						if (marker.geometry.type === 'Point') {
 							var el = document.createElement('div');
 

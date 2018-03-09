@@ -44,44 +44,44 @@ map-layers ul.map-ui {
     position: absolute;
     margin: 0;
     padding: 0;
-    background: transparent;
     list-style-type: none;
     left: 10px;
     top: 160px;
 }
 
-map-layers ul.map-ui a {
+map-layers ul.map-ui div {
     display: block;
     padding: 5px 0 5px 40px;
     background: rgb(160,150,140);
     border: 1px solid #bbb;
     border-bottom-width: 0;
     color: #3c4e5a;
+    cursor: pointer;
     font-size: 0.95em;
     text-decoration: none;
     width: 85px;
 }
 
-map-layers ul.map-ui a:hover {
+map-layers ul.map-ui div:hover {
     background: rgb(140,130,120);
 }
 
-map-layers ul.map-ui li:first-child a {
+map-layers ul.map-ui li:first-child div {
     border-radius: 3px 3px 0 0;
     -webkit-border-radius: 3px 3px 0 0;
 }
 
-map-layers ul.map-ui li:last-child a {
+map-layers ul.map-ui li:last-child div {
     border-bottom-width: 1px;
     border-radius: 0 0 3px 3px;
     -webkit-border-radius: 0 0 3px 3px;
 }
 
-map-layers ul.map-ui li.region a.active,
-map-layers ul.map-ui li.office a.active,
-map-layers ul.map-ui li.places a.active,
-map-layers ul.map-ui li.trails a.active
-/*map-layers ul.map-ui li.aerialView a.active*/
+map-layers ul.map-ui li.region div.active,
+map-layers ul.map-ui li.office div.active,
+map-layers ul.map-ui li.places div.active,
+map-layers ul.map-ui li.trails div.active
+/*map-layers ul.map-ui li.aerialView div.active*/
 {
     background: rgb(120,110,100);
 }
@@ -112,7 +112,6 @@ map-layers div.trailMarker {
 
 map-trails select.trails {
     position: absolute;
-    background: #eee;
     border-style: none;
     left: 10px;
     top: 320px;
@@ -127,14 +126,14 @@ div.office_marker {
 }
 
 div.place_marker {
-    background-image: url('/images/place.png');
+    background-image: url('/images/places.png');
     cursor: pointer;
     height: 25px;
     width: 22px;
 }
 
 div.trail_marker {
-    background-image: url('/images/trail.png');
+    background-image: url('/images/trails.png');
     cursor: pointer;
     height: 25px;
     width: 22px;

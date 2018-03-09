@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 
-var geoJSON = function (result) {
+var geojson = function (result) {
     var fc = {
         "type": "FeatureCollection",
         "features": [{
@@ -21,7 +21,7 @@ var geoJSON = function (result) {
     return fc;
 };
 
-module.exports = geoJSON;
+module.exports = geojson;
 
 return true;
 })();

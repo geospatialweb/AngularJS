@@ -2,7 +2,7 @@
 'use strict';
 
 var express = require('express'),
-	geoJSON = require('../modules/geoJSON'),
+	geojson = require('../modules/geojson'),
 	parse = require('pg-connection-string').parse,
 	pg = require('pg');
 
@@ -12,11 +12,11 @@ pg.logError = function (err, res, sql) {
 	return res.status(500).send({"Error": err});
 };
 
-module.exports = express.Router().get('/', function(req, res) {
-	//container database - delete Dockerfile in root
+var region = express.Router().get('/', function (req, res) {
+	//container database - delete Dockerfile in root directory
 	var connection = parse('postgres://postgres:admin@postgres/postgres');
 
-	//local database - copy /images/Dockerfile to root
+	//local database - copy /images/Dockerfile to root directory
 	//var connection = parse('postgres://postgres:admin@localhost/fabr');
 
 	pg.connect(connection, function (error, client, release) {
@@ -33,7 +33,7 @@ module.exports = express.Router().get('/', function(req, res) {
 					pg.logError(err, res, sql);
 
 				else if (result.rowCount > 0)
-					res.status(200).send(JSON.stringify(geoJSON(result.rows)));
+					res.status(200).send(JSON.stringify(geojson(result.rows)));
 
 				else
 					console.log('No rows received for: \n' + sql);
@@ -46,6 +46,8 @@ module.exports = express.Router().get('/', function(req, res) {
 
 	return true;
 });
+
+module.exports = region;
 
 return true;
 })();

@@ -46,7 +46,7 @@ function mapLayersController(mapService) {
 				else
 					mapService.mapLayers[0].children[0].children[2].children[0].className = '';
 
-				mapService.places.forEach(function(place) {
+				mapService.places.forEach(function (place) {
 					var el = place.getElement();
 
 					if (el.hidden)
@@ -74,7 +74,7 @@ function mapLayersController(mapService) {
 					mapService.map.setLayoutProperty(layer, 'visibility', 'none');
 				}
 		
-				mapService.trails.forEach(function(trail) {
+				mapService.trails.forEach(function (trail) {
 					var el = trail.getElement();
 		
 					if (el.hidden)
