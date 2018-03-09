@@ -1,25 +1,20 @@
 (function () {
 'use strict';
 
-var express = require('express'),
-    favicon = require('serve-favicon'),
-    join = require('path').join,
-    app = express();
-
-const HOST = '0.0.0.0',
+const express = require('express'),
+      favicon = require('serve-favicon'),
+      join = require('path').join,
+      app = express(),
+      HOST = '0.0.0.0',
       PORT = 80;
 
 app.use(favicon(join(__dirname, 'public/images/favicon.ico')));
 app.use(express.static(join(__dirname, 'public')));
 
-app.use('/region',
-    require('./routes/region'));
-app.use('/office',
-    require('./routes/kml').office);
-app.use('/places',
-    require('./routes/kml').places);
-app.use('/trails',
-    require('./routes/kml').trails);
+app.use('/region', require('./routes/region'));
+app.use('/office', require('./routes/kml').office);
+app.use('/places', require('./routes/kml').places);
+app.use('/trails', require('./routes/kml').trails);
 
 app.listen(PORT, HOST);
 console.log('Running on http://' + HOST + ':' + PORT +'\n');

@@ -1,14 +1,11 @@
 (function () {
 'use strict';
 
-function mapController(mapService) {
-	trailList.selectedIndex = 0;
-
+function mapController() {
 	return this;
 }
 
 app.controller('mapController', mapController);
-mapController.$inject = ['mapService'];
 
 return true;
 })();

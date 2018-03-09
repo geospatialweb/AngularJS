@@ -16,11 +16,11 @@ function mapService($http) {
 		zoom: 9
 	})
 		.addControl(new mapboxgl.NavigationControl(), 'top-left')
-		.on('load', function() {
+		.on('load', function () {
 			$http.get('/region')
 				.then(function success(data) {
-                    var regionLayer = {
-						"id": "regionLayer",
+                    var region = {
+						"id": "region",
 						"type": "fill",
 						"source": {
 							"type": "geojson",
@@ -36,13 +36,12 @@ function mapService($http) {
 						}
 					};
 
-					mapService.map.addLayer(regionLayer);
+					mapService.map.addLayer(region);
 
                     return true;
 
                 }, function failure(data) {
-                    console.log(data, 'Query failed:\n $1');
-                    return true;
+                    return console.log(data, 'Query failed:\n $1');
                 });
 
 			$http.get('/office')
@@ -59,9 +58,10 @@ function mapService($http) {
 						})
 							.setHTML('<b>' + data.data.features[0].properties.name + '</b><br>' + data.data.features[0].properties.description));
 
-				}, function failure(data) {
-					console.log(data, 'Query failed:\n $1');
 					return true;
+
+				}, function failure(data) {
+					return console.log(data, 'Query failed:\n $1');
 				});
 
 			$http.get('/places')
@@ -84,15 +84,16 @@ function mapService($http) {
 						return true;
 					});
 
-				}, function failure(data) {
-					console.log(data, 'Query failed:\n $1');
 					return true;
+
+				}, function failure(data) {
+					return console.log(data, 'Query failed:\n $1');
 				});
 
 			$http.get('/trails')
 				.then(function success(data) {
-					var trailsLayer = {
-						"id": "trailsLayer",
+					var trails = {
+						"id": "trails",
 						"type": "line",
 						"source": {
 							"type": "geojson",
@@ -107,7 +108,7 @@ function mapService($http) {
 						}
 					};
 
-					mapService.map.addLayer(trailsLayer);
+					mapService.map.addLayer(trails);
 
 					data.data.features.forEach(function(marker) {
 						if (marker.geometry.type === 'Point') {
@@ -129,171 +130,14 @@ function mapService($http) {
 						return true;
 					});
 
-				}, function failure(data) {
-					console.log(data, 'Query failed:\n $1');
 					return true;
+
+				}, function failure(data) {
+					return console.log(data, 'Query failed:\n $1');
 				});
 
 			return true;
 		});
-/*
-	function displayTrail(n) {
-		switch (n) {
-			case 1:
-				mapService.map.flyTo({
-					center: [-76.04, 44.508],
-					zoom: 12
-				});
-
-				break;
-
-			case 2:
-				mapService.map.flyTo({
-					center: [-76.04, 44.508],
-					zoom: 12
-				});
-
-				break;
-
-			case 3:
-				mapService.map.flyTo({
-					center: [-76.61, 44.223],
-					zoom: 14
-				});
-
-				break;
-
-			case 4:
-				mapService.map.flyTo({
-					center: [-75.75, 44.575],
-					zoom: 12
-				});
-
-				break;
-
-			case 5:
-				mapService.map.flyTo({
-					center: [-75.75, 44.575],
-					zoom: 12
-				});
-
-				break;
-
-			case 6:
-				mapService.map.flyTo({
-					center: [-76.22, 44.485],
-					zoom: 13
-				});
-
-				break;
-		}
-
-		return true;
-	}
-*/
-	$('#regionLayer').click(function() {
-		var visibility = mapService.map.getLayoutProperty(this.id, 'visibility');
-
-		if (visibility === 'none') {
-			this.children[0].className = 'active';
-			mapService.map.setLayoutProperty(this.id, 'visibility', 'visible');
-
-		} else {
-			this.children[0].className = '';
-			mapService.map.setLayoutProperty(this.id, 'visibility', 'none');
-		}
-
-		return true;
-	});
-
-	$('#officeLayer').click(function() {
-		var el = mapService.office.getElement();
-
-		if (el.hidden) {
-			this.children[0].className = 'active';
-			mapService.office.addTo(mapService.map);
-
-		} else {
-			this.children[0].className = '';
-			mapService.office.remove();
-		}
-
-		el.hidden = !el.hidden;
-
-		return true;
-	});
-
-	$('#placesLayer').click(function() {
-		if (this.children[0].className === '')
-			this.children[0].className = 'active';
-
-		else
-			this.children[0].className = '';
-
-		mapService.places.forEach(function(place) {
-			var el = place.getElement();
-
-			if (el.hidden)
-				place.addTo(mapService.map);
-
-			else
-				place.remove();
-
-			el.hidden = !el.hidden;
-
-			return true;
-		});
-
-		return true;
-	});
-
-	$('#trailsLayer').click(function() {
-		var visibility = mapService.map.getLayoutProperty(this.id, 'visibility');
-
-		if (visibility === 'none') {
-			this.children[0].className = 'active';
-			mapService.map.setLayoutProperty(this.id, 'visibility', 'visible');
-
-		} else {
-			this.children[0].className = '';
-			mapService.map.setLayoutProperty(this.id, 'visibility', 'none');
-		}
-
-		mapService.trails.forEach(function(trail) {
-			var el = trail.getElement();
-
-			if (el.hidden)
-				trail.addTo(mapService.map);
-
-			else
-				trail.remove();
-
-			el.hidden = !el.hidden;
-
-			return true;
-		});
-
-		return true;
-	});
-/*
-	$('#aerialView').click(function() {
-		if (mapService.basemap === 0) {
-			this.children[0].className = 'active';
-			mapService.map.setStyle('mapbox://styles/mapbox/satellite-v9');
-			mapService.basemap = 1;
-
-		} else {
-			this.children[0].className = '';
-			mapService.map.setStyle('mapbox://styles/mapbox/dark-v9');
-			mapService.basemap = 0;
-		}
-
-		return true;
-	});
-*/
-	$('#resetMap').click(function() {
-		return location.reload(true);
-	});
 
 	return mapService;
 }
