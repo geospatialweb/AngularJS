@@ -5,7 +5,7 @@ function mapController() {
 	return this;
 }
 
-app.controller('mapController', mapController);
+module.exports = mapController;
 
 return true;
 })();

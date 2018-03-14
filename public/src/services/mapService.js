@@ -1,6 +1,10 @@
 (function () {
 'use strict';
 
+const mapboxgl = require('mapbox-gl');
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiZ2Vvc3BhdGlhbHdlYiIsImEiOiJ6WGdOUFRvIn0.GoVRwZq5EfVsLNGyCqgZTw';
+
 function mapService($http) {
 	var mapService = this;
 
@@ -142,8 +146,9 @@ function mapService($http) {
 	return mapService;
 }
 
-app.service('mapService', mapService);
 mapService.$inject = ['$http'];
+
+module.exports = mapService;
 
 return true;
 })();

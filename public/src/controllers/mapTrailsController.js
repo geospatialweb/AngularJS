@@ -66,8 +66,9 @@ function mapTrailsController(mapService) {
 	return trails;
 }
 
-app.controller('mapTrailsController', mapTrailsController);
 mapTrailsController.$inject = ['mapService'];
+
+module.exports = mapTrailsController;
 
 return true;
 })();

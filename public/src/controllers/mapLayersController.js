@@ -115,8 +115,9 @@ function mapLayersController(mapService) {
 	return layers;
 }
 
-app.controller('mapLayersController', mapLayersController);
 mapLayersController.$inject = ['mapService'];
+
+module.exports = mapLayersController;
 
 return true;
 })();

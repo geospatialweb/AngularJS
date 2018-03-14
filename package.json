@@ -1,8 +1,8 @@
 {
   "name": "geospatial_web",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "John Campbell <johncampbell@geospatialweb.ca>",
-  "description": "Node / Express / Mapbox / PostGIS Web Mapping",
+  "description": "Node / Express / AngularJS / Mapbox / PostGIS Web Mapping",
   "main": "app.js",
   "private": true,
   "repository": {
@@ -10,6 +10,8 @@
     "url": "https://github.com/geospatialweb/devops.git"
   },
   "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development",
     "start": "node app.js"
   },
   "dependencies": {
@@ -22,6 +24,8 @@
     "serve-favicon": "^2.4.5"
   },
   "devDependencies": {
-    "webpack": "^4.1.1"
+    "angular": "^1.6.9",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
   }
 }
