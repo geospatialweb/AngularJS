@@ -3,13 +3,13 @@
 
 const express = require('express'),
       favicon = require('serve-favicon'),
-      join = require('path').join,
+      path = require('path'),
       app = express(),
       HOST = '0.0.0.0',
       PORT = 80;
 
-app.use(favicon(join(__dirname, 'public/images/favicon.ico')));
-app.use(express.static(join(__dirname, 'public')));
+app.use(favicon(path.resolve(__dirname, 'public/images/favicon.ico')));
+app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.use('/region', require('./routes/region'));
 app.use('/office', require('./routes/kml').office);
