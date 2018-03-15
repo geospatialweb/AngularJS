@@ -1,3 +1,4 @@
+(function () {
 'use strict';
 
 const path = require('path');
@@ -13,3 +14,6 @@ const config = {
 };
 
 module.exports = config;
+
+return true;
+})();

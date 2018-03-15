@@ -53,9 +53,9 @@ map-layers ul.map-ui div {
     display: block;
     padding: 5px 0 5px 40px;
     background: rgb(160,150,140);
-    border: 1px solid #bbb;
+    border: 1px solid rgb(187,187,187);
     border-bottom-width: 0;
-    color: #3c4e5a;
+    color: rgb(60,75,90);
     cursor: pointer;
     font-size: 0.95em;
     text-decoration: none;
