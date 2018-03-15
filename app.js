@@ -11,10 +11,10 @@ const express = require('express'),
 app.use(favicon(path.resolve(__dirname, 'public/images/favicon.ico')));
 app.use(express.static(path.resolve(__dirname, 'public')));
 
-app.use('/region', require('./routes/region'));
-app.use('/office', require('./routes/kml').office);
-app.use('/places', require('./routes/kml').places);
-app.use('/trails', require('./routes/kml').trails);
+app.use('/region', require(path.resolve(__dirname, 'routes/region')));
+app.use('/office', require((path.resolve(__dirname, 'routes/kml'))).office);
+app.use('/places', require((path.resolve(__dirname, 'routes/kml'))).places);
+app.use('/trails', require((path.resolve(__dirname, 'routes/kml'))).trails);
 
 app.listen(port, host);
 console.log('Running on http://' + host + ':' + port +'\n');

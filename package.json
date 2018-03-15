@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@mapbox/togeojson": "^0.16.0",
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "jsdom-nogyp": "^0.8.3",
     "mapbox-gl": "^0.44.1",
     "path": "^0.12.7",
