@@ -14,10 +14,10 @@ pg.logError = function (err, res, sql) {
 
 var region = express.Router().get('/', function (req, res) {
 	//container database - delete Dockerfile in root directory
-	//var connection = parse('postgres://postgres:admin@postgres/postgres');
+	var connection = parse('postgres://postgres:admin@postgres/postgres');
 
 	//local database - copy /images/Dockerfile to root directory
-	var connection = parse('postgres://postgres:admin@localhost/fabr');
+	//var connection = parse('postgres://postgres:admin@localhost/fabr');
 
 	pg.connect(connection, function (error, client, release) {
 		var sql = 'SELECT lat, lng FROM region';
