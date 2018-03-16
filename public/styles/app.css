@@ -16,7 +16,7 @@ body {
 
 .logo {
     margin: 0;
-    padding: 4px 0 0 4px;
+    padding: 4px 0 0 5px;
     float: left;
     height: 40px;
     width: 40px;
@@ -26,6 +26,20 @@ body {
     padding: 12px 0 0 8px;
     float: left;
     font-size: 1.25em;
+}
+
+.title {
+    padding: 15px 0 0 20px;
+    color: rgb(160,0,0);
+    float: left;
+    font-size: 1em;
+}
+
+.repo {
+    padding: 15px 10px 0 0;
+    color: rgb(0,0,0);
+    float: right;
+    font-size: .8em;
 }
 
 .mapContainer {

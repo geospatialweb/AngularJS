@@ -7,7 +7,6 @@ var express = require('express'),
 	pg = require('pg');
 
 pg.logError = function (err, res, sql) {
-	console.log("ERROR!");
 	console.log((err.stack || err) + '\n' + sql);
 	return res.status(500).send({"Error": err});
 };
