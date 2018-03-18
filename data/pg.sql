@@ -1,3 +1,5 @@
+CREATE EXTENSION postgis;
+
 CREATE TABLE biosphere (
 	id integer not null primary key,
 	geom geometry
