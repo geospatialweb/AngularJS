@@ -1,15 +1,15 @@
 (function () {
 'use strict';
 
-const path = require('path');
+const join = require('path').join;
 
 const config = {
 	entry: [
-		path.resolve(__dirname, 'public/src/index.js')
+		join(__dirname, 'public/src/index.js')
 	],
 	output: {
 		filename: 'app.js',
-		path: path.resolve(__dirname, 'public')
+		path: join(__dirname, 'public')
 	}
 };
 
