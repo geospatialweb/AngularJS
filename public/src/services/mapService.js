@@ -8,8 +8,6 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZ2Vvc3BhdGlhbHdlYiIsImEiOiJ6WGdOUFRvIn0.GoVRw
 function mapService($http, mapMarkerService) {
 	var mapService = this;
 
-//	mapService.basemap = 0;
-
 	mapService.map = new mapboxgl.Map({
 		container: 'map',
 		style: 'mapbox://styles/mapbox/dark-v9',
@@ -20,7 +18,8 @@ function mapService($http, mapMarkerService) {
 		.on('load', function () {
 			$http.get('/layers', {
 				params: {
-					db_table: 'biosphere'
+					fields: 'name, description, ST_AsGeoJSON(geom)',
+					table: 'biosphere'
 				}
 			})
 				.then(function success(data) {
@@ -51,23 +50,12 @@ function mapService($http, mapMarkerService) {
 
 			$http.get('/layers', {
 				params: {
-					db_table: 'office'
+					fields: 'name, description, ST_AsGeoJSON(geom)',
+					table: 'office'
 				}
 			})
 				.then(function success(data) {
-					var el = document.createElement('div'),
-						feature = data.data.features[0];
-
-					el.className = 'office_marker';
-					el.hidden = true;
-
-					mapMarkerService.office = new mapboxgl.Marker(el)
-						.setLngLat(feature.geometry.coordinates)
-						.setPopup(new mapboxgl.Popup({
-							offset: 15
-						})
-							.setHTML('<b>' + feature.properties.name + '</b><br>' + feature.properties.description));
-
+					mapMarkerService.setMarkers(data);
 					return true;
 
 				}, function failure(data) {
@@ -76,28 +64,12 @@ function mapService($http, mapMarkerService) {
 
 			$http.get('/layers', {
 				params: {
-					db_table: 'places'
+					fields: 'name, description, ST_AsGeoJSON(geom)',
+					table: 'places'
 				}
 			})
 				.then(function success(data) {
-					data.data.features.forEach(function (marker) {
-						var el = document.createElement('div');
-
-						el.className = 'place_marker';
-						el.hidden = true;
-
-						mapMarkerService.places.push(
-							new mapboxgl.Marker(el)
-								.setLngLat(marker.geometry.coordinates)
-								.setPopup(new mapboxgl.Popup({
-									offset: 15
-								})
-									.setHTML('<b>' + marker.properties.name + '</b><br>' + marker.properties.description))
-						)
-
-						return true;
-					});
-
+					mapMarkerService.setMarkers(data);
 					return true;
 
 				}, function failure(data) {
@@ -106,7 +78,8 @@ function mapService($http, mapMarkerService) {
 
 			$http.get('/layers', {
 				params: {
-					db_table: 'trails'
+					fields: 'name, description, lat, lng, ST_AsGeoJSON(geom)',
+					table: 'trails'
 				}
 			})
 				.then(function success(data) {
@@ -127,24 +100,7 @@ function mapService($http, mapMarkerService) {
 					};
 
 					mapService.map.addLayer(trails);
-
-					data.data.features.forEach(function (marker) {
-						var el = document.createElement('div');
-
-						el.className = 'trail_marker';
-						el.hidden = true;
-
-						mapMarkerService.trails.push(
-							new mapboxgl.Marker(el)
-								.setLngLat([marker.properties.lng, marker.properties.lat])
-								.setPopup(new mapboxgl.Popup({
-									offset: 15
-								})
-									.setHTML('<b>' + marker.properties.name + '</b><br>' + marker.properties.description))
-						)
-
-						return true;
-					});
+					mapMarkerService.setMarkers(data);
 
 					return true;
 

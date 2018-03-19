@@ -19,13 +19,7 @@ var layer = express.Router().get('/', function (req, res) {
 	//var connection = parse('postgres://postgres:admin@localhost/postgres');
 
 	pg.connect(connection, function (error, client, release) {
-		var sql;
-
-		if (req.query.db_table === 'trails')
-			sql = 'SELECT name, description, lng, lat, ST_AsGeoJSON(geom) FROM ' + req.query.db_table;
-
-		else
-			sql = 'SELECT name, description, ST_AsGeoJSON(geom) FROM ' + req.query.db_table;
+		var sql = 'SELECT ' + req.query.fields + ' FROM ' + req.query.table;
 
 		if (error)
 			pg.logError(error, res, sql);

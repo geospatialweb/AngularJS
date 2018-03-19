@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 
-function mapLayersController(mapMarkerService, mapService) {
+function mapLayersController(mapService, mapLayerService, mapMarkerService) {
 	var layers = this;
 
 	layers.setLayer = function (layer, $event) {
@@ -13,38 +13,45 @@ function mapLayersController(mapMarkerService, mapService) {
 				var visibility = mapService.map.getLayoutProperty(layer, 'visibility');
 
 				if (visibility === 'none') {
-					mapService.mapLayers[0].children[0].children[0].children[0].className = 'active';
+					mapLayerService.layers[0].children[0].children[0].children[0].className = 'active';
 					mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
 		
 				} else {
-					mapService.mapLayers[0].children[0].children[0].children[0].className = '';
+					mapLayerService.layers[0].children[0].children[0].children[0].className = '';
 					mapService.map.setLayoutProperty(layer, 'visibility', 'none');
 				}
 
 				break;
 
 			case 'office':
-				var el = mapMarkerService.office.getElement();
-	
-				if (el.hidden) {
-					mapService.mapLayers[0].children[0].children[1].children[0].className = 'active';
-					mapMarkerService.office.addTo(mapService.map);
+				if (mapLayerService.layers[0].children[0].children[1].children[0].className === '')
+					mapLayerService.layers[0].children[0].children[1].children[0].className = 'active';
+
+				else
+					mapLayerService.layers[0].children[0].children[1].children[0].className = '';
+
+				mapMarkerService.office.forEach(function (office) {
+					var el = office.getElement();
+
+					if (el.hidden)
+						office.addTo(mapService.map);
+
+					else
+						office.remove();
 		
-				} else {
-					mapService.mapLayers[0].children[0].children[1].children[0].className = '';
-					mapMarkerService.office.remove();
-				}
-		
-				el.hidden = !el.hidden;
+					el.hidden = !el.hidden;
+
+					return true;
+				});
 
 				break;
 
 			case 'places':
-				if (mapService.mapLayers[0].children[0].children[2].children[0].className === '')
-					mapService.mapLayers[0].children[0].children[2].children[0].className = 'active';
+				if (mapLayerService.layers[0].children[0].children[2].children[0].className === '')
+					mapLayerService.layers[0].children[0].children[2].children[0].className = 'active';
 
 				else
-					mapService.mapLayers[0].children[0].children[2].children[0].className = '';
+					mapLayerService.layers[0].children[0].children[2].children[0].className = '';
 
 				mapMarkerService.places.forEach(function (place) {
 					var el = place.getElement();
@@ -66,11 +73,11 @@ function mapLayersController(mapMarkerService, mapService) {
 				var visibility = mapService.map.getLayoutProperty(layer, 'visibility');
 		
 				if (visibility === 'none') {
-					mapService.mapLayers[0].children[0].children[3].children[0].className = 'active';
+					mapLayerService.layers[0].children[0].children[3].children[0].className = 'active';
 					mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
 		
 				} else {
-					mapService.mapLayers[0].children[0].children[3].children[0].className = '';
+					mapLayerService.layers[0].children[0].children[3].children[0].className = '';
 					mapService.map.setLayoutProperty(layer, 'visibility', 'none');
 				}
 		
@@ -91,15 +98,17 @@ function mapLayersController(mapMarkerService, mapService) {
 				break;
 /*
 			case 'aerialView':
-				if (mapService.basemap === 0) {
-					mapService.mapLayers[0].children[0].children[4].children[0].className = 'active';
+				if (mapLayerService.basemap === 0) {
+					mapLayerService.layers[0].children[0].children[4].children[0].className = 'active';
+					mapLayerService.basemap = 1;
+
 					mapService.map.setStyle('mapbox://styles/mapbox/satellite-v9');
-					mapService.basemap = 1;
 		
 				} else {
-					mapService.mapLayers[0].children[0].children[4].children[0].className = '';
+					mapLayerService.layers[0].children[0].children[4].children[0].className = '';
+					mapLayerService.basemap = 0;
+
 					mapService.map.setStyle('mapbox://styles/mapbox/dark-v9');
-					mapService.basemap = 0;
 				}
 
 				break;
@@ -115,7 +124,7 @@ function mapLayersController(mapMarkerService, mapService) {
 	return layers;
 }
 
-mapLayersController.$inject = ['mapMarkerService', 'mapService'];
+mapLayersController.$inject = ['mapService', 'mapLayerService', 'mapMarkerService'];
 
 module.exports = mapLayersController;
 
