@@ -8,9 +8,10 @@ app.controller('mapLayersController', require('C:/Users/John/Documents/devops/pu
 app.controller('mapTrailsController', require('C:/Users/John/Documents/devops/public/src/controllers/mapTrailsController'));
 
 app.directive('mapLayers', require('C:/Users/John/Documents/devops/public/src/directives/mapLayersDirective'));
-app.directive('mapTrails', require('C:/Users/John/Documents/devops/public/src//directives/mapTrailsDirective'));
+app.directive('mapTrails', require('C:/Users/John/Documents/devops/public/src/directives/mapTrailsDirective'));
 
-app.service('mapService', require('C:/Users/John/Documents/devops/public/src//services/mapService'));
+app.service('mapMarkerService', require('C:/Users/John/Documents/devops/public/src/services/mapMarkerService'));
+app.service('mapService', require('C:/Users/John/Documents/devops/public/src/services/mapService'));
 
 return true;
 })();

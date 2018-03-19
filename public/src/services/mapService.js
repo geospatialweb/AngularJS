@@ -5,13 +5,10 @@ const mapboxgl = require('mapbox-gl');
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ2Vvc3BhdGlhbHdlYiIsImEiOiJ6WGdOUFRvIn0.GoVRwZq5EfVsLNGyCqgZTw';
 
-function mapService($http) {
+function mapService($http, mapMarkerService) {
 	var mapService = this;
 
 //	mapService.basemap = 0;
-	mapService.office = null;
-	mapService.places = [];
-	mapService.trails = [];
 
 	mapService.map = new mapboxgl.Map({
 		container: 'map',
@@ -21,10 +18,14 @@ function mapService($http) {
 	})
 		.addControl(new mapboxgl.NavigationControl(), 'top-left')
 		.on('load', function () {
-			$http.get('/region')
+			$http.get('/layers', {
+				params: {
+					db_table: 'biosphere'
+				}
+			})
 				.then(function success(data) {
-                    var region = {
-						"id": "region",
+                    var biosphere = {
+						"id": "biosphere",
 						"type": "fill",
 						"source": {
 							"type": "geojson",
@@ -40,7 +41,7 @@ function mapService($http) {
 						}
 					};
 
-					mapService.map.addLayer(region);
+					mapService.map.addLayer(biosphere);
 
                     return true;
 
@@ -48,19 +49,24 @@ function mapService($http) {
                     return console.log(data, 'Query failed:\n $1');
                 });
 
-			$http.get('/office')
+			$http.get('/layers', {
+				params: {
+					db_table: 'office'
+				}
+			})
 				.then(function success(data) {
-					var el = document.createElement('div');
+					var el = document.createElement('div'),
+						feature = data.data.features[0];
 
 					el.className = 'office_marker';
 					el.hidden = true;
 
-					mapService.office = new mapboxgl.Marker(el)
-						.setLngLat(data.data.features[0].geometry.coordinates)
+					mapMarkerService.office = new mapboxgl.Marker(el)
+						.setLngLat(feature.geometry.coordinates)
 						.setPopup(new mapboxgl.Popup({
 							offset: 15
 						})
-							.setHTML('<b>' + data.data.features[0].properties.name + '</b><br>' + data.data.features[0].properties.description));
+							.setHTML('<b>' + feature.properties.name + '</b><br>' + feature.properties.description));
 
 					return true;
 
@@ -68,7 +74,11 @@ function mapService($http) {
 					return console.log(data, 'Query failed:\n $1');
 				});
 
-			$http.get('/places')
+			$http.get('/layers', {
+				params: {
+					db_table: 'places'
+				}
+			})
 				.then(function success(data) {
 					data.data.features.forEach(function (marker) {
 						var el = document.createElement('div');
@@ -76,7 +86,7 @@ function mapService($http) {
 						el.className = 'place_marker';
 						el.hidden = true;
 
-						mapService.places.push(
+						mapMarkerService.places.push(
 							new mapboxgl.Marker(el)
 								.setLngLat(marker.geometry.coordinates)
 								.setPopup(new mapboxgl.Popup({
@@ -94,7 +104,11 @@ function mapService($http) {
 					return console.log(data, 'Query failed:\n $1');
 				});
 
-			$http.get('/trails')
+			$http.get('/layers', {
+				params: {
+					db_table: 'trails'
+				}
+			})
 				.then(function success(data) {
 					var trails = {
 						"id": "trails",
@@ -115,21 +129,19 @@ function mapService($http) {
 					mapService.map.addLayer(trails);
 
 					data.data.features.forEach(function (marker) {
-						if (marker.geometry.type === 'Point') {
-							var el = document.createElement('div');
+						var el = document.createElement('div');
 
-							el.className = 'trail_marker';
-							el.hidden = true;
+						el.className = 'trail_marker';
+						el.hidden = true;
 
-							mapService.trails.push(
-								new mapboxgl.Marker(el)
-									.setLngLat(marker.geometry.coordinates)
-									.setPopup(new mapboxgl.Popup({
-										offset: 15
-									})
-										.setHTML('<b>' + marker.properties.name + '</b><br>' + marker.properties.description))
-							)
-						}
+						mapMarkerService.trails.push(
+							new mapboxgl.Marker(el)
+								.setLngLat([marker.properties.lng, marker.properties.lat])
+								.setPopup(new mapboxgl.Popup({
+									offset: 15
+								})
+									.setHTML('<b>' + marker.properties.name + '</b><br>' + marker.properties.description))
+						)
 
 						return true;
 					});
@@ -146,7 +158,7 @@ function mapService($http) {
 	return mapService;
 }
 
-mapService.$inject = ['$http'];
+mapService.$inject = ['$http', 'mapMarkerService'];
 
 module.exports = mapService;
 

@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 
-function mapLayersController(mapService) {
+function mapLayersController(mapMarkerService, mapService) {
 	var layers = this;
 
 	layers.setLayer = function (layer, $event) {
@@ -9,7 +9,7 @@ function mapLayersController(mapService) {
 			$event.stopPropagation();
 
 		switch (layer) {
-			case 'region':
+			case 'biosphere':
 				var visibility = mapService.map.getLayoutProperty(layer, 'visibility');
 
 				if (visibility === 'none') {
@@ -24,15 +24,15 @@ function mapLayersController(mapService) {
 				break;
 
 			case 'office':
-				var el = mapService.office.getElement();
+				var el = mapMarkerService.office.getElement();
 	
 				if (el.hidden) {
 					mapService.mapLayers[0].children[0].children[1].children[0].className = 'active';
-					mapService.office.addTo(mapService.map);
+					mapMarkerService.office.addTo(mapService.map);
 		
 				} else {
 					mapService.mapLayers[0].children[0].children[1].children[0].className = '';
-					mapService.office.remove();
+					mapMarkerService.office.remove();
 				}
 		
 				el.hidden = !el.hidden;
@@ -46,7 +46,7 @@ function mapLayersController(mapService) {
 				else
 					mapService.mapLayers[0].children[0].children[2].children[0].className = '';
 
-				mapService.places.forEach(function (place) {
+				mapMarkerService.places.forEach(function (place) {
 					var el = place.getElement();
 
 					if (el.hidden)
@@ -74,7 +74,7 @@ function mapLayersController(mapService) {
 					mapService.map.setLayoutProperty(layer, 'visibility', 'none');
 				}
 		
-				mapService.trails.forEach(function (trail) {
+				mapMarkerService.trails.forEach(function (trail) {
 					var el = trail.getElement();
 		
 					if (el.hidden)
@@ -115,7 +115,7 @@ function mapLayersController(mapService) {
 	return layers;
 }
 
-mapLayersController.$inject = ['mapService'];
+mapLayersController.$inject = ['mapMarkerService', 'mapService'];
 
 module.exports = mapLayersController;
 

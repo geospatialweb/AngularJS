@@ -11,10 +11,7 @@ const express = require('express'),
 app.use(favicon(join(__dirname, 'public/images/favicon.ico')));
 app.use(express.static(join(__dirname, 'public')));
 
-app.use('/region', require(join(__dirname, 'routes/region')));
-app.use('/office', require((join(__dirname, 'routes/kml'))).office);
-app.use('/places', require((join(__dirname, 'routes/kml'))).places);
-app.use('/trails', require((join(__dirname, 'routes/kml'))).trails);
+app.use('/layers', require(join(__dirname, 'routes/layers')));
 
 app.listen(port, host, function (error) {
     if (error)

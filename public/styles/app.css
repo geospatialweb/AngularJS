@@ -5,6 +5,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    background: rgb(0,0,0);
     font-family: 'Roboto', sans-serif;
 }
 
@@ -91,7 +92,7 @@ map-layers ul.map-ui li:last-child div {
     -webkit-border-radius: 0 0 3px 3px;
 }
 
-map-layers ul.map-ui li.region div.active,
+map-layers ul.map-ui li.biosphere div.active,
 map-layers ul.map-ui li.office div.active,
 map-layers ul.map-ui li.places div.active,
 map-layers ul.map-ui li.trails div.active
@@ -100,7 +101,7 @@ map-layers ul.map-ui li.trails div.active
     background: rgb(120,110,100);
 }
 
-map-layers div.regionMarker {
+map-layers div.biosphereMarker {
     position: absolute;
     left: 22px;
     top: 166px;

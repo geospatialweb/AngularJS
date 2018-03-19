@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 
-function mapTrailsDirective($sce, mapService) {
+function mapTrailsDirective($sce) {
 	var ddo = {
 		restrict: 'E',
 		templateUrl: $sce.trustAsResourceUrl('partials/mapTrails.html'),
@@ -11,7 +11,7 @@ function mapTrailsDirective($sce, mapService) {
 	return ddo;
 }
 
-mapTrailsDirective.$inject = ['$sce', 'mapService'];
+mapTrailsDirective.$inject = ['$sce'];
 
 module.exports = mapTrailsDirective;
 
