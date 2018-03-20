@@ -10,8 +10,8 @@
     "url": "https://github.com/geospatialweb/devops.git"
   },
   "scripts": {
-    "dev": "webpack --mode development --watch",
-    "prod": "webpack --mode production",
+    "dev": "webpack --mode development --config ./config/webpack_config.js --watch",
+    "prod": "webpack --mode production --config ./config/webpack_config.js",
     "start": "node app.js"
   },
   "dependencies": {

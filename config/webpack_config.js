@@ -4,12 +4,11 @@
 const join = require('path').join;
 
 const config = {
-	entry: [
-		join(__dirname, 'public/src/index.js')
-	],
+	entry: './public/index.js',
+
 	output: {
 		filename: 'app.js',
-		path: join(__dirname, 'public')
+		path: join(__dirname, '../public/dist')
 	}
 };
 

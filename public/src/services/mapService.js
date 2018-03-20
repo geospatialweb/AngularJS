@@ -3,10 +3,10 @@
 
 const mapboxgl = require('mapbox-gl');
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiZ2Vvc3BhdGlhbHdlYiIsImEiOiJ6WGdOUFRvIn0.GoVRwZq5EfVsLNGyCqgZTw';
-
-function mapService($http, mapMarkerService) {
+function mapService($http, $window, mapMarkerService) {
 	var mapService = this;
+
+	mapboxgl.accessToken = $window.accessToken;
 
 	mapService.map = new mapboxgl.Map({
 		container: 'map',
@@ -136,7 +136,7 @@ function mapService($http, mapMarkerService) {
 	return mapService;
 }
 
-mapService.$inject = ['$http', 'mapMarkerService'];
+mapService.$inject = ['$http', '$window', 'mapMarkerService'];
 
 module.exports = mapService;
 

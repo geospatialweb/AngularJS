@@ -2,11 +2,12 @@
 'use strict';
 
 const express = require('express'),
+      config = require('./config/config'),
       favicon = require('serve-favicon'),
       join = require('path').join,
-      app = express(),
-      host = '0.0.0.0',
-      port = 80;
+      host = config.host,
+      port = config.port,
+      app = express();
 
 app.use(favicon(join(__dirname, 'public/images/favicon.ico')));
 

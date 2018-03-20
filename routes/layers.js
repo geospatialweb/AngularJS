@@ -2,6 +2,7 @@
 'use strict';
 
 var express = require('express'),
+	config = require('../config/config'),
 	geojson = require('../modules/geojson'),
 	parse = require('pg-connection-string').parse,
 	pg = require('pg');
@@ -14,10 +15,10 @@ pg.logError = function (err, res) {
 
 var layer = express.Router().get('/', function (req, res) {
 	//container database - delete Dockerfile in root directory after build
-	var connection = parse('postgres://postgres:postgres@postgres/postgres');
+	var connection = parse(config.DATABASE_URL);
 
 	//local database - copy /images/Dockerfile to root directory
-	//var connection = parse('postgres://postgres:admin@localhost/postgres');
+	//var connection = parse(config.DATABASE_URL_LOCAL);
 
 	pg.connect(connection, function (err, client, release) {
 		var sql = 'SELECT ' + req.query.fields + ' FROM ' + req.query.table;

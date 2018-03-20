@@ -14,11 +14,23 @@ function mapLayersController($document, $window, mapService, mapLayerService) {
 
 				if (biosphere.hasClass('')) {
 					biosphere.addClass('active');
-					mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
+
+					try {
+						mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
+					
+					} catch (err) {
+						console.error('Layer Error:\n', err);
+					}
 
 				} else {
 					biosphere.removeClass('active');
-					mapService.map.setLayoutProperty(layer, 'visibility', 'none');
+
+					try {
+						mapService.map.setLayoutProperty(layer, 'visibility', 'none');
+					
+					} catch (err) {
+						console.error('Layer Error:\n', err);
+					}
 				}
 
 				break;
@@ -54,11 +66,23 @@ function mapLayersController($document, $window, mapService, mapLayerService) {
 
 				if (trails.hasClass('')) {
 					trails.addClass('active');
-					mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
+
+					try {
+						mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
+					
+					} catch (err) {
+						console.error('Layer Error:\n', err);
+					}
 
 				} else {
 					trails.removeClass('active');
-					mapService.map.setLayoutProperty(layer, 'visibility', 'none');
+
+					try {
+						mapService.map.setLayoutProperty(layer, 'visibility', 'none');
+					
+					} catch (err) {
+						console.error('Layer Error:\n', err);
+					}
 				}
 
 				mapLayerService.displayMarkers(layer);
