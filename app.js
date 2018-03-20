@@ -13,9 +13,9 @@ app.use(express.static(join(__dirname, 'public')));
 
 app.use('/layers', require(join(__dirname, 'routes/layers')));
 
-app.listen(port, host, function (error) {
-    if (error)
-        console.log(error);
+app.listen(port, host, function (err) {
+    if (err)
+        console.error(err);
     else
         console.log('Active on http://localhost:' + port + ' at ' + new Date().toDateString() + ' ' + new Date().toTimeString());
 });

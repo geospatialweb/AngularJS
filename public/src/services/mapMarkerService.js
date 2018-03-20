@@ -70,7 +70,7 @@ function mapMarkerService() {
 				});
 
 				break;
-		};
+		}
 	};
 
 	return mapMarkerService;

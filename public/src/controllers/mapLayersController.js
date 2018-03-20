@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 
-function mapLayersController(mapService, mapLayerService, mapMarkerService) {
+function mapLayersController($document, $window, mapService, mapLayerService) {
 	var layers = this;
 
 	layers.setLayer = function (layer, $event) {
@@ -10,102 +10,72 @@ function mapLayersController(mapService, mapLayerService, mapMarkerService) {
 
 		switch (layer) {
 			case 'biosphere':
-				var visibility = mapService.map.getLayoutProperty(layer, 'visibility');
+				var biosphere = angular.element($document[0].querySelectorAll('li.' + layer)).children();
 
-				if (visibility === 'none') {
-					mapLayerService.layers[0].children[0].children[0].children[0].className = 'active';
+				if (biosphere.hasClass('')) {
+					biosphere.addClass('active');
 					mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
-		
+
 				} else {
-					mapLayerService.layers[0].children[0].children[0].children[0].className = '';
+					biosphere.removeClass('active');
 					mapService.map.setLayoutProperty(layer, 'visibility', 'none');
 				}
 
 				break;
 
 			case 'office':
-				if (mapLayerService.layers[0].children[0].children[1].children[0].className === '')
-					mapLayerService.layers[0].children[0].children[1].children[0].className = 'active';
+				var office = angular.element($document[0].querySelectorAll('li.' + layer)).children();
+
+				if (office.hasClass(''))
+					office.addClass('active');
 
 				else
-					mapLayerService.layers[0].children[0].children[1].children[0].className = '';
+					office.removeClass('active');
 
-				mapMarkerService.office.forEach(function (office) {
-					var el = office.getElement();
-
-					if (el.hidden)
-						office.addTo(mapService.map);
-
-					else
-						office.remove();
-		
-					el.hidden = !el.hidden;
-
-					return true;
-				});
+				mapLayerService.displayMarkers(layer);
 
 				break;
 
 			case 'places':
-				if (mapLayerService.layers[0].children[0].children[2].children[0].className === '')
-					mapLayerService.layers[0].children[0].children[2].children[0].className = 'active';
+				var places = angular.element($document[0].querySelectorAll('li.' + layer)).children();
+
+				if (places.hasClass(''))
+					places.addClass('active');
 
 				else
-					mapLayerService.layers[0].children[0].children[2].children[0].className = '';
+					places.removeClass('active');
 
-				mapMarkerService.places.forEach(function (place) {
-					var el = place.getElement();
-
-					if (el.hidden)
-						place.addTo(mapService.map);
-
-					else
-						place.remove();
-
-					el.hidden = !el.hidden;
-
-					return true;
-				});
+				mapLayerService.displayMarkers(layer);
 
 				break;
 
 			case 'trails':
-				var visibility = mapService.map.getLayoutProperty(layer, 'visibility');
-		
-				if (visibility === 'none') {
-					mapLayerService.layers[0].children[0].children[3].children[0].className = 'active';
+				var trails = angular.element($document[0].querySelectorAll('li.' + layer)).children();
+
+				if (trails.hasClass('')) {
+					trails.addClass('active');
 					mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
-		
+
 				} else {
-					mapLayerService.layers[0].children[0].children[3].children[0].className = '';
+					trails.removeClass('active');
 					mapService.map.setLayoutProperty(layer, 'visibility', 'none');
 				}
-		
-				mapMarkerService.trails.forEach(function (trail) {
-					var el = trail.getElement();
-		
-					if (el.hidden)
-						trail.addTo(mapService.map);
-		
-					else
-						trail.remove();
-		
-					el.hidden = !el.hidden;
-		
-					return true;
-				});
+
+				mapLayerService.displayMarkers(layer);
 
 				break;
 /*
 			case 'aerialView':
+				var aerialView = angular.element($document[0].querySelectorAll('li.' + layer)).children();
+
 				if (mapLayerService.basemap === 0) {
-					mapLayerService.layers[0].children[0].children[4].children[0].className = 'active';
+					aerialView.addClass('active');
 					mapLayerService.basemap = 1;
 
 					mapService.map.setStyle('mapbox://styles/mapbox/satellite-v9');
-		
+
 				} else {
-					mapLayerService.layers[0].children[0].children[4].children[0].className = '';
+					aerialView.removeClass('active');
 					mapLayerService.basemap = 0;
 
 					mapService.map.setStyle('mapbox://styles/mapbox/dark-v9');
@@ -114,7 +84,7 @@ function mapLayersController(mapService, mapLayerService, mapMarkerService) {
 				break;
 */
 			case 'resetMap':
-				location.reload(true);
+				$window.location.reload(true);
 				break;
 		}
 
@@ -124,7 +94,7 @@ function mapLayersController(mapService, mapLayerService, mapMarkerService) {
 	return layers;
 }
 
-mapLayersController.$inject = ['mapService', 'mapLayerService', 'mapMarkerService'];
+mapLayersController.$inject = ['$document', '$window', 'mapService', 'mapLayerService'];
 
 module.exports = mapLayersController;
 

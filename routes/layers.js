@@ -6,9 +6,10 @@ var express = require('express'),
 	parse = require('pg-connection-string').parse,
 	pg = require('pg');
 
-pg.logError = function (err, res, sql) {
-	console.log((err.stack || err) + '\n' + sql);
-	return res.status(500).send({'Error': err});
+pg.logError = function (err, res) {
+	console.error(err);
+	res.status(500).send(err);
+	return true;
 };
 
 var layer = express.Router().get('/', function (req, res) {
@@ -18,24 +19,24 @@ var layer = express.Router().get('/', function (req, res) {
 	//local database - copy /images/Dockerfile to root directory
 	//var connection = parse('postgres://postgres:admin@localhost/postgres');
 
-	pg.connect(connection, function (error, client, release) {
+	pg.connect(connection, function (err, client, release) {
 		var sql = 'SELECT ' + req.query.fields + ' FROM ' + req.query.table;
 
-		if (error)
-			pg.logError(error, res, sql);
+		if (err)
+			pg.logError(err, res);
 
 		else
 			client.query(sql, function (err, result) {
 				release();
 
 				if (err)
-					pg.logError(err, res, sql);
+					pg.logError(err, res);
 
 				else if (result.rowCount > 0)
 					res.status(200).send(geojson(result.rows));
 
 				else
-					console.log('No rows received for: \n' + sql);
+					console.error('No rows returned for:\n', sql);
 
 				return true;
 			});

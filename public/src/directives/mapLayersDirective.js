@@ -1,23 +1,17 @@
 (function () {
 'use strict';
 
-function mapLayersDirective($sce, mapLayerService) {
+function mapLayersDirective($sce) {
 	var ddo = {
 		restrict: 'E',
 		templateUrl: $sce.trustAsResourceUrl('partials/mapLayers.html'),
-		controller: 'mapLayersController as layers',
-		link: mapLayersLink
+		controller: 'mapLayersController as layers'
 	};
-
-	function mapLayersLink(scope, element) {
-        mapLayerService.layers = element;
-        return true;
-    }
 
 	return ddo;
 }
 
-mapLayersDirective.$inject = ['$sce', 'mapLayerService'];
+mapLayersDirective.$inject = ['$sce'];
 
 module.exports = mapLayersDirective;
 

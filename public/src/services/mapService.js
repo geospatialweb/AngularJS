@@ -44,12 +44,13 @@ function mapService($http, mapMarkerService) {
 						mapService.map.addLayer(biosphere);
 
 					} else
-						console.log(data, 'Data Error:\n $1');
+						console.error('Data Error:\n', data);
 
                     return true;
 
                 }, function failure(data) {
-                    return console.log(data, 'Query Failed:\n $1');
+					console.error('Query Failed:\n', data);
+					return true;
                 });
 
 			$http.get('/layers', {
@@ -63,12 +64,13 @@ function mapService($http, mapMarkerService) {
 						mapMarkerService.setMarkers(data);
 
 					else
-						console.log(data, 'Data Error:\n $1');
+						console.error('Data Error:\n', data);
 
 					return true;
 
 				}, function failure(data) {
-					return console.log(data, 'Query Failed:\n $1');
+					console.error('Query Failed:\n', data);
+					return true;
 				});
 
 			$http.get('/layers', {
@@ -82,12 +84,13 @@ function mapService($http, mapMarkerService) {
 						mapMarkerService.setMarkers(data);
 
 					else
-						console.log(data, 'Data Error:\n $1');
+						console.error('Data Error:\n', data);
 
 					return true;
 
 				}, function failure(data) {
-					return console.log(data, 'Query Failed:\n $1');
+					console.error('Query Failed:\n', data);
+					return true;
 				});
 
 			$http.get('/layers', {
@@ -118,12 +121,13 @@ function mapService($http, mapMarkerService) {
 						mapMarkerService.setMarkers(data);
 
 					} else
-						console.log(data, 'Data Error:\n $1');
+						console.error('Data Error:\n', data);
 
 					return true;
 
 				}, function failure(data) {
-					return console.log(data, 'Query Failed:\n $1');
+					console.error('Query Failed:\n', data);
+					return true;
 				});
 
 			return true;
