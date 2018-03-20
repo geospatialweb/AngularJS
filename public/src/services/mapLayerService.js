@@ -34,7 +34,7 @@ function mapLayerService(mapService, mapMarkerService) {
 		}
 	};
 
-	function displayMarker(marker) {
+	var displayMarker = function (marker) {
 		var el = marker.getElement();
 
 		if (el.hidden)

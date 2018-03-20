@@ -10,7 +10,7 @@ function mapLayersController($document, $window, mapService, mapLayerService) {
 
 		switch (layer) {
 			case 'biosphere':
-				var biosphere = angular.element($document[0].querySelectorAll('li.' + layer)).children();
+				var biosphere = angular.element($document[0].querySelectorAll('map-layers ul.layers li.' + layer)).children();
 
 				if (biosphere.hasClass('')) {
 					biosphere.addClass('active');
@@ -24,7 +24,7 @@ function mapLayersController($document, $window, mapService, mapLayerService) {
 				break;
 
 			case 'office':
-				var office = angular.element($document[0].querySelectorAll('li.' + layer)).children();
+				var office = angular.element($document[0].querySelectorAll('map-layers ul.layers li.' + layer)).children();
 
 				if (office.hasClass(''))
 					office.addClass('active');
@@ -37,7 +37,7 @@ function mapLayersController($document, $window, mapService, mapLayerService) {
 				break;
 
 			case 'places':
-				var places = angular.element($document[0].querySelectorAll('li.' + layer)).children();
+				var places = angular.element($document[0].querySelectorAll('map-layers ul.layers li.' + layer)).children();
 
 				if (places.hasClass(''))
 					places.addClass('active');
@@ -50,7 +50,7 @@ function mapLayersController($document, $window, mapService, mapLayerService) {
 				break;
 
 			case 'trails':
-				var trails = angular.element($document[0].querySelectorAll('li.' + layer)).children();
+				var trails = angular.element($document[0].querySelectorAll('map-layers ul.layers li.' + layer)).children();
 
 				if (trails.hasClass('')) {
 					trails.addClass('active');

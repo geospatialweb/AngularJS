@@ -9,6 +9,7 @@ const express = require('express'),
       port = 80;
 
 app.use(favicon(join(__dirname, 'public/images/favicon.ico')));
+
 app.use(express.static(join(__dirname, 'public')));
 
 app.use('/layers', require(join(__dirname, 'routes/layers')));
