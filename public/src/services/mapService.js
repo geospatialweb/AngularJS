@@ -23,29 +23,33 @@ function mapService($http, mapMarkerService) {
 				}
 			})
 				.then(function success(data) {
-                    var biosphere = {
-						"id": "biosphere",
-						"type": "fill",
-						"source": {
-							"type": "geojson",
-							"data": data.data
-						},
-						"layout": {
-							"visibility": "none",
-						},
-						"paint": {
-							"fill-color": "#fff",
-							"fill-opacity": .25,
-							"fill-outline-color": "#000"
-						}
-					};
+					if (data && data.data) {
+						var biosphere = {
+							"id": "biosphere",
+							"type": "fill",
+							"source": {
+								"type": "geojson",
+								"data": data.data
+							},
+							"layout": {
+								"visibility": "none",
+							},
+							"paint": {
+								"fill-color": "#fff",
+								"fill-opacity": .25,
+								"fill-outline-color": "#000"
+							}
+						};
 
-					mapService.map.addLayer(biosphere);
+						mapService.map.addLayer(biosphere);
+
+					} else
+						console.log(data, 'Data Error:\n $1');
 
                     return true;
 
                 }, function failure(data) {
-                    return console.log(data, 'Query failed:\n $1');
+                    return console.log(data, 'Query Failed:\n $1');
                 });
 
 			$http.get('/layers', {
@@ -55,11 +59,16 @@ function mapService($http, mapMarkerService) {
 				}
 			})
 				.then(function success(data) {
-					mapMarkerService.setMarkers(data);
+					if (data && data.data)
+						mapMarkerService.setMarkers(data);
+
+					else
+						console.log(data, 'Data Error:\n $1');
+
 					return true;
 
 				}, function failure(data) {
-					return console.log(data, 'Query failed:\n $1');
+					return console.log(data, 'Query Failed:\n $1');
 				});
 
 			$http.get('/layers', {
@@ -69,11 +78,16 @@ function mapService($http, mapMarkerService) {
 				}
 			})
 				.then(function success(data) {
-					mapMarkerService.setMarkers(data);
+					if (data && data.data)
+						mapMarkerService.setMarkers(data);
+
+					else
+						console.log(data, 'Data Error:\n $1');
+
 					return true;
 
 				}, function failure(data) {
-					return console.log(data, 'Query failed:\n $1');
+					return console.log(data, 'Query Failed:\n $1');
 				});
 
 			$http.get('/layers', {
@@ -83,29 +97,33 @@ function mapService($http, mapMarkerService) {
 				}
 			})
 				.then(function success(data) {
-					var trails = {
-						"id": "trails",
-						"type": "line",
-						"source": {
-							"type": "geojson",
-							"data": data.data
-						},
-						"layout": {
-							"visibility": "none",
-						},
-						"paint": {
-							"line-color": "#aa0000",
-							"line-width": 2
-						}
-					};
+					if (data && data.data) {
+						var trails = {
+							"id": "trails",
+							"type": "line",
+							"source": {
+								"type": "geojson",
+								"data": data.data
+							},
+							"layout": {
+								"visibility": "none",
+							},
+							"paint": {
+								"line-color": "#aa0000",
+								"line-width": 2
+							}
+						};
 
-					mapService.map.addLayer(trails);
-					mapMarkerService.setMarkers(data);
+						mapService.map.addLayer(trails);
+						mapMarkerService.setMarkers(data);
+
+					} else
+						console.log(data, 'Data Error:\n $1');
 
 					return true;
 
 				}, function failure(data) {
-					return console.log(data, 'Query failed:\n $1');
+					return console.log(data, 'Query Failed:\n $1');
 				});
 
 			return true;
