@@ -1,45 +1,32 @@
 (function () {
 'use strict';
 
-const mapboxgl = require('mapbox-gl');
+var config = window.config,
+	mapboxgl = require('mapbox-gl');
 
-function mapService($http, $window, mapMarkerService) {
+mapboxgl.accessToken = config.map.accessToken;
+
+function mapService($http, mapMarkerService) {
 	var mapService = this;
 
-	mapboxgl.accessToken = $window.accessToken;
-
 	mapService.map = new mapboxgl.Map({
-		container: 'map',
-		style: 'mapbox://styles/mapbox/dark-v9',
-		center: [-76.3, 44.45],
-		zoom: 9
+		container: config.map.container,
+		style: config.map.style,
+		center: config.map.center,
+		zoom: config.map.zoom
 	})
-		.addControl(new mapboxgl.NavigationControl(), 'top-left')
+		.addControl(new mapboxgl.NavigationControl(), config.map.control)
 		.on('load', function () {
 			$http.get('/layers', {
 				params: {
-					fields: 'name, description, ST_AsGeoJSON(geom)',
-					table: 'biosphere'
+					fields: config.layers.biosphere.fields,
+					table: config.layers.biosphere.table
 				}
 			})
 				.then(function success(data) {
 					if (data && data.data) {
-						var biosphere = {
-							"id": "biosphere",
-							"type": "fill",
-							"source": {
-								"type": "geojson",
-								"data": data.data
-							},
-							"layout": {
-								"visibility": "none",
-							},
-							"paint": {
-								"fill-color": "#fff",
-								"fill-opacity": .25,
-								"fill-outline-color": "#000"
-							}
-						};
+						var biosphere = config.layers.biosphere.layer;
+						biosphere.source.data = data.data;
 
 						mapService.map.addLayer(biosphere);
 
@@ -55,8 +42,8 @@ function mapService($http, $window, mapMarkerService) {
 
 			$http.get('/layers', {
 				params: {
-					fields: 'name, description, ST_AsGeoJSON(geom)',
-					table: 'office'
+					fields: config.layers.office.fields,
+					table: config.layers.office.table
 				}
 			})
 				.then(function success(data) {
@@ -75,8 +62,8 @@ function mapService($http, $window, mapMarkerService) {
 
 			$http.get('/layers', {
 				params: {
-					fields: 'name, description, ST_AsGeoJSON(geom)',
-					table: 'places'
+					fields: config.layers.places.fields,
+					table: config.layers.places.table
 				}
 			})
 				.then(function success(data) {
@@ -95,27 +82,14 @@ function mapService($http, $window, mapMarkerService) {
 
 			$http.get('/layers', {
 				params: {
-					fields: 'name, description, lat, lng, ST_AsGeoJSON(geom)',
-					table: 'trails'
+					fields: config.layers.trails.fields,
+					table: config.layers.trails.table
 				}
 			})
 				.then(function success(data) {
 					if (data && data.data) {
-						var trails = {
-							"id": "trails",
-							"type": "line",
-							"source": {
-								"type": "geojson",
-								"data": data.data
-							},
-							"layout": {
-								"visibility": "none",
-							},
-							"paint": {
-								"line-color": "#aa0000",
-								"line-width": 2
-							}
-						};
+						var trails = config.layers.trails.layer;
+						trails.source.data = data.data;
 
 						mapService.map.addLayer(trails);
 						mapMarkerService.setMarkers(data);
@@ -136,7 +110,7 @@ function mapService($http, $window, mapMarkerService) {
 	return mapService;
 }
 
-mapService.$inject = ['$http', '$window', 'mapMarkerService'];
+mapService.$inject = ['$http', 'mapMarkerService'];
 
 module.exports = mapService;
 

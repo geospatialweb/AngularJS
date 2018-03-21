@@ -1,17 +1,17 @@
 (function () {
 'use strict';
 
-const express = require('express'),
-      config = require('./config/config'),
-      favicon = require('serve-favicon'),
-      join = require('path').join,
-      host = config.host,
-      port = config.port,
-      app = express();
+var express = require('express'),
+    config = require('./config/config'),
+    favicon = require('serve-favicon'),
+    join = require('path').join,
+    host = config.node.host,
+    port = config.node.port,
+    app = express();
 
-app.use(favicon(join(__dirname, 'public/images/favicon.ico')));
+app.use(express.static(join(__dirname, 'src')));
 
-app.use(express.static(join(__dirname, 'public')));
+app.use(favicon(join(__dirname, 'src/images/favicon.ico')));
 
 app.use('/layers', require(join(__dirname, 'routes/layers')));
 

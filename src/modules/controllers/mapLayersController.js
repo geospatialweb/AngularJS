@@ -14,23 +14,11 @@ function mapLayersController($document, $window, mapService, mapLayerService) {
 
 				if (biosphere.hasClass('')) {
 					biosphere.addClass('active');
-
-					try {
-						mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
-					
-					} catch (err) {
-						console.error('Layer Error:\n', err);
-					}
+					mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
 
 				} else {
 					biosphere.removeClass('active');
-
-					try {
-						mapService.map.setLayoutProperty(layer, 'visibility', 'none');
-					
-					} catch (err) {
-						console.error('Layer Error:\n', err);
-					}
+					mapService.map.setLayoutProperty(layer, 'visibility', 'none');
 				}
 
 				break;
@@ -66,23 +54,11 @@ function mapLayersController($document, $window, mapService, mapLayerService) {
 
 				if (trails.hasClass('')) {
 					trails.addClass('active');
-
-					try {
-						mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
-					
-					} catch (err) {
-						console.error('Layer Error:\n', err);
-					}
+					mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
 
 				} else {
 					trails.removeClass('active');
-
-					try {
-						mapService.map.setLayoutProperty(layer, 'visibility', 'none');
-					
-					} catch (err) {
-						console.error('Layer Error:\n', err);
-					}
+					mapService.map.setLayoutProperty(layer, 'visibility', 'none');
 				}
 
 				mapLayerService.displayMarkers(layer);
@@ -90,19 +66,17 @@ function mapLayersController($document, $window, mapService, mapLayerService) {
 				break;
 /*
 			case 'aerialView':
-				var aerialView = angular.element($document[0].querySelectorAll('li.' + layer)).children();
+				var aerialView = angular.element($document[0].querySelectorAll('map-layers ul.layers li.' + layer)).children();
 
 				if (mapLayerService.basemap === 0) {
 					aerialView.addClass('active');
-					mapLayerService.basemap = 1;
-
 					mapService.map.setStyle('mapbox://styles/mapbox/satellite-v9');
+					mapLayerService.basemap = 1;
 
 				} else {
 					aerialView.removeClass('active');
-					mapLayerService.basemap = 0;
-
 					mapService.map.setStyle('mapbox://styles/mapbox/dark-v9');
+					mapLayerService.basemap = 0;
 				}
 
 				break;

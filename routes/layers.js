@@ -15,10 +15,10 @@ pg.logError = function (err, res) {
 
 var layer = express.Router().get('/', function (req, res) {
 	//container database - delete Dockerfile in root directory after build
-	var connection = parse(config.DATABASE_URL);
+	var connection = parse(config.postgres.DATABASE_URL);
 
 	//local database - copy /images/Dockerfile to root directory
-	//var connection = parse(config.DATABASE_URL_LOCAL);
+	//var connection = parse(config.postgres.DATABASE_URL_LOCAL);
 
 	pg.connect(connection, function (err, client, release) {
 		var sql = 'SELECT ' + req.query.fields + ' FROM ' + req.query.table;

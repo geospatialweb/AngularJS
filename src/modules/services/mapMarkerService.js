@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 
-const mapboxgl = require('mapbox-gl');
+var mapboxgl = require('mapbox-gl');
 
 function mapMarkerService() {
 	var mapMarkerService = this;

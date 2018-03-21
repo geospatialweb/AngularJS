@@ -1,14 +1,14 @@
 (function () {
 'use strict';
 
-const join = require('path').join;
+var join = require('path').join;
 
-const config = {
-	entry: './public/index.js',
+var config = {
+	entry: './src/index.js',
 
 	output: {
 		filename: 'app.js',
-		path: join(__dirname, '../public/dist')
+		path: join(__dirname, '../src/dist')
 	}
 };
 
