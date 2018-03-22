@@ -7,33 +7,30 @@ var express = require('express'),
 	parse = require('pg-connection-string').parse,
 	pg = require('pg');
 
-pg.logError = function (err, res) {
-	console.error(err);
-	res.status(500).send(err);
-	return true;
-};
-
 var layer = express.Router().get('/', function (req, res) {
-	//container database - delete Dockerfile in root directory after build
+	//docker container postgres
 	var connection = parse(config.postgres.DATABASE_URL);
 
-	//local database - copy /images/Dockerfile to root directory
+	//local postgres
 	//var connection = parse(config.postgres.DATABASE_URL_LOCAL);
 
 	pg.connect(connection, function (err, client, release) {
 		var sql = 'SELECT ' + req.query.fields + ' FROM ' + req.query.table;
 
-		if (err)
-			pg.logError(err, res);
+		if (err) {
+			console.error(err);
+			res.status(500).send(err);
+		}
 
 		else
 			client.query(sql, function (err, result) {
 				release();
 
-				if (err)
-					pg.logError(err, res);
+				if (err) {
+					console.error(err);
+					res.status(500).send(err);
 
-				else if (result.rowCount > 0)
+				} else if (result.rowCount > 0)
 					res.status(200).send(geojson(result.rows));
 
 				else

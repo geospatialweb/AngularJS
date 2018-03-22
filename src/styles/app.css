@@ -101,25 +101,25 @@ map-layers ul.layers li.trails div.active
     background: rgb(120,110,100);
 }
 
-map-layers div.biosphereIcon {
+map-layers div.biosphere-icon {
     position: absolute;
     left: 22px;
     top: 166px;
 }
 
-map-layers div.officeIcon {
+map-layers div.office-icon {
     position: absolute;
     left: 22px;
     top: 194px;
 }
 
-map-layers div.placesIcon {
+map-layers div.places-icon {
     position: absolute;
     left: 22px;
     top:223px;
 }
 
-map-layers div.trailsIcon {
+map-layers div.trails-icon {
     position: absolute;
     left: 22px;
     top: 252px;
@@ -133,21 +133,21 @@ map-trails select.trails {
     width: 127px;
 }
 
-div.office {
+div.office-marker {
     background-image: url('/images/office.png');
     cursor: pointer;
     height: 25px;
     width: 22px;
 }
 
-div.places {
+div.places-marker {
     background-image: url('/images/places.png');
     cursor: pointer;
     height: 25px;
     width: 22px;
 }
 
-div.trails {
+div.trails-marker {
     background-image: url('/images/trails.png');
     cursor: pointer;
     height: 25px;

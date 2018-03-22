@@ -18,7 +18,7 @@ function mapMarkerService() {
 				data.data.features.forEach(function (feature) {
 					var el = document.createElement('div');
 
-					el.className = layer;
+					el.className = layer + '-marker';
 					el.hidden = true;
 
 					mapMarkerService.office.push(
@@ -37,7 +37,7 @@ function mapMarkerService() {
 				data.data.features.forEach(function (feature) {
 					var el = document.createElement('div');
 
-					el.className = layer;
+					el.className = layer + '-marker';
 					el.hidden = true;
 
 					mapMarkerService.places.push(
@@ -56,7 +56,7 @@ function mapMarkerService() {
 				data.data.features.forEach(function (feature) {
 					var el = document.createElement('div');
 
-					el.className = layer;
+					el.className = layer + '-marker';
 					el.hidden = true;
 
 					mapMarkerService.trails.push(
