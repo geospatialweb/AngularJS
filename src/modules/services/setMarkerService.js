@@ -3,14 +3,14 @@
 
 var mapboxgl = require('mapbox-gl');
 
-function mapMarkerService() {
-	var mapMarkerService = this;
+function setMarkerService() {
+	var setMarkerService = this;
 
-	mapMarkerService.office = [];
-	mapMarkerService.places = [];
-	mapMarkerService.trails = [];
+	setMarkerService.office = [];
+	setMarkerService.places = [];
+	setMarkerService.trails = [];
 
-	mapMarkerService.setMarkers = function (data) {
+	setMarkerService.setMarkers = function (data) {
 		var layer = data.config.params.table;
 
 		switch (layer) {
@@ -21,7 +21,7 @@ function mapMarkerService() {
 					el.className = layer + '-marker';
 					el.hidden = true;
 
-					mapMarkerService.office.push(
+					setMarkerService.office.push(
 						new mapboxgl.Marker(el)
 							.setLngLat(feature.geometry.coordinates)
 							.setPopup(new mapboxgl.Popup({
@@ -40,7 +40,7 @@ function mapMarkerService() {
 					el.className = layer + '-marker';
 					el.hidden = true;
 
-					mapMarkerService.places.push(
+					setMarkerService.places.push(
 						new mapboxgl.Marker(el)
 							.setLngLat(feature.geometry.coordinates)
 							.setPopup(new mapboxgl.Popup({
@@ -59,7 +59,7 @@ function mapMarkerService() {
 					el.className = layer + '-marker';
 					el.hidden = true;
 
-					mapMarkerService.trails.push(
+					setMarkerService.trails.push(
 						new mapboxgl.Marker(el)
 							.setLngLat([feature.properties.lng, feature.properties.lat])
 							.setPopup(new mapboxgl.Popup({
@@ -73,10 +73,10 @@ function mapMarkerService() {
 		}
 	};
 
-	return mapMarkerService;
+	return setMarkerService;
 }
 
-module.exports = mapMarkerService;
+module.exports = setMarkerService;
 
 return true;
 })();

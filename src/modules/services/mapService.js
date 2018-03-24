@@ -6,12 +6,15 @@ var config = window.config,
 
 mapboxgl.accessToken = config.map.accessToken;
 
-function mapService($http, mapMarkerService) {
+function mapService($http, setMarkerService) {
 	var mapService = this;
+
+	mapService.mapLayers = [];
+	mapService.mapStyle = config.map.styles.dark;
 
 	mapService.map = new mapboxgl.Map({
 		container: config.map.container,
-		style: config.map.style,
+		style: mapService.mapStyle,
 		center: config.map.center,
 		zoom: config.map.zoom
 	})
@@ -19,16 +22,14 @@ function mapService($http, mapMarkerService) {
 		.on('load', function () {
 			$http.get('/layers', {
 				params: {
-					fields: config.layers.biosphere.fields,
-					table: config.layers.biosphere.table
+					fields: config.layers.biosphere.postgres.fields,
+					table: config.layers.biosphere.postgres.table
 				}
 			})
 				.then(function success(data) {
 					if (data && data.data) {
-						var biosphere = config.layers.biosphere.layer;
-						biosphere.source.data = data.data;
-
-						mapService.map.addLayer(biosphere);
+						mapService.biosphere = config.layers.biosphere.layer;
+						mapService.biosphere.source.data = data.data;
 
 					} else
 						console.error('Data Error:\n', data);
@@ -42,13 +43,13 @@ function mapService($http, mapMarkerService) {
 
 			$http.get('/layers', {
 				params: {
-					fields: config.layers.office.fields,
-					table: config.layers.office.table
+					fields: config.layers.office.postgres.fields,
+					table: config.layers.office.postgres.table
 				}
 			})
 				.then(function success(data) {
 					if (data && data.data)
-						mapMarkerService.setMarkers(data);
+						setMarkerService.setMarkers(data);
 
 					else
 						console.error('Data Error:\n', data);
@@ -62,13 +63,13 @@ function mapService($http, mapMarkerService) {
 
 			$http.get('/layers', {
 				params: {
-					fields: config.layers.places.fields,
-					table: config.layers.places.table
+					fields: config.layers.places.postgres.fields,
+					table: config.layers.places.postgres.table
 				}
 			})
 				.then(function success(data) {
 					if (data && data.data)
-						mapMarkerService.setMarkers(data);
+						setMarkerService.setMarkers(data);
 
 					else
 						console.error('Data Error:\n', data);
@@ -82,17 +83,16 @@ function mapService($http, mapMarkerService) {
 
 			$http.get('/layers', {
 				params: {
-					fields: config.layers.trails.fields,
-					table: config.layers.trails.table
+					fields: config.layers.trails.postgres.fields,
+					table: config.layers.trails.postgres.table
 				}
 			})
 				.then(function success(data) {
 					if (data && data.data) {
-						var trails = config.layers.trails.layer;
-						trails.source.data = data.data;
+						mapService.trails = config.layers.trails.layer;
+						mapService.trails.source.data = data.data;
 
-						mapService.map.addLayer(trails);
-						mapMarkerService.setMarkers(data);
+						setMarkerService.setMarkers(data);
 
 					} else
 						console.error('Data Error:\n', data);
@@ -110,7 +110,7 @@ function mapService($http, mapMarkerService) {
 	return mapService;
 }
 
-mapService.$inject = ['$http', 'mapMarkerService'];
+mapService.$inject = ['$http', 'setMarkerService'];
 
 module.exports = mapService;
 

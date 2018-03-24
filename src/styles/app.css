@@ -74,7 +74,7 @@ map-layers ul.layers div {
     cursor: pointer;
     font-size: 0.95em;
     text-decoration: none;
-    width: 85px;
+    width: 90px;
 }
 
 map-layers ul.layers div:hover {
@@ -92,11 +92,11 @@ map-layers ul.layers li:last-child div {
     -webkit-border-radius: 0 0 3px 3px;
 }
 
+map-layers ul.layers li.terrain div.active,
 map-layers ul.layers li.biosphere div.active,
 map-layers ul.layers li.office div.active,
 map-layers ul.layers li.places div.active,
 map-layers ul.layers li.trails div.active
-/*map-layers ul.layers li.aerialView div.active*/
 {
     background: rgb(120,110,100);
 }
@@ -104,33 +104,33 @@ map-layers ul.layers li.trails div.active
 map-layers div.biosphere-icon {
     position: absolute;
     left: 22px;
-    top: 166px;
+    top: 195px;
 }
 
 map-layers div.office-icon {
     position: absolute;
     left: 22px;
-    top: 194px;
+    top: 223px;
 }
 
 map-layers div.places-icon {
     position: absolute;
     left: 22px;
-    top:223px;
+    top:252px;
 }
 
 map-layers div.trails-icon {
     position: absolute;
     left: 22px;
-    top: 252px;
+    top: 281px;
 }
 
 map-trails select.trails {
     position: absolute;
     border-style: none;
     left: 10px;
-    top: 320px;
-    width: 127px;
+    top: 350px;
+    width: 132px;
 }
 
 div.office-marker {

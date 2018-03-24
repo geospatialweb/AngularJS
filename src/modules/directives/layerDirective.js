@@ -1,19 +1,19 @@
 (function () {
 'use strict';
 
-function mapLayersDirective($sce) {
+function layerDirective($sce) {
 	var ddo = {
 		restrict: 'E',
 		templateUrl: $sce.trustAsResourceUrl('partials/mapLayers.html'),
-		controller: 'mapLayersController as layers'
+		controller: 'layerController as layer'
 	};
 
 	return ddo;
 }
 
-mapLayersDirective.$inject = ['$sce'];
+layerDirective.$inject = ['$sce'];
 
-module.exports = mapLayersDirective;
+module.exports = layerDirective;
 
 return true;
 })();

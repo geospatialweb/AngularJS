@@ -1,19 +1,19 @@
 (function () {
 'use strict';
 
-function mapTrailsDirective($sce) {
+function trailDirective($sce) {
 	var ddo = {
 		restrict: 'E',
 		templateUrl: $sce.trustAsResourceUrl('partials/mapTrails.html'),
-		controller: 'mapTrailsController as trails'
+		controller: 'trailController as trail'
 	};
 
 	return ddo;
 }
 
-mapTrailsDirective.$inject = ['$sce'];
+trailDirective.$inject = ['$sce'];
 
-module.exports = mapTrailsDirective;
+module.exports = trailDirective;
 
 return true;
 })();

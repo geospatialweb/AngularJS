@@ -1,16 +1,16 @@
 (function () {
 'use strict';
 
-function mapTrailsController(mapService) {
-	var trails = this;
+function trailController(mapService) {
+	var trail = this;
 
-	trails.selectedOption = 'Select Trail';
+	trail.selectedOption = 'Select Trail';
 
-	trails.setTrail = function ($event) {
+	trail.setTrail = function ($event) {
 		if ($event)
 			$event.stopPropagation();
 
-		switch (trails.selectedOption) {
+		switch (trail.selectedOption) {
 			case 'Blue Mountain':
 				mapService.map.flyTo({
 					center: [-76.04, 44.508],
@@ -63,12 +63,12 @@ function mapTrailsController(mapService) {
 		return true;
 	};	
 
-	return trails;
+	return trail;
 }
 
-mapTrailsController.$inject = ['mapService'];
+trailController.$inject = ['mapService'];
 
-module.exports = mapTrailsController;
+module.exports = trailController;
 
 return true;
 })();
