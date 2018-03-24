@@ -5,7 +5,7 @@ function layerDirective($sce) {
 	var ddo = {
 		restrict: 'E',
 		templateUrl: $sce.trustAsResourceUrl('partials/mapLayers.html'),
-		controller: 'layerController as layer'
+		controller: 'layerController as layers'
 	};
 
 	return ddo;

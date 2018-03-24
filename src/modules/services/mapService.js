@@ -6,10 +6,9 @@ var config = window.config,
 
 mapboxgl.accessToken = config.map.accessToken;
 
-function mapService($http, setMarkerService) {
+function mapService($http, layerService, setMarkerService) {
 	var mapService = this;
 
-	mapService.mapLayers = [];
 	mapService.mapStyle = config.map.styles.dark;
 
 	mapService.map = new mapboxgl.Map({
@@ -28,8 +27,11 @@ function mapService($http, setMarkerService) {
 			})
 				.then(function success(data) {
 					if (data && data.data) {
-						mapService.biosphere = config.layers.biosphere.layer;
-						mapService.biosphere.source.data = data.data;
+						layerService.biosphere = config.layers.biosphere.layer;
+						layerService.biosphere.source.data = data.data;
+						
+						mapService.map.addLayer(layerService.biosphere);
+						layerService.layers.push(layerService.biosphere);
 
 					} else
 						console.error('Data Error:\n', data);
@@ -50,7 +52,6 @@ function mapService($http, setMarkerService) {
 				.then(function success(data) {
 					if (data && data.data)
 						setMarkerService.setMarkers(data);
-
 					else
 						console.error('Data Error:\n', data);
 
@@ -70,7 +71,6 @@ function mapService($http, setMarkerService) {
 				.then(function success(data) {
 					if (data && data.data)
 						setMarkerService.setMarkers(data);
-
 					else
 						console.error('Data Error:\n', data);
 
@@ -89,8 +89,11 @@ function mapService($http, setMarkerService) {
 			})
 				.then(function success(data) {
 					if (data && data.data) {
-						mapService.trails = config.layers.trails.layer;
-						mapService.trails.source.data = data.data;
+						layerService.trails = config.layers.trails.layer;
+						layerService.trails.source.data = data.data;
+
+						mapService.map.addLayer(layerService.trails);
+						layerService.layers.push(layerService.trails);
 
 						setMarkerService.setMarkers(data);
 
@@ -110,7 +113,7 @@ function mapService($http, setMarkerService) {
 	return mapService;
 }
 
-mapService.$inject = ['$http', 'setMarkerService'];
+mapService.$inject = ['$http', 'layerService', 'setMarkerService'];
 
 module.exports = mapService;
 

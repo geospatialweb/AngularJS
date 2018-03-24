@@ -5,7 +5,7 @@ function trailDirective($sce) {
 	var ddo = {
 		restrict: 'E',
 		templateUrl: $sce.trustAsResourceUrl('partials/mapTrails.html'),
-		controller: 'trailController as trail'
+		controller: 'trailController as trails'
 	};
 
 	return ddo;

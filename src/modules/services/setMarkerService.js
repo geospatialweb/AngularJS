@@ -11,12 +11,13 @@ function setMarkerService() {
 	setMarkerService.trails = [];
 
 	setMarkerService.setMarkers = function (data) {
-		var layer = data.config.params.table;
+		var layer = data.config.params.table,
+			el;
 
 		switch (layer) {
 			case 'office':
 				data.data.features.forEach(function (feature) {
-					var el = document.createElement('div');
+					el = document.createElement('div');
 
 					el.className = layer + '-marker';
 					el.hidden = true;
@@ -29,13 +30,15 @@ function setMarkerService() {
 							})
 								.setHTML('<b>' + feature.properties.name + '</b><br>' + feature.properties.description))
 					)
+
+					return true;
 				});
 
 				break;
 
 			case 'places':
 				data.data.features.forEach(function (feature) {
-					var el = document.createElement('div');
+					el = document.createElement('div');
 
 					el.className = layer + '-marker';
 					el.hidden = true;
@@ -48,13 +51,15 @@ function setMarkerService() {
 							})
 								.setHTML('<b>' + feature.properties.name + '</b><br>' + feature.properties.description))
 					)
+
+					return true;
 				});
 
 				break;
 
 			case 'trails':
 				data.data.features.forEach(function (feature) {
-					var el = document.createElement('div');
+					el = document.createElement('div');
 
 					el.className = layer + '-marker';
 					el.hidden = true;
@@ -67,10 +72,14 @@ function setMarkerService() {
 							})
 								.setHTML('<b>' + feature.properties.name + '</b><br>' + feature.properties.description))
 					)
+
+					return true;
 				});
 
 				break;
 		}
+
+		return true;
 	};
 
 	return setMarkerService;

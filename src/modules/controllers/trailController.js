@@ -2,15 +2,15 @@
 'use strict';
 
 function trailController(mapService) {
-	var trail = this;
+	var trails = this;
 
-	trail.selectedOption = 'Select Trail';
+	trails.selectedOption = 'Select Trail';
 
-	trail.setTrail = function ($event) {
+	trails.setTrail = function ($event) {
 		if ($event)
 			$event.stopPropagation();
 
-		switch (trail.selectedOption) {
+		switch (trails.selectedOption) {
 			case 'Blue Mountain':
 				mapService.map.flyTo({
 					center: [-76.04, 44.508],
@@ -63,7 +63,7 @@ function trailController(mapService) {
 		return true;
 	};	
 
-	return trail;
+	return trails;
 }
 
 trailController.$inject = ['mapService'];
