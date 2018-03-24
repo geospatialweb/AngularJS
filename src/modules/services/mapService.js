@@ -27,11 +27,11 @@ function mapService($http, layerService, setMarkerService) {
 			})
 				.then(function success(data) {
 					if (data && data.data) {
-						layerService.biosphere = config.layers.biosphere.layer;
-						layerService.biosphere.source.data = data.data;
-						
-						mapService.map.addLayer(layerService.biosphere);
-						layerService.layers.push(layerService.biosphere);
+						var biosphere = config.layers.biosphere.layer;
+						biosphere.source.data = data.data;
+
+						mapService.map.addLayer(biosphere);
+						layerService.layers.push(biosphere);
 
 					} else
 						console.error('Data Error:\n', data);
@@ -89,11 +89,11 @@ function mapService($http, layerService, setMarkerService) {
 			})
 				.then(function success(data) {
 					if (data && data.data) {
-						layerService.trails = config.layers.trails.layer;
-						layerService.trails.source.data = data.data;
+						var trails = config.layers.trails.layer;
+						trails.source.data = data.data;
 
-						mapService.map.addLayer(layerService.trails);
-						layerService.layers.push(layerService.trails);
+						mapService.map.addLayer(trails);
+						layerService.layers.push(trails);
 
 						setMarkerService.setMarkers(data);
 

@@ -8,10 +8,10 @@ var express = require('express'),
 	pg = require('pg');
 
 var layer = express.Router().get('/', function (req, res) {
-	//docker container postgres
+	/* docker container postgres */
 	var connection = parse(config.postgres.DATABASE_URL);
 
-	//local postgres
+	/* local postgres */
 	//var connection = parse(config.postgres.DATABASE_URL_LOCAL);
 
 	pg.connect(connection, function (err, client, release) {

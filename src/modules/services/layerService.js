@@ -4,8 +4,6 @@
 function layerService() {
 	var layerService = this;
 
-	layerService.biosphere = null;
-	layerService.trails = null;
 	layerService.layers  = [];
 	layerService.layersHash = {};
 	layerService.visibleLayers = [];
