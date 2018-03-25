@@ -7,8 +7,8 @@ var app = require('angular').module('app', []);
 
 app.service('mapService', require('./modules/services/mapService'));
 app.service('layerService', require('./modules/services/layerService'));
-app.service('setMarkerService', require('./modules/services/setMarkerService'));
-app.service('displayMarkerService', require('./modules/services/displayMarkerService'));
+app.service('markerService', require('./modules/services/markerService'));
+app.service('displayService', require('./modules/services/displayService'));
 
 app.controller('mapController', require('./modules/controllers/mapController'));
 app.controller('layerController', require('./modules/controllers/layerController'));

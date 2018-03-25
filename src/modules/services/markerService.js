@@ -3,26 +3,25 @@
 
 var mapboxgl = require('mapbox-gl');
 
-function setMarkerService() {
-	var setMarkerService = this;
+function markerService(layerService) {
+	var office = [],
+		places = [],
+		trails = [],
+		markerService = this;
 
-	setMarkerService.office = [];
-	setMarkerService.places = [];
-	setMarkerService.trails = [];
-
-	setMarkerService.setMarkers = function (data) {
-		var layer = data.config.params.table,
-			el;
+	markerService.setMarkers = function (data) {
+		var layer = data.config.params.table;
 
 		switch (layer) {
 			case 'office':
 				data.data.features.forEach(function (feature) {
-					el = document.createElement('div');
+					var el = document.createElement('div');
 
+					el.id = layer;
 					el.className = layer + '-marker';
 					el.hidden = true;
 
-					setMarkerService.office.push(
+					office.push(
 						new mapboxgl.Marker(el)
 							.setLngLat(feature.geometry.coordinates)
 							.setPopup(new mapboxgl.Popup({
@@ -33,17 +32,20 @@ function setMarkerService() {
 
 					return true;
 				});
+
+				layerService.markers.push(office);
 
 				break;
 
 			case 'places':
 				data.data.features.forEach(function (feature) {
-					el = document.createElement('div');
+					var el = document.createElement('div');
 
+					el.id = layer;
 					el.className = layer + '-marker';
 					el.hidden = true;
 
-					setMarkerService.places.push(
+					places.push(
 						new mapboxgl.Marker(el)
 							.setLngLat(feature.geometry.coordinates)
 							.setPopup(new mapboxgl.Popup({
@@ -55,16 +57,19 @@ function setMarkerService() {
 					return true;
 				});
 
+				layerService.markers.push(places);
+
 				break;
 
 			case 'trails':
 				data.data.features.forEach(function (feature) {
-					el = document.createElement('div');
+					var el = document.createElement('div');
 
+					el.id = layer;
 					el.className = layer + '-marker';
 					el.hidden = true;
 
-					setMarkerService.trails.push(
+					trails.push(
 						new mapboxgl.Marker(el)
 							.setLngLat([feature.properties.lng, feature.properties.lat])
 							.setPopup(new mapboxgl.Popup({
@@ -76,16 +81,20 @@ function setMarkerService() {
 					return true;
 				});
 
+				layerService.markers.push(trails);
+
 				break;
 		}
 
 		return true;
 	};
 
-	return setMarkerService;
+	return markerService;
 }
 
-module.exports = setMarkerService;
+markerService.$inject = ['layerService'];
+
+module.exports = markerService;
 
 return true;
 })();

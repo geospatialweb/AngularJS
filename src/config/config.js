@@ -22,7 +22,7 @@ var config = {
 					type: 'geojson'
 				},
 				layout: {
-					visibility: 'none'
+					visibility: 'visible'
 				},
 				paint: {
 					'fill-color': '#090',

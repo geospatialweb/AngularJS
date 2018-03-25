@@ -4,9 +4,11 @@
 function layerService() {
 	var layerService = this;
 
-	layerService.layers  = [];
+	layerService.layers = [];
 	layerService.layersHash = {};
-	layerService.visibleLayers = [];
+	layerService.markers = [];
+	layerService.markersHash = {};
+	layerService.tempMarkers = [];
 
 	return layerService;
 }

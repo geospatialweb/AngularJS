@@ -1,22 +1,28 @@
 (function () {
 'use strict';
 
-function layerController($document, $timeout, $window, displayMarkerService, layerService, mapService) {
+function layerController($document, $timeout, $window, displayService, layerService, mapService) {
 	var layers = this;
 
 	layers.setLayer = function (layer, $event) {
+		var el = angular.element($document[0].querySelectorAll('map-layers ul.layers li.' + layer)).children();
+
 		if ($event)
 			$event.stopPropagation();
 
-		if (angular.equals(layerService.layersHash, {})) {
-			if (layerService.layers.length)
-				layerService.layers.forEach(function (layer, index) {
-					layerService.layersHash[layer.id] = index;
-					return true;
-				});
-		}
+		if (angular.equals(layerService.layersHash, {}))
+			layerService.layers.forEach(function (layer, index) {
+				layerService.layersHash[layer.id] = index;
+				return true;
+			});
 
-		var el = angular.element($document[0].querySelectorAll('map-layers ul.layers li.' + layer)).children();
+		if (angular.equals(layerService.markersHash, {}))
+			layerService.markers.forEach(function (markers, index) {
+				var el = markers[0].getElement();
+
+				layerService.markersHash[el.id] = index;
+				return true;
+			});
 
 		if (el.hasClass(''))
 			el.addClass('active');
@@ -31,42 +37,49 @@ function layerController($document, $timeout, $window, displayMarkerService, lay
 			else
 				mapService.mapStyle = config.map.styles.dark;
 
+			displayService.hideActiveMarkers();
+
 			mapService.map.setStyle(mapService.mapStyle, false);
 
-			if (layerService.visibleLayers.length)
-				layerService.visibleLayers.forEach(function (layer) {
-					if (!mapService.map.getLayer(layer.id))
-						$timeout(function () {
-							mapService.map.addLayer(layer);
-							mapService.map.setLayoutProperty(layer.id, 'visibility', 'visible');
+			$timeout(function () {
+				displayService.unhideActiveMarkers();
+				return true;
+			}, 1000);
 
-							return true;
-						}, 500);
+			layerService.layers.forEach(function (layer) {
+				if (!mapService.map.getLayer(layer.id) && layer.layout.visibility === 'visible')
+					$timeout(function () {
+						mapService.map.addLayer(layer);
+						mapService.map.setLayoutProperty(layer.id, 'visibility', 'visible');
+						layerService.layers[layer.layout.visibility = 'visible'];
 
-					return true;
-				});
+						return true;
+					}, 1000);
+
+				return true;
+			});
 
 		} else if (layer === 'biosphere' || layer === 'trails') {
 			if (el.hasClass('active')) {
 				mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
-				layerService.visibleLayers.push(layerService.layers[layerService.layersHash[layer]]);
+				layerService.layers[layerService.layersHash[layer]].layout.visibility = 'visible';
 
 				if (layer === 'trails')
-					displayMarkerService.showMarkers(layer);
+					displayService.showMarkers(layer);
 
 			} else {
 				mapService.map.setLayoutProperty(layer, 'visibility', 'none');
-				layerService.visibleLayers.splice(layerService.layersHash[layer], 1);
+				layerService.layers[layerService.layersHash[layer]].layout.visibility = 'none';
 
 				if (layer === 'trails')
-					displayMarkerService.hideMarkers(layer);
+					displayService.hideMarkers(layer);
 			}
 
 		} else if (layer === 'office' || layer === 'places') {
 			if (el.hasClass('active'))
-				displayMarkerService.showMarkers(layer);
+				displayService.showMarkers(layer);
 			else
-				displayMarkerService.hideMarkers(layer);
+				displayService.hideMarkers(layer);
 
 		} else if (layer === 'resetMap')
 			$window.location.reload(true);
@@ -77,7 +90,7 @@ function layerController($document, $timeout, $window, displayMarkerService, lay
 	return layers;
 }
 
-layerController.$inject = ['$document', '$timeout', '$window', 'displayMarkerService', 'layerService', 'mapService'];
+layerController.$inject = ['$document', '$timeout', '$window', 'displayService', 'layerService', 'mapService'];
 
 module.exports = layerController;
 

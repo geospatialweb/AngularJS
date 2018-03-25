@@ -6,7 +6,7 @@ var config = window.config,
 
 mapboxgl.accessToken = config.map.accessToken;
 
-function mapService($http, layerService, setMarkerService) {
+function mapService($http, layerService, markerService) {
 	var mapService = this;
 
 	mapService.mapStyle = config.map.styles.dark;
@@ -51,7 +51,7 @@ function mapService($http, layerService, setMarkerService) {
 			})
 				.then(function success(data) {
 					if (data && data.data)
-						setMarkerService.setMarkers(data);
+						markerService.setMarkers(data);
 					else
 						console.error('Data Error:\n', data);
 
@@ -70,7 +70,7 @@ function mapService($http, layerService, setMarkerService) {
 			})
 				.then(function success(data) {
 					if (data && data.data)
-						setMarkerService.setMarkers(data);
+						markerService.setMarkers(data);
 					else
 						console.error('Data Error:\n', data);
 
@@ -95,7 +95,7 @@ function mapService($http, layerService, setMarkerService) {
 						mapService.map.addLayer(trails);
 						layerService.layers.push(trails);
 
-						setMarkerService.setMarkers(data);
+						markerService.setMarkers(data);
 
 					} else
 						console.error('Data Error:\n', data);
@@ -113,7 +113,7 @@ function mapService($http, layerService, setMarkerService) {
 	return mapService;
 }
 
-mapService.$inject = ['$http', 'layerService', 'setMarkerService'];
+mapService.$inject = ['$http', 'layerService', 'markerService'];
 
 module.exports = mapService;
 
