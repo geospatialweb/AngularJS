@@ -10,19 +10,8 @@ function layerController($document, $timeout, $window, displayService, layerServ
 		if ($event)
 			$event.stopPropagation();
 
-		if (angular.equals(layerService.layersHash, {}))
-			layerService.layers.forEach(function (layer, index) {
-				layerService.layersHash[layer.id] = index;
-				return true;
-			});
-
-		if (angular.equals(layerService.markersHash, {}))
-			layerService.markers.forEach(function (markers, index) {
-				var el = markers[0].getElement();
-
-				layerService.markersHash[el.id] = index;
-				return true;
-			});
+		if (angular.equals(layerService.layersHash, {}) && angular.equals(layerService.markersHash, {}))
+			layerService.createHash();
 
 		if (el.hasClass(''))
 			el.addClass('active');
@@ -41,10 +30,11 @@ function layerController($document, $timeout, $window, displayService, layerServ
 
 			mapService.map.setStyle(mapService.mapStyle, false);
 
-			$timeout(function () {
-				displayService.unhideActiveMarkers();
-				return true;
-			}, 1000);
+			if (layerService.tempMarkers.length)
+				$timeout(function () {
+					displayService.unhideActiveMarkers();
+					return true;
+				}, 1000);
 
 			layerService.layers.forEach(function (layer) {
 				if (!mapService.map.getLayer(layer.id) && layer.layout.visibility === 'visible')
