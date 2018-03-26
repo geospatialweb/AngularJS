@@ -26,15 +26,9 @@ function layerController($document, $timeout, $window, displayService, layerServ
 			else
 				mapService.mapStyle = config.map.styles.dark;
 
+			mapService.map.setStyle(mapService.mapStyle);
+
 			displayService.hideActiveMarkers();
-
-			mapService.map.setStyle(mapService.mapStyle, false);
-
-			if (layerService.tempMarkers.length)
-				$timeout(function () {
-					displayService.unhideActiveMarkers();
-					return true;
-				}, 1000);
 
 			layerService.layers.forEach(function (layer) {
 				if (!mapService.map.getLayer(layer.id) && layer.layout.visibility === 'visible')
@@ -48,6 +42,12 @@ function layerController($document, $timeout, $window, displayService, layerServ
 
 				return true;
 			});
+
+			if (layerService.activeMarkers.length)
+				$timeout(function () {
+					displayService.unhideActiveMarkers();
+					return true;
+				}, 1000);
 
 		} else if (layer === 'biosphere' || layer === 'trails') {
 			if (el.hasClass('active')) {

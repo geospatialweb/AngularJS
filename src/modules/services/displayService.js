@@ -11,7 +11,7 @@ function displayService(layerService, mapService) {
 
 			if (!el.hidden) {
 				displayService.hideMarkers(el.id);
-				layerService.tempMarkers.push(marker);
+				layerService.activeMarkers.push(marker);
 			}
 
 			return true;
@@ -22,7 +22,7 @@ function displayService(layerService, mapService) {
 
 	/* unhide active markers when toggling 'dark' and 'outdoors' map styles (basemaps) */
 	displayService.unhideActiveMarkers = function () {
-		layerService.tempMarkers.forEach(function (marker) {
+		layerService.activeMarkers.forEach(function (marker) {
 			var el = marker[0].getElement();
 
 			displayService.showMarkers(el.id);
@@ -30,7 +30,7 @@ function displayService(layerService, mapService) {
 			return true;
 		});
 
-		layerService.tempMarkers = [];
+		layerService.activeMarkers = [];
 
 		return true;
 	};

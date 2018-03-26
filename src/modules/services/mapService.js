@@ -6,10 +6,11 @@ var config = window.config,
 
 mapboxgl.accessToken = config.map.accessToken;
 
-function mapService($http, layerService, markerService) {
+function mapService($document, $http, layerService, markerService) {
 	var mapService = this;
 
 	mapService.mapStyle = config.map.styles.dark;
+	mapService.splashScreen = null;
 
 	mapService.map = new mapboxgl.Map({
 		container: config.map.container,
@@ -18,6 +19,18 @@ function mapService($http, layerService, markerService) {
 		zoom: config.map.zoom
 	})
 		.addControl(new mapboxgl.NavigationControl(), config.map.control)
+		.on('styledata', function (event) {
+			if (event.target._loaded) {
+				if (!mapService.splashScreen.hasClass('hidden')) {
+					mapService.splashScreen.addClass('hidden');
+
+					angular.element($document[0].querySelectorAll('map-layers ul.layers li.biosphere div'))
+						.addClass('active');
+				}
+			}
+			
+			return true;
+		})
 		.on('load', function () {
 			$http.get('/layers', {
 				params: {
@@ -113,7 +126,7 @@ function mapService($http, layerService, markerService) {
 	return mapService;
 }
 
-mapService.$inject = ['$http', 'layerService', 'markerService'];
+mapService.$inject = ['$document', '$http', 'layerService', 'markerService'];
 
 module.exports = mapService;
 

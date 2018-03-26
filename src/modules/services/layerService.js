@@ -8,7 +8,7 @@ function layerService() {
 	layerService.layersHash = {};
 	layerService.markers = [];
 	layerService.markersHash = {};
-	layerService.tempMarkers = [];
+	layerService.activeMarkers = [];
 
 	layerService.createHash = function () {
 		layerService.layers.forEach(function (layer, index) {

@@ -44,13 +44,26 @@ body {
 }
 
 .mapContainer {
+    position: absolute;
     height: 100%;
     width: 100%;
 }
 
+splash-screen {
+    position: absolute;
+    background: rgba(0,0,0,.5);
+    visibility: visible;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+}
+
+splash-screen.hidden {
+    visibility: hidden;
+}
+
 #map {
     position: absolute;
-    top: 45px;
     height: 100%;
     width: 100%;
 }

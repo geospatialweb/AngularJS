@@ -16,6 +16,7 @@ app.controller('trailController', require('./modules/controllers/trailController
 
 app.directive('mapLayers', require('./modules/directives/layerDirective'));
 app.directive('mapTrails', require('./modules/directives/trailDirective'));
+app.directive('splashScreen', require('./modules/directives/splashDirective'));
 
 return true;
 })();
