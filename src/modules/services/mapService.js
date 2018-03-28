@@ -6,15 +6,14 @@ var config = window.config,
 
 mapboxgl.accessToken = config.map.accessToken;
 
-function mapService($document, $http, layerService, markerService, splashScreenService)
+function mapService($document, $http, $timeout, layerService, markerService, splashScreenService)
 {
-	var mapService = this;
-
-	mapService.mapStyle = config.map.styles.dark;
+	var style = config.map.styles.default,
+		mapService = this;
 
 	mapService.map = new mapboxgl.Map({
 		container: config.map.container,
-		style: mapService.mapStyle,
+		style: style,
 		center: config.map.center,
 		zoom: config.map.zoom
 	})
@@ -133,10 +132,41 @@ function mapService($document, $http, layerService, markerService, splashScreenS
 			return true;
 		});
 
+		/* toggle 'dark' and 'outdoors' map styles (basemaps) */
+		mapService.setStyle = function ()
+		{
+			if (style === config.map.styles.default)
+				style = config.map.styles.outdoors;
+
+			else
+				style = config.map.styles.default;
+
+			mapService.map.setStyle(style);
+
+			/* add layers to new map style after delay for aesthetic purposes */
+			layerService.layers.forEach(function (layer)
+			{
+				$timeout(function ()
+				{
+					mapService.map.addLayer(layer);
+
+					if (layer.layout.visibility === 'visible')
+						mapService.map.setLayoutProperty(layer.id, 'visibility', 'visible');
+
+					return true;
+
+				}, 1000);
+
+				return true;
+			});
+
+			return true;
+		};
+
 	return mapService;
 }
 
-mapService.$inject = ['$document', '$http', 'layerService', 'markerService', 'splashScreenService'];
+mapService.$inject = ['$document', '$http', '$timeout', 'layerService', 'markerService', 'splashScreenService'];
 
 module.exports = mapService;
 

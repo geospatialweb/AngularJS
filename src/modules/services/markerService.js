@@ -9,9 +9,8 @@ function markerService()
 
 	markerService.markers = [];
 	markerService.markersHash = {};
-	markerService.visibleMarkers = [];
 
-	markerService.createMarkersHash = function ()
+	markerService.createHash = function ()
 	{
 		markerService.markers.forEach(function (marker, index)
 		{

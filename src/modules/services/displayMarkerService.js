@@ -3,7 +3,19 @@
 
 function displayMarkerService($document, mapService, markerService)
 {
-	var displayMarkerService = this;
+	var activeMarkers = [],
+		displayMarkerService = this;
+
+	displayMarkerService.addMarkers = function (layer)
+		{
+			markerService.markers[markerService.markersHash[layer]].forEach(function (marker)
+			{
+				marker.addTo(mapService.map);
+				return true;
+			});
+
+			return true;
+		};
 
 	displayMarkerService.removeMarkers = function (layer)
 	{
@@ -16,20 +28,7 @@ function displayMarkerService($document, mapService, markerService)
 		return true;
 	};
 
-	
-	displayMarkerService.addMarkers = function (layer)
-	{
-		markerService.markers[markerService.markersHash[layer]].forEach(function (marker)
-		{
-			marker.addTo(mapService.map);
-			return true;
-		});
-
-		return true;
-	};
-
-	/* hide visible markers when toggling 'dark' and 'outdoors' map styles (basemaps) for aesthetic purposes */
-	displayMarkerService.hideVisibleMarkers = function ()
+	displayMarkerService.hideMarkers = function ()
 	{
 		markerService.markers.forEach(function (marker)
 		{
@@ -39,7 +38,8 @@ function displayMarkerService($document, mapService, markerService)
 			if (el.length)
 			{
 				displayMarkerService.removeMarkers(layer);
-				markerService.visibleMarkers.push(marker);
+
+				activeMarkers.push(marker);
 			}
 
 			return true;
@@ -48,20 +48,20 @@ function displayMarkerService($document, mapService, markerService)
 		return true;
 	};
 
-	/* show visible markers after toggling 'dark' and 'outdoors' map styles (basemaps) for aesthetic purposes */
-	displayMarkerService.showVisibleMarkers = function ()
+	displayMarkerService.showMarkers = function ()
 	{
-		markerService.visibleMarkers.forEach(function (marker)
+		if (activeMarkers.length)
 		{
-			var layer = marker[0].getElement().id;
+			activeMarkers.forEach(function (marker)
+			{
+				var layer = marker[0].getElement().id;
 
-			displayMarkerService.addMarkers(layer);
-			return true;
-		});
+				displayMarkerService.addMarkers(layer);
+				return true;
+			});
 
-		markerService.visibleMarkers = [];
-
-		return true;
+			activeMarkers = [];
+		}
 	};
 
 	return displayMarkerService;
