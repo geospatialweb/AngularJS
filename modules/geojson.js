@@ -1,13 +1,15 @@
 (function () {
 'use strict';
 
-var geojson = function (features) {
+var geojson = function (features)
+{
     var fc = {
         "type": "FeatureCollection",
         "features": []
     };
 
-    features.forEach(function (feature) {
+    features.forEach(function (feature)
+    {
         var geometry = JSON.parse(feature.st_asgeojson),
             geojson = {
                 "type": "Feature",

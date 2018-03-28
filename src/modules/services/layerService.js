@@ -1,14 +1,17 @@
 (function () {
 'use strict';
 
-function layerService() {
+function layerService()
+{
 	var layerService = this;
 
 	layerService.layers = [];
 	layerService.layersHash = {};
 
-	layerService.createLayersHash = function () {
-		layerService.layers.forEach(function (layer, index) {
+	layerService.createLayersHash = function ()
+	{
+		layerService.layers.forEach(function (layer, index)
+		{
 			layerService.layersHash[layer.id] = index;
 			return true;
 		});

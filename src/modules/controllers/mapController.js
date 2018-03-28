@@ -1,7 +1,8 @@
 (function () {
 'use strict';
 
-function mapController() {
+function mapController()
+{
 	return this;
 }
 

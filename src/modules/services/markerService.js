@@ -3,15 +3,18 @@
 
 var mapboxgl = require('mapbox-gl');
 
-function markerService() {
+function markerService()
+{
 	var markerService = this;
 
 	markerService.markers = [];
 	markerService.markersHash = {};
 	markerService.visibleMarkers = [];
 
-	markerService.createMarkersHash = function () {
-		markerService.markers.forEach(function (marker, index) {
+	markerService.createMarkersHash = function ()
+	{
+		markerService.markers.forEach(function (marker, index)
+		{
 			var el = marker[0].getElement();
 
 			markerService.markersHash[el.id] = index;
@@ -21,14 +24,16 @@ function markerService() {
 		return true;
 	};
 
-	markerService.setMarkers = function (data) {
+	markerService.setMarkers = function (data)
+	{
 		var layer = data.config.params.table;
 
 		switch (layer) {
 			case 'office':
 				var office = [];
 
-				data.data.features.forEach(function (feature) {
+				data.data.features.forEach(function (feature)
+				{
 					var el = document.createElement('div');
 
 					el.id = layer;
@@ -53,7 +58,8 @@ function markerService() {
 			case 'places':
 				var places = [];
 
-				data.data.features.forEach(function (feature) {
+				data.data.features.forEach(function (feature)
+				{
 					var el = document.createElement('div');
 
 					el.id = layer;
@@ -78,7 +84,8 @@ function markerService() {
 			case 'trails':
 				var trails = [];
 
-				data.data.features.forEach(function (feature) {
+				data.data.features.forEach(function (feature)
+				{
 					var el = document.createElement('div');
 
 					el.id = layer;

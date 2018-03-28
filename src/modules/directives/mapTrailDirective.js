@@ -1,7 +1,8 @@
 (function () {
 'use strict';
 
-function mapTrailDirective($sce) {
+function mapTrailDirective($sce)
+{
 	var ddo = {
 		restrict: 'E',
 		templateUrl: $sce.trustAsResourceUrl('partials/mapTrail.html'),

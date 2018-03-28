@@ -24,11 +24,11 @@ var config = {
 					type: 'geojson'
 				},
 				layout: {
-					visibility: 'none'
+					visibility: 'visible'
 				},
 				paint: {
 					'fill-color': '#090',
-					'fill-opacity': .4,
+					'fill-opacity': .25,
 					'fill-outline-color': '#000'
 				}
 			},

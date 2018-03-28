@@ -105,11 +105,11 @@ map-layer ul.layers li:last-child div {
     -webkit-border-radius: 0 0 3px 3px;
 }
 
-map-layer ul.layers li.terrain div.visible,
-map-layer ul.layers li.biosphere div.visible,
-map-layer ul.layers li.office div.visible,
-map-layer ul.layers li.places div.visible,
-map-layer ul.layers li.trails div.visible {
+map-layer ul.layers li.terrain div.active,
+map-layer ul.layers li.biosphere div.active,
+map-layer ul.layers li.office div.active,
+map-layer ul.layers li.places div.active,
+map-layer ul.layers li.trails div.active {
     background: rgb(120,110,100);
 }
 

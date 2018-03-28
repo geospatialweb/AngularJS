@@ -7,14 +7,12 @@ var express = require('express'),
 	parse = require('pg-connection-string').parse,
 	pg = require('pg');
 
-var layer = express.Router().get('/', function (req, res) {
-	/* docker container postgres */
+var layer = express.Router().get('/', function (req, res)
+{
 	var connection = parse(config.postgres.DATABASE_URL);
 
-	/* local postgres */
-	//var connection = parse(config.postgres.DATABASE_URL_LOCAL);
-
-	pg.connect(connection, function (error, client, release) {
+	pg.connect(connection, function (error, client, release)
+	{
 		var sql = 'SELECT ' + req.query.fields + ' FROM ' + req.query.table;
 
 		if (error) {
@@ -22,7 +20,8 @@ var layer = express.Router().get('/', function (req, res) {
 			res.status(500).send(error);
 		
 		} else
-			client.query(sql, function (error, result) {
+			client.query(sql, function (error, result)
+			{
 				release();
 
 				if (error) {

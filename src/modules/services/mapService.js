@@ -6,7 +6,8 @@ var config = window.config,
 
 mapboxgl.accessToken = config.map.accessToken;
 
-function mapService($http, layerService, markerService, splashScreenService) {
+function mapService($document, $http, layerService, markerService, splashScreenService)
+{
 	var mapService = this;
 
 	mapService.mapStyle = config.map.styles.dark;
@@ -18,17 +19,27 @@ function mapService($http, layerService, markerService, splashScreenService) {
 		zoom: config.map.zoom
 	})
 		.addControl(new mapboxgl.NavigationControl(), config.map.control.position)
-		.on('load', function () {
-			splashScreenService.hideSplashScreen();
+		.on('styledata', function (event)
+		{
+			var el = angular.element($document[0].querySelectorAll('splash-screen div'));
+			
+			if (event.target._loaded && el.hasClass('visible'))
+				splashScreenService.hideSplashScreen();
 
+			return true;
+		})
+		.on('load', function ()
+		{
 			$http.get('/layers', {
 				params: {
 					fields: config.layers.biosphere.postgres.fields,
 					table: config.layers.biosphere.postgres.table
 				}
 			})
-				.then(function success(data) {
-					if (data && data.data) {
+				.then(function success(data)
+				{
+					if (data && data.data)
+					{
 						var biosphere = config.layers.biosphere.layer;
 						biosphere.source.data = data.data;
 
@@ -40,7 +51,8 @@ function mapService($http, layerService, markerService, splashScreenService) {
 
                     return true;
 
-                }, function failure(data) {
+				}, function failure(data)
+				{
 					console.error('Query Failed:\n', data);
 					return true;
                 });
@@ -51,7 +63,8 @@ function mapService($http, layerService, markerService, splashScreenService) {
 					table: config.layers.office.postgres.table
 				}
 			})
-				.then(function success(data) {
+				.then(function success(data)
+				{
 					if (data && data.data)
 						markerService.setMarkers(data);
 					else
@@ -59,7 +72,8 @@ function mapService($http, layerService, markerService, splashScreenService) {
 
 					return true;
 
-				}, function failure(data) {
+				}, function failure(data)
+				{
 					console.error('Query Failed:\n', data);
 					return true;
 				});
@@ -70,7 +84,8 @@ function mapService($http, layerService, markerService, splashScreenService) {
 					table: config.layers.places.postgres.table
 				}
 			})
-				.then(function success(data) {
+				.then(function success(data)
+				{
 					if (data && data.data)
 						markerService.setMarkers(data);
 					else
@@ -78,7 +93,8 @@ function mapService($http, layerService, markerService, splashScreenService) {
 
 					return true;
 
-				}, function failure(data) {
+				}, function failure(data)
+				{
 					console.error('Query Failed:\n', data);
 					return true;
 				});
@@ -89,8 +105,10 @@ function mapService($http, layerService, markerService, splashScreenService) {
 					table: config.layers.trails.postgres.table
 				}
 			})
-				.then(function success(data) {
-					if (data && data.data) {
+				.then(function success(data)
+				{
+					if (data && data.data)
+					{
 						var trails = config.layers.trails.layer;
 						trails.source.data = data.data;
 
@@ -104,7 +122,8 @@ function mapService($http, layerService, markerService, splashScreenService) {
 
 					return true;
 
-				}, function failure(data) {
+				}, function failure(data)
+				{
 					console.error('Query Failed:\n', data);
 					return true;
 				});
@@ -115,7 +134,7 @@ function mapService($http, layerService, markerService, splashScreenService) {
 	return mapService;
 }
 
-mapService.$inject = ['$http', 'layerService', 'markerService', 'splashScreenService'];
+mapService.$inject = ['$document', '$http', 'layerService', 'markerService', 'splashScreenService'];
 
 module.exports = mapService;
 

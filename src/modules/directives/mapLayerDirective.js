@@ -1,7 +1,8 @@
 (function () {
 'use strict';
 
-function mapLayerDirective($sce) {
+function mapLayerDirective($sce)
+{
 	var ddo = {
 		restrict: 'E',
 		templateUrl: $sce.trustAsResourceUrl('partials/mapLayer.html'),

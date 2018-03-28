@@ -1,11 +1,14 @@
 (function () {
 'use strict';
 
-function displayMarkerService($document, mapService, markerService) {
+function displayMarkerService($document, mapService, markerService)
+{
 	var displayMarkerService = this;
 
-	displayMarkerService.removeMarkers = function (layer) {
-		markerService.markers[markerService.markersHash[layer]].forEach(function (marker) {
+	displayMarkerService.removeMarkers = function (layer)
+	{
+		markerService.markers[markerService.markersHash[layer]].forEach(function (marker)
+		{
 			marker.remove();
 			return true;
 		});
@@ -13,8 +16,11 @@ function displayMarkerService($document, mapService, markerService) {
 		return true;
 	};
 
-	displayMarkerService.addMarkers = function (layer) {
-		markerService.markers[markerService.markersHash[layer]].forEach(function (marker) {
+	
+	displayMarkerService.addMarkers = function (layer)
+	{
+		markerService.markers[markerService.markersHash[layer]].forEach(function (marker)
+		{
 			marker.addTo(mapService.map);
 			return true;
 		});
@@ -22,13 +28,16 @@ function displayMarkerService($document, mapService, markerService) {
 		return true;
 	};
 
-	/* hide visible markers when toggling 'dark' and 'outdoors' map styles (basemaps) */
-	displayMarkerService.hideVisibleMarkers = function () {
-		markerService.markers.forEach(function (marker) {
+	/* hide visible markers when toggling 'dark' and 'outdoors' map styles (basemaps) for aesthetic purposes */
+	displayMarkerService.hideVisibleMarkers = function ()
+	{
+		markerService.markers.forEach(function (marker)
+		{
 			var layer = marker[0].getElement().id,
 				el = angular.element($document[0].querySelectorAll('div.' + layer + '-marker'));
 
-			if (el.length) {
+			if (el.length)
+			{
 				displayMarkerService.removeMarkers(layer);
 				markerService.visibleMarkers.push(marker);
 			}
@@ -39,9 +48,11 @@ function displayMarkerService($document, mapService, markerService) {
 		return true;
 	};
 
-	/* show visible markers after toggling 'dark' and 'outdoors' map styles (basemaps) */
-	displayMarkerService.showVisibleMarkers = function () {
-		markerService.visibleMarkers.forEach(function (marker) {
+	/* show visible markers after toggling 'dark' and 'outdoors' map styles (basemaps) for aesthetic purposes */
+	displayMarkerService.showVisibleMarkers = function ()
+	{
+		markerService.visibleMarkers.forEach(function (marker)
+		{
 			var layer = marker[0].getElement().id;
 
 			displayMarkerService.addMarkers(layer);
