@@ -1,22 +1,19 @@
 (function () {
 'use strict';
 
-function layerController($document, $timeout, $window, displayService, layerService, mapService) {
+function layerController($document, $timeout, $window, displayMarkerService, layerService, mapService, markerService) {
 	var layers = this;
 
 	layers.setLayer = function (layer, $event) {
-		var el = angular.element($document[0].querySelectorAll('map-layers ul.layers li.' + layer)).children();
+		var el = angular.element($document[0].querySelectorAll('map-layer ul.layers li.' + layer)).children();
 
 		if ($event)
 			$event.stopPropagation();
 
-		if (angular.equals(layerService.layersHash, {}) && angular.equals(layerService.markersHash, {}))
-			layerService.createHash();
-
-		if (el.hasClass(''))
-			el.addClass('active');
-		else
-			el.removeClass('active');
+		if (angular.equals(layerService.layersHash, {}) && angular.equals(markerService.markersHash, {})) {
+			layerService.createLayersHash();
+			markerService.createMarkersHash();
+		}
 
 		if (layer === 'terrain') {
 			var config = $window.config;
@@ -28,48 +25,58 @@ function layerController($document, $timeout, $window, displayService, layerServ
 
 			mapService.map.setStyle(mapService.mapStyle);
 
-			displayService.hideActiveMarkers();
+			displayMarkerService.hideVisibleMarkers();
+
+			if (markerService.visibleMarkers.length)
+				$timeout(function () {
+					displayMarkerService.showVisibleMarkers();
+					return true;
+				}, 1300);
 
 			layerService.layers.forEach(function (layer) {
-				if (!mapService.map.getLayer(layer.id) && layer.layout.visibility === 'visible')
-					$timeout(function () {
-						mapService.map.addLayer(layer);
-						mapService.map.setLayoutProperty(layer.id, 'visibility', 'visible');
-						layerService.layers[layer.layout.visibility = 'visible'];
+				$timeout(function () {
+					mapService.map.addLayer(layer);
 
-						return true;
-					}, 1000);
+					if (layer.layout.visibility === 'visible')
+						mapService.map.setLayoutProperty(layer.id, 'visibility', 'visible');
+
+					return true;
+				}, 1000);
 
 				return true;
 			});
 
-			if (layerService.activeMarkers.length)
-				$timeout(function () {
-					displayService.unhideActiveMarkers();
-					return true;
-				}, 1000);
-
 		} else if (layer === 'biosphere' || layer === 'trails') {
-			if (el.hasClass('active')) {
+			if (!el.hasClass('visible')) {
+				el.addClass('visible');
+
 				mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
 				layerService.layers[layerService.layersHash[layer]].layout.visibility = 'visible';
 
 				if (layer === 'trails')
-					displayService.showMarkers(layer);
+					displayMarkerService.addMarkers(layer);
 
 			} else {
+				el.removeClass('visible');
+
 				mapService.map.setLayoutProperty(layer, 'visibility', 'none');
 				layerService.layers[layerService.layersHash[layer]].layout.visibility = 'none';
 
 				if (layer === 'trails')
-					displayService.hideMarkers(layer);
+					displayMarkerService.removeMarkers(layer);
 			}
 
 		} else if (layer === 'office' || layer === 'places') {
-			if (el.hasClass('active'))
-				displayService.showMarkers(layer);
-			else
-				displayService.hideMarkers(layer);
+			if (!el.hasClass('visible')) {
+				el.addClass('visible');
+
+				displayMarkerService.addMarkers(layer);
+
+			} else {
+				el.removeClass('visible');
+
+				displayMarkerService.removeMarkers(layer);
+			}
 
 		} else if (layer === 'resetMap')
 			$window.location.reload(true);
@@ -80,7 +87,7 @@ function layerController($document, $timeout, $window, displayService, layerServ
 	return layers;
 }
 
-layerController.$inject = ['$document', '$timeout', '$window', 'displayService', 'layerService', 'mapService'];
+layerController.$inject = ['$document', '$timeout', '$window', 'displayMarkerService', 'layerService', 'mapService', 'markerService'];
 
 module.exports = layerController;
 

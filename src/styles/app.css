@@ -49,17 +49,17 @@ body {
     width: 100%;
 }
 
-splash-screen {
+splash-screen div {
     position: absolute;
     background: rgba(0,0,0,.5);
-    visibility: visible;
+    visibility: hidden;
     z-index: 1;
     height: 100%;
     width: 100%;
 }
 
-splash-screen.hidden {
-    visibility: hidden;
+splash-screen div.visible {
+    visibility: visible;
 }
 
 #map {
@@ -68,16 +68,16 @@ splash-screen.hidden {
     width: 100%;
 }
 
-map-layers ul.layers {
+map-layer ul.layers {
     position: absolute;
     margin: 0;
     padding: 0;
     list-style-type: none;
     left: 10px;
-    top: 160px;
+    top: 120px;
 }
 
-map-layers ul.layers div {
+map-layer ul.layers div {
     display: block;
     padding: 5px 0 5px 40px;
     background: rgb(160,150,140);
@@ -90,59 +90,58 @@ map-layers ul.layers div {
     width: 90px;
 }
 
-map-layers ul.layers div:hover {
+map-layer ul.layers div:hover {
     background: rgb(140,130,120);
 }
 
-map-layers ul.layers li:first-child div {
+map-layer ul.layers li:first-child div {
     border-radius: 3px 3px 0 0;
     -webkit-border-radius: 3px 3px 0 0;
 }
 
-map-layers ul.layers li:last-child div {
+map-layer ul.layers li:last-child div {
     border-bottom-width: 1px;
     border-radius: 0 0 3px 3px;
     -webkit-border-radius: 0 0 3px 3px;
 }
 
-map-layers ul.layers li.terrain div.active,
-map-layers ul.layers li.biosphere div.active,
-map-layers ul.layers li.office div.active,
-map-layers ul.layers li.places div.active,
-map-layers ul.layers li.trails div.active
-{
+map-layer ul.layers li.terrain div.visible,
+map-layer ul.layers li.biosphere div.visible,
+map-layer ul.layers li.office div.visible,
+map-layer ul.layers li.places div.visible,
+map-layer ul.layers li.trails div.visible {
     background: rgb(120,110,100);
 }
 
-map-layers div.biosphere-icon {
+map-layer div.biosphere-icon {
     position: absolute;
     left: 22px;
-    top: 195px;
+    top: 155px;
 }
 
-map-layers div.office-icon {
+map-layer div.office-icon {
     position: absolute;
     left: 22px;
-    top: 223px;
+    top: 183px;
 }
 
-map-layers div.places-icon {
+map-layer div.places-icon {
     position: absolute;
     left: 22px;
-    top:252px;
+    top:212px;
 }
 
-map-layers div.trails-icon {
+map-layer div.trails-icon {
     position: absolute;
     left: 22px;
-    top: 281px;
+    top: 241px;
 }
 
-map-trails select.trails {
+map-trail select.trails {
     position: absolute;
     border-style: none;
     left: 10px;
-    top: 350px;
+    top: 310px;
     width: 132px;
 }
 

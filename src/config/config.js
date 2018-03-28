@@ -6,7 +6,9 @@ var config = {
 		accessToken: 'pk.eyJ1IjoiZ2Vvc3BhdGlhbHdlYiIsImEiOiJ6WGdOUFRvIn0.GoVRwZq5EfVsLNGyCqgZTw',
 		center: [-76.3, 44.45],
 		container: 'map',
-		control: 'top-left',
+		control: {
+			position: 'top-left'
+		},
 		styles: {
 			dark: 'mapbox://styles/mapbox/dark-v9',
 			outdoors: 'mapbox://styles/mapbox/outdoors-v9'
@@ -22,11 +24,11 @@ var config = {
 					type: 'geojson'
 				},
 				layout: {
-					visibility: 'visible'
+					visibility: 'none'
 				},
 				paint: {
 					'fill-color': '#090',
-					'fill-opacity': .25,
+					'fill-opacity': .4,
 					'fill-outline-color': '#000'
 				}
 			},

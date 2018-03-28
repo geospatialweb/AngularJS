@@ -6,20 +6,10 @@ function layerService() {
 
 	layerService.layers = [];
 	layerService.layersHash = {};
-	layerService.markers = [];
-	layerService.markersHash = {};
-	layerService.activeMarkers = [];
 
-	layerService.createHash = function () {
+	layerService.createLayersHash = function () {
 		layerService.layers.forEach(function (layer, index) {
 			layerService.layersHash[layer.id] = index;
-			return true;
-		});
-
-		layerService.markers.forEach(function (marker, index) {
-			var el = marker[0].getElement();
-
-			layerService.markersHash[el.id] = index;
 			return true;
 		});
 

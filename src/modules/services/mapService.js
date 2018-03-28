@@ -6,11 +6,10 @@ var config = window.config,
 
 mapboxgl.accessToken = config.map.accessToken;
 
-function mapService($document, $http, layerService, markerService) {
+function mapService($http, layerService, markerService, splashScreenService) {
 	var mapService = this;
 
 	mapService.mapStyle = config.map.styles.dark;
-	mapService.splashScreen = null;
 
 	mapService.map = new mapboxgl.Map({
 		container: config.map.container,
@@ -18,20 +17,10 @@ function mapService($document, $http, layerService, markerService) {
 		center: config.map.center,
 		zoom: config.map.zoom
 	})
-		.addControl(new mapboxgl.NavigationControl(), config.map.control)
-		.on('styledata', function (event) {
-			if (event.target._loaded) {
-				if (!mapService.splashScreen.hasClass('hidden')) {
-					mapService.splashScreen.addClass('hidden');
-
-					angular.element($document[0].querySelectorAll('map-layers ul.layers li.biosphere div'))
-						.addClass('active');
-				}
-			}
-			
-			return true;
-		})
+		.addControl(new mapboxgl.NavigationControl(), config.map.control.position)
 		.on('load', function () {
+			splashScreenService.hideSplashScreen();
+
 			$http.get('/layers', {
 				params: {
 					fields: config.layers.biosphere.postgres.fields,
@@ -126,7 +115,7 @@ function mapService($document, $http, layerService, markerService) {
 	return mapService;
 }
 
-mapService.$inject = ['$document', '$http', 'layerService', 'markerService'];
+mapService.$inject = ['$http', 'layerService', 'markerService', 'splashScreenService'];
 
 module.exports = mapService;
 

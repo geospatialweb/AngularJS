@@ -14,21 +14,20 @@ var layer = express.Router().get('/', function (req, res) {
 	/* local postgres */
 	//var connection = parse(config.postgres.DATABASE_URL_LOCAL);
 
-	pg.connect(connection, function (err, client, release) {
+	pg.connect(connection, function (error, client, release) {
 		var sql = 'SELECT ' + req.query.fields + ' FROM ' + req.query.table;
 
-		if (err) {
-			console.error(err);
-			res.status(500).send(err);
-		}
-
-		else
-			client.query(sql, function (err, result) {
+		if (error) {
+			console.error(error);
+			res.status(500).send(error);
+		
+		} else
+			client.query(sql, function (error, result) {
 				release();
 
-				if (err) {
-					console.error(err);
-					res.status(500).send(err);
+				if (error) {
+					console.error(error);
+					res.status(500).send(error);
 
 				} else if (result.rowCount > 0)
 					res.status(200).send(geojson(result.rows));
