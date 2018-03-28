@@ -28,7 +28,8 @@ function markerService()
 	{
 		var layer = data.config.params.table;
 
-		switch (layer) {
+		switch (layer)
+		{
 			case 'office':
 				var office = [];
 

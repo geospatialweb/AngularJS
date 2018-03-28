@@ -20,7 +20,8 @@ var geojson = function (features)
                 "properties": {}
             };
 
-        for (var prop in feature) {
+        for (var prop in feature)
+        {
             if (prop !== 'st_asgeojson')
                 geojson.properties[prop] = feature[prop];
         }

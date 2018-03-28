@@ -67,6 +67,7 @@ function mapService($document, $http, layerService, markerService, splashScreenS
 				{
 					if (data && data.data)
 						markerService.setMarkers(data);
+
 					else
 						console.error('Data Error:\n', data);
 
@@ -88,6 +89,7 @@ function mapService($document, $http, layerService, markerService, splashScreenS
 				{
 					if (data && data.data)
 						markerService.setMarkers(data);
+
 					else
 						console.error('Data Error:\n', data);
 

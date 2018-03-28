@@ -15,7 +15,8 @@ var layer = express.Router().get('/', function (req, res)
 	{
 		var sql = 'SELECT ' + req.query.fields + ' FROM ' + req.query.table;
 
-		if (error) {
+		if (error)
+		{
 			console.error(error);
 			res.status(500).send(error);
 		
@@ -24,7 +25,8 @@ var layer = express.Router().get('/', function (req, res)
 			{
 				release();
 
-				if (error) {
+				if (error)
+				{
 					console.error(error);
 					res.status(500).send(error);
 

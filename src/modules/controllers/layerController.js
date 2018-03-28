@@ -20,6 +20,7 @@ function layerController($document, $timeout, $window, displayMarkerService, lay
 
 		if (!el.hasClass('active'))
 			el.addClass('active');
+
 		else
 			el.removeClass('active');
 		
@@ -29,6 +30,7 @@ function layerController($document, $timeout, $window, displayMarkerService, lay
 
 			if (mapService.mapStyle === config.map.styles.dark)
 				mapService.mapStyle = config.map.styles.outdoors;
+
 			else
 				mapService.mapStyle = config.map.styles.dark;
 
@@ -62,7 +64,7 @@ function layerController($document, $timeout, $window, displayMarkerService, lay
 		} else if (layer === 'biosphere' || layer === 'trails')
 		{
 			if (el.hasClass('active'))
-			{
+			{				
 				mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
 				layerService.layers[layerService.layersHash[layer]].layout.visibility = 'visible';
 
@@ -82,6 +84,7 @@ function layerController($document, $timeout, $window, displayMarkerService, lay
 		{
 			if (el.hasClass('active'))
 				displayMarkerService.addMarkers(layer);
+
 			else
 				displayMarkerService.removeMarkers(layer);
 

@@ -15,9 +15,11 @@ app.use(favicon(join(__dirname, 'src/images/favicon.ico')));
 
 app.use('/layers', require(join(__dirname, 'routes/layers')));
 
-app.listen(port, host, function (error) {
+app.listen(port, host, function (error)
+{
     if (error)
         console.error(error);
+
     else
         console.log('Active on http://localhost:' + port + ' at ' + new Date().toDateString() + ' ' + new Date().toTimeString());
 });

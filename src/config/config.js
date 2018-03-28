@@ -28,7 +28,7 @@ var config = {
 				},
 				paint: {
 					'fill-color': '#090',
-					'fill-opacity': .25,
+					'fill-opacity': .3,
 					'fill-outline-color': '#000'
 				}
 			},
