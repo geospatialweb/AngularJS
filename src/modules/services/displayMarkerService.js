@@ -3,7 +3,7 @@
 
 function displayMarkerService($document, mapService, markerService)
 {
-	var displayMarkers = [],
+	var markers = [],
 		displayMarkerService = this;
 
 	displayMarkerService.addMarkers = function (layer)
@@ -39,7 +39,7 @@ function displayMarkerService($document, mapService, markerService)
 			{
 				displayMarkerService.removeMarkers(layer);
 
-				displayMarkers.push(marker);
+				markers.push(marker);
 			}
 
 			return true;
@@ -50,9 +50,9 @@ function displayMarkerService($document, mapService, markerService)
 
 	displayMarkerService.showMarkers = function ()
 	{
-		if (displayMarkers.length)
+		if (markers.length)
 		{
-			displayMarkers.forEach(function (marker)
+			markers.forEach(function (marker)
 			{
 				var layer = marker[0].getElement().id;
 
@@ -60,7 +60,7 @@ function displayMarkerService($document, mapService, markerService)
 				return true;
 			});
 
-			displayMarkers = [];
+			markers = [];
 		}
 	};
 
