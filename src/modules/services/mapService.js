@@ -147,6 +147,8 @@ function mapService($http, $timeout, markerService, splashScreenService)
 		/* change between 'dark' and 'outdoors' map styles (basemaps) */
 		mapService.changeStyle = function ()
 		{
+			splashScreenService.addSplashScreen();
+
 			if (style === config.map.styles.default)
 				style = config.map.styles.outdoors;
 
@@ -156,7 +158,7 @@ function mapService($http, $timeout, markerService, splashScreenService)
 			mapService.map.setStyle(style);
 
 			/* add layers to new map style after delay for aesthetic purposes */
-			mapService.layers.forEach(function (layer)
+			mapService.layers.forEach(function (layer, index)
 			{
 				$timeout(function ()
 				{
@@ -164,6 +166,9 @@ function mapService($http, $timeout, markerService, splashScreenService)
 
 					if (layer.layout.visibility === 'visible')
 						mapService.map.setLayoutProperty(layer.id, 'visibility', 'visible');
+
+					if (index === mapService.layers.length - 1)
+						splashScreenService.removeSplashScreen();
 
 					return true;
 

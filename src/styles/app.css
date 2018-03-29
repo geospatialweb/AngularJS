@@ -58,6 +58,7 @@ splash-screen div {
     width: 100%;
 }
 
+splash-screen div.active,
 splash-screen div.visible {
     visibility: visible;
 }

@@ -38,7 +38,7 @@ function layerController($document, $timeout, $window, displayMarkerService, map
 				displayMarkerService.showMarkers();
 				return true;
 
-			},1200);
+			}, 1250);
 
 		} else if (layer === 'biosphere' || layer === 'trails')
 		{

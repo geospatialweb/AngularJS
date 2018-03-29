@@ -17,6 +17,18 @@ function splashScreenService($document)
 		return true;
 	};
 
+	splashScreenService.addSplashScreen = function ()
+	{
+		splashScreenService.splashScreen.addClass('active');
+		return true;
+	};
+
+	splashScreenService.removeSplashScreen = function ()
+	{
+		splashScreenService.splashScreen.removeClass('active');
+		return true;
+	};
+
 	return splashScreenService;
 }
 
