@@ -6,7 +6,7 @@ var config = window.config,
 
 mapboxgl.accessToken = config.map.accessToken;
 
-function mapService($document, $http, $timeout, layerService, markerService, splashScreenService)
+function mapService($http, $timeout, layerService, markerService, splashScreenService)
 {
 	var style = config.map.styles.default,
 		mapService = this;
@@ -20,9 +20,7 @@ function mapService($document, $http, $timeout, layerService, markerService, spl
 		.addControl(new mapboxgl.NavigationControl(), config.map.control.position)
 		.on('styledata', function (event)
 		{
-			var el = angular.element($document[0].querySelectorAll('splash-screen div'));
-			
-			if (event.target._loaded && el.hasClass('visible'))
+			if (event.target._loaded && splashScreenService.splashScreen.hasClass('visible'))
 				splashScreenService.hideSplashScreen();
 
 			return true;
@@ -166,7 +164,7 @@ function mapService($document, $http, $timeout, layerService, markerService, spl
 	return mapService;
 }
 
-mapService.$inject = ['$document', '$http', '$timeout', 'layerService', 'markerService', 'splashScreenService'];
+mapService.$inject = ['$http', '$timeout', 'layerService', 'markerService', 'splashScreenService'];
 
 module.exports = mapService;
 

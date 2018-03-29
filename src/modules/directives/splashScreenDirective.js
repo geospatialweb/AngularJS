@@ -9,9 +9,9 @@ function splashScreenDirective($sce, splashScreenService)
 		link: splashScreenLink
 	};
 
-	function splashScreenLink(scope, el)
+	function splashScreenLink(scope, element)
 	{
-        splashScreenService.splashScreen = el.children();
+        splashScreenService.splashScreen = element.children();
         return true;
     }
 
