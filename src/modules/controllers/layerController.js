@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 
-function layerController($document, $timeout, $window, displayMarkerService, layerService, mapService)
+function layerController($document, $timeout, $window, displayMarkerService, mapService, markerService)
 {
 	var layers = this;
 
@@ -10,26 +10,29 @@ function layerController($document, $timeout, $window, displayMarkerService, lay
 		if ($event)
 			$event.stopPropagation();
 
-		if (angular.equals(layerService.layersHash, {}))
-			layerService.createHash();
+		if (angular.equals(mapService.layersHash, {}) && angular.equals(markerService.markersHash, {}))
+		{
+			mapService.createLayersHash();
+			markerService.createMarkersHash();
+		}
 
-		var el = angular.element($document[0].querySelectorAll('map-layer ul.layers li.' + layer + ' div'));
+		var element = angular.element($document[0].querySelectorAll('map-layer ul.layers li.' + layer + ' div'));
 
-		if (!el.hasClass('active'))
-			el.addClass('active');
+		if (!element.hasClass('active'))
+			element.addClass('active');
 
 		else
-			el.removeClass('active');
+			element.removeClass('active');
 
 		if (layer === 'terrain')
 		{
-			/* toggle 'dark' and 'outdoors' map styles (basemaps) */
-			mapService.setStyle();
+			/* change between 'dark' and 'outdoors' map styles (basemaps) */
+			mapService.changeStyle();
 
-			/* hide active markers when toggling map styles for aesthetic purposes */
+			/* hide active markers when changing map styles for aesthetic purposes */
 			displayMarkerService.hideMarkers();
 
-			/* show active markers after toggling map styles for aesthetic purposes */
+			/* show active markers after changing map styles for aesthetic purposes */
 			$timeout(function ()
 			{
 				displayMarkerService.showMarkers();
@@ -39,10 +42,10 @@ function layerController($document, $timeout, $window, displayMarkerService, lay
 
 		} else if (layer === 'biosphere' || layer === 'trails')
 		{
-			if (el.hasClass('active'))
+			if (element.hasClass('active'))
 			{				
 				mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
-				layerService.layers[layerService.layersHash[layer]].layout.visibility = 'visible';
+				mapService.layers[mapService.layersHash[layer]].layout.visibility = 'visible';
 
 				if (layer === 'trails')
 					displayMarkerService.addMarkers(layer);
@@ -50,7 +53,7 @@ function layerController($document, $timeout, $window, displayMarkerService, lay
 			} else
 			{
 				mapService.map.setLayoutProperty(layer, 'visibility', 'none');
-				layerService.layers[layerService.layersHash[layer]].layout.visibility = 'none';
+				mapService.layers[mapService.layersHash[layer]].layout.visibility = 'none';
 
 				if (layer === 'trails')
 					displayMarkerService.removeMarkers(layer);
@@ -58,7 +61,7 @@ function layerController($document, $timeout, $window, displayMarkerService, lay
 
 		} else if (layer === 'office' || layer === 'places')
 		{
-			if (el.hasClass('active'))
+			if (element.hasClass('active'))
 				displayMarkerService.addMarkers(layer);
 
 			else
@@ -73,7 +76,7 @@ function layerController($document, $timeout, $window, displayMarkerService, lay
 	return layers;
 }
 
-layerController.$inject = ['$document', '$timeout', '$window', 'displayMarkerService', 'layerService', 'mapService'];
+layerController.$inject = ['$document', '$timeout', '$window', 'displayMarkerService', 'mapService', 'markerService'];
 
 module.exports = layerController;
 

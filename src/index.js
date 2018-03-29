@@ -6,7 +6,6 @@ window.config = require('./config/config');
 var app = require('angular').module('app', []);
 
 app.service('mapService', require('./modules/services/mapService'));
-app.service('layerService', require('./modules/services/layerService'));
 app.service('markerService', require('./modules/services/markerService'));
 app.service('displayMarkerService', require('./modules/services/displayMarkerService'));
 app.service('splashScreenService', require('./modules/services/splashScreenService'));

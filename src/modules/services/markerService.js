@@ -10,13 +10,13 @@ function markerService()
 	markerService.markers = [];
 	markerService.markersHash = {};
 
-	markerService.createHash = function ()
+	markerService.createMarkersHash = function ()
 	{
 		markerService.markers.forEach(function (marker, index)
 		{
-			var el = marker[0].getElement();
+			var element = marker[0].getElement();
 
-			markerService.markersHash[el.id] = index;
+			markerService.markersHash[element.id] = index;
 			return true;
 		});
 
@@ -34,13 +34,13 @@ function markerService()
 
 				data.data.features.forEach(function (feature)
 				{
-					var el = document.createElement('div');
+					var element = document.createElement('div');
 
-					el.id = layer;
-					el.className = layer + '-marker';
+					element.id = layer;
+					element.className = layer + '-marker';
 
 					office.push(
-						new mapboxgl.Marker(el)
+						new mapboxgl.Marker(element)
 							.setLngLat(feature.geometry.coordinates)
 							.setPopup(new mapboxgl.Popup({
 								offset: 15
@@ -60,13 +60,13 @@ function markerService()
 
 				data.data.features.forEach(function (feature)
 				{
-					var el = document.createElement('div');
+					var element = document.createElement('div');
 
-					el.id = layer;
-					el.className = layer + '-marker';
+					element.id = layer;
+					element.className = layer + '-marker';
 
 					places.push(
-						new mapboxgl.Marker(el)
+						new mapboxgl.Marker(element)
 							.setLngLat(feature.geometry.coordinates)
 							.setPopup(new mapboxgl.Popup({
 								offset: 15
@@ -86,13 +86,13 @@ function markerService()
 
 				data.data.features.forEach(function (feature)
 				{
-					var el = document.createElement('div');
+					var element = document.createElement('div');
 
-					el.id = layer;
-					el.className = layer + '-marker';
+					element.id = layer;
+					element.className = layer + '-marker';
 
 					trails.push(
-						new mapboxgl.Marker(el)
+						new mapboxgl.Marker(element)
 							.setLngLat([feature.properties.lng, feature.properties.lat])
 							.setPopup(new mapboxgl.Popup({
 								offset: 15

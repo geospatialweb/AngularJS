@@ -33,9 +33,9 @@ function displayMarkerService($document, mapService, markerService)
 		markerService.markers.forEach(function (marker)
 		{
 			var layer = marker[0].getElement().id,
-				el = angular.element($document[0].querySelectorAll('div.' + layer + '-marker'));
+				element = angular.element($document[0].querySelectorAll('div.' + layer + '-marker'));
 
-			if (el.length)
+			if (element.length)
 			{
 				displayMarkerService.removeMarkers(layer);
 

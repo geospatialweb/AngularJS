@@ -6,10 +6,13 @@ var config = window.config,
 
 mapboxgl.accessToken = config.map.accessToken;
 
-function mapService($http, $timeout, layerService, markerService, splashScreenService)
+function mapService($http, $timeout, markerService, splashScreenService)
 {
 	var style = config.map.styles.default,
 		mapService = this;
+
+	mapService.layers = [];
+	mapService.layersHash = {};
 
 	mapService.map = new mapboxgl.Map({
 		container: config.map.container,
@@ -41,7 +44,7 @@ function mapService($http, $timeout, layerService, markerService, splashScreenSe
 						biosphere.source.data = data.data;
 
 						mapService.map.addLayer(biosphere);
-						layerService.layers.push(biosphere);
+						mapService.layers.push(biosphere);
 
 					} else
 						console.error('Data Error:\n', data);
@@ -112,7 +115,7 @@ function mapService($http, $timeout, layerService, markerService, splashScreenSe
 						trails.source.data = data.data;
 
 						mapService.map.addLayer(trails);
-						layerService.layers.push(trails);
+						mapService.layers.push(trails);
 
 						markerService.setMarkers(data);
 
@@ -130,8 +133,19 @@ function mapService($http, $timeout, layerService, markerService, splashScreenSe
 			return true;
 		});
 
-		/* toggle 'dark' and 'outdoors' map styles (basemaps) */
-		mapService.setStyle = function ()
+		mapService.createLayersHash = function ()
+		{
+			mapService.layers.forEach(function (layer, index)
+			{
+				mapService.layersHash[layer.id] = index;
+				return true;
+			});
+
+			return true;
+		};
+
+		/* change between 'dark' and 'outdoors' map styles (basemaps) */
+		mapService.changeStyle = function ()
 		{
 			if (style === config.map.styles.default)
 				style = config.map.styles.outdoors;
@@ -142,7 +156,7 @@ function mapService($http, $timeout, layerService, markerService, splashScreenSe
 			mapService.map.setStyle(style);
 
 			/* add layers to new map style after delay for aesthetic purposes */
-			layerService.layers.forEach(function (layer)
+			mapService.layers.forEach(function (layer)
 			{
 				$timeout(function ()
 				{
@@ -164,7 +178,7 @@ function mapService($http, $timeout, layerService, markerService, splashScreenSe
 	return mapService;
 }
 
-mapService.$inject = ['$http', '$timeout', 'layerService', 'markerService', 'splashScreenService'];
+mapService.$inject = ['$http', '$timeout', 'markerService', 'splashScreenService'];
 
 module.exports = mapService;
 
