@@ -5,7 +5,7 @@ var express = require('express'),
 	config = require('../config/config'),
 	geojson = require('../modules/geojson'),
 	parse = require('pg-connection-string').parse,
-	//pg = require('pg');
+	pg = require('pg');
 
 var layer = express.Router().get('/', function (req, res)
 {
