@@ -69,6 +69,9 @@ var config = {
 				fields: 'name, description, lat, lng, ST_AsGeoJSON(geom)',
 			}
 		}
+	},
+	routes: {
+		layers: '/layers'
 	}
 }
 

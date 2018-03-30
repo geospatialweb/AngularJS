@@ -7,15 +7,15 @@ function displayMarkerService($document, mapService, markerService)
 		displayMarkerService = this;
 
 	displayMarkerService.addMarkers = function (layer)
+	{
+		markerService.markers[markerService.markersHash[layer]].forEach(function (marker)
 		{
-			markerService.markers[markerService.markersHash[layer]].forEach(function (marker)
-			{
-				marker.addTo(mapService.map);
-				return true;
-			});
-
+			marker.addTo(mapService.map);
 			return true;
-		};
+		});
+
+		return true;
+	};
 
 	displayMarkerService.removeMarkers = function (layer)
 	{
@@ -32,12 +32,12 @@ function displayMarkerService($document, mapService, markerService)
 	{
 		markerService.markers.forEach(function (marker)
 		{
-			var layer = marker[0].getElement().id,
-				element = angular.element($document[0].querySelectorAll('div.' + layer + '-marker'));
+			var id = marker[0].getElement().id,
+				element = angular.element($document[0].querySelectorAll('div.' + id + '-marker'));
 
 			if (element.length)
 			{
-				displayMarkerService.removeMarkers(layer);
+				displayMarkerService.removeMarkers(id);
 
 				markers.push(marker);
 			}
@@ -54,9 +54,9 @@ function displayMarkerService($document, mapService, markerService)
 		{
 			markers.forEach(function (marker)
 			{
-				var layer = marker[0].getElement().id;
+				var id = marker[0].getElement().id;
 
-				displayMarkerService.addMarkers(layer);
+				displayMarkerService.addMarkers(id);
 				return true;
 			});
 

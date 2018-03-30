@@ -9,6 +9,9 @@ var config = {
 	postgres: {
 		DATABASE_URL: 'postgres://postgres:postgres@postgres/postgres',
 		DATABASE_URL_LOCAL: 'postgres://postgres:admin@localhost/postgres'
+	},
+	routes: {
+		layers: '/layers'
 	}
 };
 

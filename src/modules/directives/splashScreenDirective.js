@@ -11,7 +11,7 @@ function splashScreenDirective($sce, splashScreenService)
 
 	function splashScreenLink(scope, element)
 	{
-        splashScreenService.splashScreen = element.children();
+        splashScreenService.setSplashScreen(element.children());
         return true;
     }
 

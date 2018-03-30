@@ -5,7 +5,11 @@ function splashScreenService($document)
 {
 	var splashScreenService = this;
 
-	splashScreenService.splashScreen = null;
+	splashScreenService.setSplashScreen = function (element)
+	{
+		splashScreenService.splashScreen = element;
+		return true;
+	};
 
 	splashScreenService.hideSplashScreen = function ()
 	{
