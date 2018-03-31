@@ -34,7 +34,7 @@ http.createServer(
 
         .set('port', PORT)
 )
-    .listen(PORT, HOST, function (error, req, res)
+    .listen(PORT, HOST, function (error)
     {
         if (error)
             console.error(error);

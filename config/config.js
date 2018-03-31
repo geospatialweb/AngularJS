@@ -5,7 +5,7 @@ var config = {
 	sourcecode: 'src',
 	favicon: 'src/images/favicon.ico',
 	logfile: './logs/access.log',
-	timeout: 300000,
+	timeout: 120000,
 	node: {
 		HOST: '0.0.0.0',
 		PORT: 80
