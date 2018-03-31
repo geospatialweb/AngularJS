@@ -2,9 +2,13 @@
 'use strict';
 
 var config = {
+	sourcecode: 'src',
+	favicon: 'src/images/favicon.ico',
+	logfile: './logs/access.log',
+	timeout: 300000,
 	node: {
-		host: '0.0.0.0',
-		port: 80
+		HOST: '0.0.0.0',
+		PORT: 80
 	},
 	postgres: {
 		DATABASE_URL: 'postgres://postgres:postgres@postgres/postgres',

@@ -5,13 +5,19 @@ var express = require('express'),
 	config = require('../config/config'),
 	geojson = require('../modules/geojson'),
 	parse = require('pg-connection-string').parse,
-	pg = require('pg');
+	pg = require('pg'),
 
-var layer = express.Router().get('/', function (req, res)
+	router = express.Router();
+
+var layer = router.get('/', function (req, res)
 {
-	var connection = parse(config.postgres.DATABASE_URL);
+	/* docker container */
+	var connect = parse(config.postgres.DATABASE_URL);
 
-	pg.connect(connection, function (error, client, release)
+	/* local instance */
+	//var connect = parse(config.postgres.DATABASE_URL_LOCAL);
+
+	pg.connect(connect, function (error, client, release)
 	{
 		var sql = 'SELECT ' + req.query.fields + ' FROM ' + req.query.table;
 
