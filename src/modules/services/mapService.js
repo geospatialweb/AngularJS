@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 
-var config = window.config,
+var config = require('../../config/config'),
 	mapboxgl = require('mapbox-gl');
 
 mapboxgl.accessToken = config.map.accessToken;

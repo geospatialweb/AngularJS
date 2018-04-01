@@ -1,8 +1,6 @@
 (function () {
 'use strict';
 
-window.config = require('./config/config');
-
 var app = require('angular').module('app', []);
 
 app.service('mapService', require('./modules/services/mapService'));

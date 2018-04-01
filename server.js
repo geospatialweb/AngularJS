@@ -16,19 +16,19 @@ const HOST = config.node.HOST,
 
 http.createServer(
     app
-        .use(morgan('combined', {
-            stream: fs.createWriteStream(join(__dirname, config.logfile), {
-                flags: 'a'
+        .use(morgan(config.morgan.format, {
+            stream: fs.createWriteStream(join(__dirname, config.morgan.logfile), {
+                flags: config.morgan.flags
             })
         }))
 
         .use(express.static(join(__dirname, config.sourcecode)))
 
-        .use(favicon(join(__dirname, config.favicon)))
+        .use(favicon(join(__dirname, join(config.sourcecode, config.favicon))))
 
-        .use(config.routes.layers, require(join(__dirname, join('routes', config.routes.layers))))
+        .use(config.routes.layers, require(join(__dirname, join(config.routes.directory, config.routes.layers))))
 
-        .set('timeout', config.timeout)
+        .set('timeout', config.node.timeout)
 
         .set('host', HOST)
 
@@ -40,7 +40,8 @@ http.createServer(
             console.error(error);
 
         else
-            console.log('Active on http://localhost:' + PORT + ' at ' + new Date().toDateString() + ' ' + new Date().toTimeString());
+            console.log('Active on http://' + config.node.localhost + ':' + PORT + 
+                ' at ' + new Date().toDateString() + ' ' + new Date().toTimeString());
     });
 
 return true;

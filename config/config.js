@@ -3,10 +3,15 @@
 
 var config = {
 	sourcecode: 'src',
-	favicon: 'src/images/favicon.ico',
-	logfile: './logs/access.log',
-	timeout: 120000,
+	favicon: 'images/favicon.ico',
+	morgan: {
+		flags: 'a',
+		format: 'combined',
+		logfile: 'logs/access.log'
+	},
 	node: {
+		localhost: '127.0.0.1',
+		timeout: 120000,
 		HOST: '0.0.0.0',
 		PORT: 80
 	},
@@ -15,6 +20,7 @@ var config = {
 		DATABASE_URL_LOCAL: 'postgres://postgres:admin@localhost/postgres'
 	},
 	routes: {
+		directory: 'routes',
 		layers: '/layers'
 	}
 };
