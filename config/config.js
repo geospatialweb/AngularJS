@@ -15,10 +15,6 @@ var config = {
 		HOST: '0.0.0.0',
 		PORT: 80
 	},
-	postgres: {
-		DATABASE_URL: 'postgres://postgres:postgres@postgres/postgres',
-		DATABASE_URL_LOCAL: 'postgres://postgres:admin@localhost/postgres'
-	},
 	routes: {
 		directory: 'routes',
 		layers: '/layers'

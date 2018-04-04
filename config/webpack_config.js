@@ -8,7 +8,7 @@ var config = {
 
 	output: {
 		filename: 'app.js',
-		path: resolve('./src/dist')
+		path: resolve(process.cwd(), 'src/dist')
 	}
 };
 

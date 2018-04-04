@@ -12,7 +12,6 @@ app.controller('mapController', require('./modules/controllers/mapController'));
 app.controller('layerController', require('./modules/controllers/layerController'));
 app.controller('trailController', require('./modules/controllers/trailController'));
 
-app.directive('mapboxGl', require('./modules/directives/mapboxGlDirective'));
 app.directive('mapLayer', require('./modules/directives/mapLayerDirective'));
 app.directive('mapTrail', require('./modules/directives/mapTrailDirective'));
 app.directive('splashScreen', require('./modules/directives/splashScreenDirective'));

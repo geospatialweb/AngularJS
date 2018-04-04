@@ -3,7 +3,6 @@
   "version": "0.2.0",
   "author": "John Campbell <johncampbell@geospatialweb.ca>",
   "description": "Node | Express | AngularJS | Mapbox GL | PostGIS | Webpack | Docker Web Mapping",
-  "main": "server.js",
   "private": true,
   "repository": {
     "type": "git",
@@ -14,7 +13,9 @@
     "prod": "webpack --mode production --config ./config/webpack_config.js"
   },
   "dependencies": {
+    "ajv": "^6.4.0",
     "angular": "^1.6.9",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "mapbox-gl": "^0.44.1",
     "morgan": "^1.9.0",
