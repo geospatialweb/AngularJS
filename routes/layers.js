@@ -2,7 +2,6 @@
 'use strict';
 
 var express = require('express'),
-	config = require('../config/config'),
 	geojson = require('../modules/geojson'),
 	parse = require('pg-connection-string').parse,
 	pg = require('pg'),
@@ -12,10 +11,10 @@ var express = require('express'),
 var layer = router.get('/', function (req, res)
 {
 	/* docker container instance */
-	//var connect = parse(process.env.DATABASE_URL);
+	var connect = parse(process.env.DATABASE_URL);
 
 	/* local instance */
-	var connect = parse(process.env.DATABASE_URL_LOCAL);
+//	var connect = parse(process.env.DATABASE_URL_LOCAL);
 
 	pg.connect(connect, function (error, client, release)
 	{
