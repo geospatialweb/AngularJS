@@ -30,7 +30,7 @@ function mapService($http, $timeout, markerService, splashScreenService)
 		})
 		.on('load', function ()
 		{
-			$http.get(config.routes.layers, {
+			$http.get(config.layers.route, {
 				params: {
 					fields: config.layers.biosphere.postgres.fields,
 					table: config.layers.biosphere.postgres.table
@@ -57,7 +57,7 @@ function mapService($http, $timeout, markerService, splashScreenService)
 					return true;
                 });
 
-			$http.get(config.routes.layers, {
+			$http.get(config.layers.route, {
 				params: {
 					fields: config.layers.office.postgres.fields,
 					table: config.layers.office.postgres.table
@@ -79,7 +79,7 @@ function mapService($http, $timeout, markerService, splashScreenService)
 					return true;
 				});
 
-			$http.get(config.routes.layers, {
+			$http.get(config.layers.route, {
 				params: {
 					fields: config.layers.places.postgres.fields,
 					table: config.layers.places.postgres.table
@@ -101,7 +101,7 @@ function mapService($http, $timeout, markerService, splashScreenService)
 					return true;
 				});
 
-			$http.get(config.routes.layers, {
+			$http.get(config.layers.route, {
 				params: {
 					fields: config.layers.trails.postgres.fields,
 					table: config.layers.trails.postgres.table

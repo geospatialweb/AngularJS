@@ -11,7 +11,7 @@ var express = require('express'),
 
 var layer = router.get('/', function (req, res)
 {
-	/* docker container */
+	/* docker container instance */
 	var connect = parse(config.postgres.DATABASE_URL);
 
 	/* local instance */

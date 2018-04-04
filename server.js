@@ -6,8 +6,8 @@ var config = require('./config/config'),
     favicon = require('serve-favicon'),
     fs = require('fs'),
     http = require('http'),
-    join = require('path').join,
     morgan = require('morgan'),
+    resolve = require('path').resolve,
 
     app = express();
 
@@ -17,16 +17,16 @@ const HOST = config.node.HOST,
 http.createServer(
     app
         .use(morgan(config.morgan.format, {
-            stream: fs.createWriteStream(join(__dirname, config.morgan.logfile), {
+            stream: fs.createWriteStream(resolve(config.morgan.logfile), {
                 flags: config.morgan.flags
             })
         }))
 
-        .use(express.static(join(__dirname, config.sourcecode)))
+        .use(express.static(resolve(config.sourcecode)))
 
-        .use(favicon(join(__dirname, join(config.sourcecode, config.favicon))))
+        .use(favicon(resolve(config.sourcecode, config.favicon)))
 
-        .use(config.routes.layers, require(join(__dirname, join(config.routes.directory, config.routes.layers))))
+        .use(config.routes.layers, require(resolve(config.routes.directory, config.routes.layers.slice(1))))
 
         .set('timeout', config.node.timeout)
 

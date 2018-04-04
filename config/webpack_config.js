@@ -1,14 +1,14 @@
 (function () {
 'use strict';
 
-var join = require('path').join;
+var resolve = require('path').resolve;
 
 var config = {
 	entry: './src/index.js',
 
 	output: {
 		filename: 'app.js',
-		path: join(__dirname, '../src/dist')
+		path: resolve('./src/dist')
 	}
 };
 

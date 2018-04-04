@@ -16,6 +16,7 @@ var config = {
 		zoom: 9
 	},
 	layers: {
+		route: '/layers',
 		biosphere: {
 			layer: {
 				id: 'biosphere',
@@ -69,11 +70,8 @@ var config = {
 				fields: 'name, description, lat, lng, ST_AsGeoJSON(geom)',
 			}
 		}
-	},
-	routes: {
-		layers: '/layers'
 	}
-}
+};
 
 module.exports = config;
 
