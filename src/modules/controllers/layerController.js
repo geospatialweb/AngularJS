@@ -18,11 +18,7 @@ function layerController($document, $timeout, $window, displayMarkerService, map
 
 		var element = angular.element($document[0].querySelectorAll('map-layer ul.layers li.' + layer + ' div'));
 
-		if (!element.hasClass('active'))
-			element.addClass('active');
-
-		else
-			element.removeClass('active');
+		element.hasClass('active') ? element.removeClass('active') : element.addClass('active');
 
 		if (layer === 'terrain')
 		{
