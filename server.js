@@ -1,8 +1,9 @@
 (function () {
 'use strict';
 
+require('dotenv').config();
+
 var config = require('./config/config'),
-    dotenv = require('dotenv').config(),
     express = require('express'),
     favicon = require('serve-favicon'),
     fs = require('fs'),
@@ -18,16 +19,16 @@ const HOST = config.node.HOST,
 http.createServer(
     app
         .use(morgan(config.morgan.format, {
-            stream: fs.createWriteStream(resolve(process.cwd(), config.morgan.logfile), {
+            stream: fs.createWriteStream(resolve(config.morgan.logfile), {
                 flags: config.morgan.flags
             })
         }))
 
-        .use(express.static(resolve(process.cwd(), config.sourcecode)))
+        .use(express.static(resolve(config.src)))
 
-        .use(favicon(resolve(process.cwd(), config.sourcecode, config.favicon)))
+        .use(favicon(resolve(config.src, config.favicon)))
 
-        .use(config.routes.layers, require(resolve(process.cwd(), config.routes.directory, config.routes.layers.slice(1))))
+        .use(config.routes.layers, require(resolve(config.routes.directory, config.routes.layers.slice(1))))
 
         .set('timeout', config.node.timeout)
 

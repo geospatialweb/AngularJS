@@ -2,7 +2,7 @@
 'use strict';
 
 var config = {
-	sourcecode: 'src',
+	src: 'src',
 	favicon: 'images/favicon.ico',
 	morgan: {
 		flags: 'a',
