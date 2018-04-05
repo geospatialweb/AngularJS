@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 
-var app = require('../index');
+var app = require('angular').module('app', []);
 
 app.controller('mapController', require('./controllers/mapController'));
 app.controller('layerController', require('./controllers/layerController'));
@@ -15,6 +15,8 @@ app.service('mapService', require('./services/mapService'));
 app.service('markerService', require('./services/markerService'));
 app.service('displayMarkerService', require('./services/displayMarkerService'));
 app.service('splashScreenService', require('./services/splashScreenService'));
+
+module.exports = app;
 
 return true;
 })();

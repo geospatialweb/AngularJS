@@ -4,8 +4,6 @@
 var config = require('../../config/config'),
 	mapboxgl = require('mapbox-gl');
 
-mapboxgl.accessToken = config.map.accessToken;
-
 function mapService($http, $timeout, markerService, splashScreenService)
 {
 	var style = config.map.styles.default,

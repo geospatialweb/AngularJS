@@ -3,20 +3,16 @@
 
 var express = require('express'),
 	geojson = require('../modules/geojson'),
-	parse = require('pg-connection-string').parse,
 	pg = require('pg'),
 
 	router = express.Router();
 
 var layer = router.get('/', function (req, res)
 {
-	/* docker container postgres instance */
-	var connect = parse(process.env.DATABASE_URL);
-
-	/* local postgres instance */
-//	var connect = parse(process.env.DATABASE_URL_LOCAL);
-
-	pg.connect(connect, function (error, client, release)
+	/* local postgres instance 
+		change: process.env.DATABASE_URL_LOCAL;
+	*/
+	pg.connect(process.env.DATABASE_URL, function (error, client, release)
 	{
 		var sql = 'SELECT ' + req.query.fields + ' FROM ' + req.query.table;
 

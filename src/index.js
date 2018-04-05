@@ -1,7 +1,10 @@
 (function () {
 'use strict';
 
-module.exports = require('angular').module('app', []);
+var config = require('./config/config'),
+	mapboxgl = require('mapbox-gl');
+
+mapboxgl.accessToken = config.map.accessToken;
 
 require('./modules/modules');
 
