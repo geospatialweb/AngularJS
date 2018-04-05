@@ -1,0 +1,15 @@
+127.0.0.1 - - [05/Apr/2018:04:25:37 +0000] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [05/Apr/2018:04:25:37 +0000] "GET /styles/app.css HTTP/1.1" 304 -
+127.0.0.1 - - [05/Apr/2018:04:25:37 +0000] "GET /images/logo.png HTTP/1.1" 304 -
+127.0.0.1 - - [05/Apr/2018:04:25:37 +0000] "GET /dist/app.js HTTP/1.1" 200 2089126
+127.0.0.1 - - [05/Apr/2018:04:25:37 +0000] "GET /partials/splashScreen.html HTTP/1.1" 304 -
+127.0.0.1 - - [05/Apr/2018:04:25:37 +0000] "GET /partials/mapLayer.html HTTP/1.1" 304 -
+127.0.0.1 - - [05/Apr/2018:04:25:37 +0000] "GET /partials/mapTrail.html HTTP/1.1" 304 -
+127.0.0.1 - - [05/Apr/2018:04:25:37 +0000] "GET /images/office.png HTTP/1.1" 304 -
+127.0.0.1 - - [05/Apr/2018:04:25:37 +0000] "GET /images/biosphere.png HTTP/1.1" 304 -
+127.0.0.1 - - [05/Apr/2018:04:25:37 +0000] "GET /images/places.png HTTP/1.1" 304 -
+127.0.0.1 - - [05/Apr/2018:04:25:37 +0000] "GET /images/trails.png HTTP/1.1" 304 -
+127.0.0.1 - - [05/Apr/2018:04:25:39 +0000] "GET /layers?fields=name,+description,+ST_AsGeoJSON(geom)&table=biosphere HTTP/1.1" 304 -
+127.0.0.1 - - [05/Apr/2018:04:25:39 +0000] "GET /layers?fields=name,+description,+ST_AsGeoJSON(geom)&table=office HTTP/1.1" 304 -
+127.0.0.1 - - [05/Apr/2018:04:25:39 +0000] "GET /layers?fields=name,+description,+ST_AsGeoJSON(geom)&table=places HTTP/1.1" 304 -
+127.0.0.1 - - [05/Apr/2018:04:25:39 +0000] "GET /layers?fields=name,+description,+lat,+lng,+ST_AsGeoJSON(geom)&table=trails HTTP/1.1" 304 -

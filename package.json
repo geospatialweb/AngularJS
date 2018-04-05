@@ -1,7 +1,7 @@
 {
   "name": "geospatial_web",
   "version": "0.2.0",
-  "author": "John Campbell <johncampbell@geospatialweb.ca>",
+  "author": "John Campbell <johncampbell@geospatialweb.ca> <http://www.linkedin.com/in/geospatialweb>",
   "description": "Node | Express | AngularJS | Mapbox GL | PostGIS | Webpack | Docker Web Mapping",
   "private": true,
   "repository": {

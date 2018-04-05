@@ -10,10 +10,10 @@ var express = require('express'),
 
 var layer = router.get('/', function (req, res)
 {
-	/* docker container instance */
+	/* docker container postgres instance */
 	var connect = parse(process.env.DATABASE_URL);
 
-	/* local instance */
+	/* local postgres instance */
 //	var connect = parse(process.env.DATABASE_URL_LOCAL);
 
 	pg.connect(connect, function (error, client, release)

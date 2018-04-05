@@ -6,7 +6,7 @@ var config = {
 	favicon: 'images/favicon.ico',
 	morgan: {
 		flags: 'a',
-		format: 'combined',
+		format: 'common',
 		logfile: 'logs/access.log'
 	},
 	node: {
