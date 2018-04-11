@@ -1,5 +1,7 @@
 'use strict';
 
+mapLayerDirective.$inject = ['$sce'];
+
 export function mapLayerDirective($sce)
 {
 	const ddo = {

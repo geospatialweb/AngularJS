@@ -2,6 +2,8 @@
 
 import {config} from '../../config/config';
 
+layerController.$inject = ['$document', '$timeout', '$window', 'displayMarkerService', 'mapService', 'markerService'];
+
 export function layerController($document, $timeout, $window, displayMarkerService, mapService, markerService)
 {
 	const layers = this;

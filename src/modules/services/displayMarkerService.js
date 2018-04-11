@@ -1,5 +1,7 @@
 'use strict';
 
+displayMarkerService.$inject = ['$document', 'mapService', 'markerService'];
+
 export function displayMarkerService($document, mapService, markerService)
 {
 	const displayMarkerService = this;

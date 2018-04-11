@@ -2,6 +2,8 @@
 
 import {config} from '../../config/config';
 
+trailController.$inject = ['mapService'];
+
 export function trailController(mapService)
 {
 	const trails = this;
