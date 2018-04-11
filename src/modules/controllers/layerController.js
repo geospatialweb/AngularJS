@@ -17,7 +17,7 @@ export function layerController($document, $timeout, $window, displayMarkerServi
 			markerService.createMarkersHash();
 		}
 
-		const element = angular.element($document[0].querySelectorAll('map-layer ul.layers li.' + layer + ' div'));
+		const element = angular.element($document[0].querySelectorAll(`map-layer ul.layers li.${layer} div`));
 
 		element.hasClass('active') ? element.removeClass('active') : element.addClass('active');
 

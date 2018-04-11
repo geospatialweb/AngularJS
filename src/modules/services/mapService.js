@@ -22,7 +22,7 @@ export function mapService($http, $timeout, markerService, splashScreenService)
 		.addControl(new mapboxgl.NavigationControl(), config.map.control.position)
 		.on('styledata', event =>
 		{
-			if (event.target._loaded && splashScreenService.splashScreen.hasClass('visible'))
+			if (event.target._loaded && splashScreenService.splashScreen.hasClass('active'))
 				splashScreenService.hideSplashScreen();
 
 			return true;
@@ -108,7 +108,7 @@ export function mapService($http, $timeout, markerService, splashScreenService)
 		});
 
 		mapService.createLayersHash = () =>
-			mapService.layers.forEach((layer, index) =>
+			mapService.layers.map((layer, index) =>
 				mapService.layersHash[layer.id] = index
 			);
 
@@ -124,7 +124,7 @@ export function mapService($http, $timeout, markerService, splashScreenService)
 			mapService.map.setStyle(mapService.mapStyle);
 
 			/* add layers to new map style after delay for aesthetic purposes */
-			mapService.layers.forEach((layer, index) =>
+			mapService.layers.map((layer, index) =>
 				$timeout(() =>
 				{
 					mapService.map.addLayer(layer);

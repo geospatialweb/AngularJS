@@ -7,7 +7,7 @@ module.exports = features =>
         "features": []
     };
 
-    features.forEach(feature =>
+    features.map(feature =>
     {
         const geometry = JSON.parse(feature.st_asgeojson);
 

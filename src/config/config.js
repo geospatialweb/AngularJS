@@ -71,27 +71,27 @@ export const config = {
 		}
 	},
 	trails: {
-		Blue_Mountain: {
+		'Blue Mountain': {
 			center: [-76.04, 44.508],
 			zoom: 12
 		},
-		Charleston_Lake: {
+		'Charleston Lake': {
 			center: [-76.04, 44.508],
 			zoom: 12
 		},
-		Lemoine_Point: {
+		'Lemoine Point': {
 			center: [-76.61, 44.223],
 			zoom: 14
 		},
-		Lyn_Valley: {
+		'Lyn Valley': {
 			center: [-75.75, 44.575],
 			zoom: 12
 		},
-		Mac_Johnson: {
+		'Mac Johnson': {
 			center: [-75.75, 44.575],
 			zoom: 12
 		},
-		Seeleys_Bay: {
+		'Seeley\'s Bay': {
 			center: [-76.22, 44.485],
 			zoom: 13
 		},

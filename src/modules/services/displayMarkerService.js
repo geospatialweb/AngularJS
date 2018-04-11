@@ -2,52 +2,46 @@
 
 export function displayMarkerService($document, mapService, markerService)
 {
-	var markers = [];
-
 	const displayMarkerService = this;
 
 	displayMarkerService.addMarkers = layer =>
-		markerService.markers[markerService.markersHash[layer]].forEach(marker =>
+		markerService.markers[markerService.markersHash[layer]].map(marker =>
 			marker.addTo(mapService.map)
 		);
 
 	displayMarkerService.removeMarkers = layer =>
-		markerService.markers[markerService.markersHash[layer]].forEach(marker =>
+		markerService.markers[markerService.markersHash[layer]].map(marker =>
 			marker.remove()
 		);
 
 	displayMarkerService.hideMarkers = () =>
-		markerService.markers.forEach(marker =>
+		markerService.markers.map(marker =>
 		{
 			const id = marker[0].getElement().id;
-			const element = angular.element($document[0].querySelectorAll('div.' + id + '-marker'));
+			const element = angular.element($document[0].querySelectorAll(`div.${id}-marker`));
 
 			if (element.length)
 			{
 				displayMarkerService.removeMarkers(id);
-				markers.push(marker);
+				marker.hidden = true;
 			}
 
 			return true;
 		});
 
 	displayMarkerService.showMarkers = () =>
-	{
-		if (markers.length)
+		markerService.markers.map(marker =>
 		{
-			markers.forEach(marker =>
+			if (marker.hidden)
 			{
 				const id = marker[0].getElement().id;
 
 				displayMarkerService.addMarkers(id);
-				return true;
-			});
+				marker.hidden = false;
+			}
 
-			markers = [];
-		}
-
-		return true;
-	};
+			return true;
+		});
 
 	return displayMarkerService;
 }
