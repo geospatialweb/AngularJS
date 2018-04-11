@@ -1,7 +1,6 @@
-(function () {
 'use strict';
 
-var config = {
+export const config = {
 	map: {
 		accessToken: 'pk.eyJ1IjoiZ2Vvc3BhdGlhbHdlYiIsImEiOiJ6WGdOUFRvIn0.GoVRwZq5EfVsLNGyCqgZTw',
 		center: [-76.3, 44.45],
@@ -70,10 +69,32 @@ var config = {
 				fields: 'name, description, lat, lng, ST_AsGeoJSON(geom)',
 			}
 		}
+	},
+	trails: {
+		Blue_Mountain: {
+			center: [-76.04, 44.508],
+			zoom: 12
+		},
+		Charleston_Lake: {
+			center: [-76.04, 44.508],
+			zoom: 12
+		},
+		Lemoine_Point: {
+			center: [-76.61, 44.223],
+			zoom: 14
+		},
+		Lyn_Valley: {
+			center: [-75.75, 44.575],
+			zoom: 12
+		},
+		Mac_Johnson: {
+			center: [-75.75, 44.575],
+			zoom: 12
+		},
+		Seeleys_Bay: {
+			center: [-76.22, 44.485],
+			zoom: 13
+		},
+		selectedOption: 'Select Trail'
 	}
 };
-
-module.exports = config;
-
-return true;
-})();

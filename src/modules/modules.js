@@ -1,22 +1,31 @@
-(function () {
 'use strict';
 
-var app = require('angular').module('app', []);
+import angular from 'angular';
 
-app.controller('mapController', require('./controllers/mapController'));
-app.controller('layerController', require('./controllers/layerController'));
-app.controller('trailController', require('./controllers/trailController'));
+import {mapController} from './controllers/mapController';
+import {layerController} from './controllers/layerController';
+import {trailController} from './controllers/trailController';
 
-app.directive('mapLayer', require('./directives/mapLayerDirective'));
-app.directive('mapTrail', require('./directives/mapTrailDirective'));
-app.directive('splashScreen', require('./directives/splashScreenDirective'));
+import {mapLayerDirective} from './directives/mapLayerDirective';
+import {mapTrailDirective} from './directives/mapTrailDirective';
+import {splashScreenDirective} from './directives/splashScreenDirective';
 
-app.service('mapService', require('./services/mapService'));
-app.service('markerService', require('./services/markerService'));
-app.service('displayMarkerService', require('./services/displayMarkerService'));
-app.service('splashScreenService', require('./services/splashScreenService'));
+import {mapService} from './services/mapService';
+import {markerService} from './services/markerService';
+import {displayMarkerService} from './services/displayMarkerService';
+import {splashScreenService} from './services/splashScreenService';
 
-module.exports = app;
+angular.module('app', [])
+	.controller('mapController', mapController)
+	.controller('layerController', layerController)
+	.controller('trailController', trailController)
 
-return true;
-})();
+	.directive('mapLayer', mapLayerDirective)
+	.directive('mapTrail', mapTrailDirective)
+	.directive('splashScreen', splashScreenDirective)
+
+	.service('mapService', mapService)
+	.service('markerService', markerService)
+	.service('displayMarkerService', displayMarkerService)
+	.service('splashScreenService', splashScreenService)
+;

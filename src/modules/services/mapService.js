@@ -1,32 +1,33 @@
-(function () {
 'use strict';
 
-var config = require('../../config/config'),
-	mapboxgl = require('mapbox-gl');
+import {config} from '../../config/config';
+import mapboxgl from 'mapbox-gl';
 
-function mapService($http, $timeout, markerService, splashScreenService)
+mapboxgl.accessToken = config.map.accessToken;
+
+export function mapService($http, $timeout, markerService, splashScreenService)
 {
-	var style = config.map.styles.default,
-		mapService = this;
+	const mapService = this;
 
 	mapService.layers = [];
 	mapService.layersHash = {};
+	mapService.mapStyle = config.map.styles.default;
 
 	mapService.map = new mapboxgl.Map({
 		container: config.map.container,
-		style: style,
+		style: mapService.mapStyle,
 		center: config.map.center,
 		zoom: config.map.zoom
 	})
 		.addControl(new mapboxgl.NavigationControl(), config.map.control.position)
-		.on('styledata', function (event)
+		.on('styledata', event =>
 		{
 			if (event.target._loaded && splashScreenService.splashScreen.hasClass('visible'))
 				splashScreenService.hideSplashScreen();
 
 			return true;
 		})
-		.on('load', function ()
+		.on('load', () =>
 		{
 			$http.get(config.layers.route, {
 				params: {
@@ -34,11 +35,11 @@ function mapService($http, $timeout, markerService, splashScreenService)
 					table: config.layers.biosphere.postgres.table
 				}
 			})
-				.then(function success(data)
+				.then(data =>
 				{
 					if (data && data.data)
 					{
-						var biosphere = config.layers.biosphere.layer;
+						const biosphere = config.layers.biosphere.layer;
 						biosphere.source.data = data.data;
 
 						mapService.map.addLayer(biosphere);
@@ -48,12 +49,8 @@ function mapService($http, $timeout, markerService, splashScreenService)
 						console.error('Data Error:\n', data);
 
                     return true;
-
-				}, function failure(data)
-				{
-					console.error('Query Failed:\n', data);
-					return true;
-                });
+				})
+				.catch(data => console.error('Query Failed:\n', data));
 
 			$http.get(config.layers.route, {
 				params: {
@@ -61,21 +58,12 @@ function mapService($http, $timeout, markerService, splashScreenService)
 					table: config.layers.office.postgres.table
 				}
 			})
-				.then(function success(data)
-				{
-					if (data && data.data)
-						markerService.setMarkers(data);
-
-					else
-						console.error('Data Error:\n', data);
-
-					return true;
-
-				}, function failure(data)
-				{
-					console.error('Query Failed:\n', data);
-					return true;
-				});
+				.then(data =>
+					data && data.data ?
+						markerService.setMarkers(data) :
+						console.error('Data Error:\n', data)
+				)
+				.catch(data => console.error('Query Failed:\n', data));
 
 			$http.get(config.layers.route, {
 				params: {
@@ -83,21 +71,12 @@ function mapService($http, $timeout, markerService, splashScreenService)
 					table: config.layers.places.postgres.table
 				}
 			})
-				.then(function success(data)
-				{
-					if (data && data.data)
-						markerService.setMarkers(data);
-
-					else
-						console.error('Data Error:\n', data);
-
-					return true;
-
-				}, function failure(data)
-				{
-					console.error('Query Failed:\n', data);
-					return true;
-				});
+				.then(data =>
+					data && data.data ?
+						markerService.setMarkers(data) :
+						console.error('Data Error:\n', data)
+				)
+				.catch(data => console.error('Query Failed:\n', data));
 
 			$http.get(config.layers.route, {
 				params: {
@@ -105,11 +84,11 @@ function mapService($http, $timeout, markerService, splashScreenService)
 					table: config.layers.trails.postgres.table
 				}
 			})
-				.then(function success(data)
+				.then(data =>
 				{
 					if (data && data.data)
 					{
-						var trails = config.layers.trails.layer;
+						const trails = config.layers.trails.layer;
 						trails.source.data = data.data;
 
 						mapService.map.addLayer(trails);
@@ -122,43 +101,31 @@ function mapService($http, $timeout, markerService, splashScreenService)
 
 					return true;
 
-				}, function failure(data)
-				{
-					console.error('Query Failed:\n', data);
-					return true;
-				});
+				})
+				.catch(data => console.error('Query Failed:\n', data));
 
 			return true;
 		});
 
-		mapService.createLayersHash = function ()
-		{
-			mapService.layers.forEach(function (layer, index)
-			{
-				mapService.layersHash[layer.id] = index;
-				return true;
-			});
-
-			return true;
-		};
+		mapService.createLayersHash = () =>
+			mapService.layers.forEach((layer, index) =>
+				mapService.layersHash[layer.id] = index
+			);
 
 		/* change between 'dark' and 'outdoors' map styles (basemaps) */
-		mapService.changeStyle = function ()
+		mapService.changeStyle = () =>
 		{
 			splashScreenService.addSplashScreen();
 
-			if (style === config.map.styles.default)
-				style = config.map.styles.outdoors;
+			mapService.mapStyle === config.map.styles.default ?
+				mapService.mapStyle = config.map.styles.outdoors :
+				mapService.mapStyle = config.map.styles.default;
 
-			else
-				style = config.map.styles.default;
-
-			mapService.map.setStyle(style);
+			mapService.map.setStyle(mapService.mapStyle);
 
 			/* add layers to new map style after delay for aesthetic purposes */
-			mapService.layers.forEach(function (layer, index)
-			{
-				$timeout(function ()
+			mapService.layers.forEach((layer, index) =>
+				$timeout(() =>
 				{
 					mapService.map.addLayer(layer);
 
@@ -170,20 +137,11 @@ function mapService($http, $timeout, markerService, splashScreenService)
 
 					return true;
 
-				}, 1000);
-
-				return true;
-			});
+				}, 1000)
+			);
 
 			return true;
 		};
 
 	return mapService;
 }
-
-mapService.$inject = ['$http', '$timeout', 'markerService', 'splashScreenService'];
-
-module.exports = mapService;
-
-return true;
-})();

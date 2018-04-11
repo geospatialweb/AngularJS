@@ -1,9 +1,8 @@
-(function () {
 'use strict';
 
-function splashScreenDirective($sce, splashScreenService)
+export function splashScreenDirective($sce, splashScreenService)
 {
-	var ddo = {
+	const ddo = {
 		restrict: 'E',
 		templateUrl: $sce.trustAsResourceUrl('partials/splashScreen.html'),
 		link: splashScreenLink
@@ -17,10 +16,3 @@ function splashScreenDirective($sce, splashScreenService)
 
 	return ddo;
 }
-
-splashScreenDirective.$inject = ['$sce', 'splashScreenService'];
-
-module.exports = splashScreenDirective;
-
-return true;
-})();

@@ -1,50 +1,40 @@
-(function () {
 'use strict';
 
 require('dotenv').config();
 
-var config = require('./config/config'),
-    express = require('express'),
-    favicon = require('serve-favicon'),
-    fs = require('fs'),
-    http = require('http'),
-    morgan = require('morgan'),
-    resolve = require('path').resolve,
-
-    app = express();
-
-const HOST = config.node.HOST,
-      PORT = config.node.PORT;
+const config = require('./config/config');
+const express = require('express');
+const favicon = require('serve-favicon');
+const fs = require('fs');
+const http = require('http');
+const morgan = require('morgan');
+const resolve = require('path').resolve;
 
 http.createServer(
-    app
+    express()
         .use(morgan(config.morgan.format, {
             stream: fs.createWriteStream(resolve(config.morgan.logfile), {
                 flags: config.morgan.flags
             })
         }))
 
-        .use(express.static(resolve(config.src)))
+        .use(express.static(resolve(process.env.SRC)))
 
-        .use(favicon(resolve(config.src, config.favicon)))
+        .use(favicon(resolve(process.env.SRC, config.favicon)))
 
-        .use(config.routes.layers, require(resolve(config.routes.directory, config.routes.layers.slice(1))))
+        .use(`/${config.routes.layers}`, require(resolve(process.env.ROUTES, config.routes.layers)))
 
-        .set('timeout', config.node.timeout)
+        .set('timeout', process.env.TIMEOUT)
 
-        .set('host', HOST)
+        .set('host', process.env.HOST)
 
-        .set('port', PORT)
+        .set('port', process.env.PORT)
 )
-    .listen(PORT, HOST, function (error)
+    .listen(process.env.PORT, process.env.HOST, error =>
     {
-        if (error)
-            console.error(error);
+        error ?
+            console.error(error) :
 
-        else
-            console.log('Active on http://' + config.node.localhost + ':' + PORT + 
-                ' at ' + new Date().toDateString() + ' ' + new Date().toTimeString());
+            console.log(`Active on http://${process.env.LOCALHOST}:${process.env.PORT} at ` +
+                `${new Date().toDateString()} ${new Date().toTimeString()}`);
     });
-
-return true;
-})();

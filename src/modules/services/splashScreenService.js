@@ -1,17 +1,10 @@
-(function () {
 'use strict';
 
-function splashScreenService($document)
+export function splashScreenService($document)
 {
-	var splashScreenService = this;
+	const splashScreenService = this;
 
-	splashScreenService.setSplashScreen = function (element)
-	{
-		splashScreenService.splashScreen = element;
-		return true;
-	};
-
-	splashScreenService.hideSplashScreen = function ()
+	splashScreenService.hideSplashScreen = () =>
 	{
 		splashScreenService.splashScreen.removeClass('visible');
 
@@ -21,24 +14,14 @@ function splashScreenService($document)
 		return true;
 	};
 
-	splashScreenService.addSplashScreen = function ()
-	{
-		splashScreenService.splashScreen.addClass('active');
-		return true;
-	};
+	splashScreenService.setSplashScreen = element =>
+		splashScreenService.splashScreen = element;
 
-	splashScreenService.removeSplashScreen = function ()
-	{
+	splashScreenService.addSplashScreen = () =>
+		splashScreenService.splashScreen.addClass('active');
+
+	splashScreenService.removeSplashScreen = () =>
 		splashScreenService.splashScreen.removeClass('active');
-		return true;
-	};
 
 	return splashScreenService;
 }
-
-splashScreenService.$inject = ['$document'];
-
-module.exports = splashScreenService;
-
-return true;
-})();

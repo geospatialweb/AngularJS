@@ -1,40 +1,35 @@
-(function () {
 'use strict';
 
-var mapboxgl = require('mapbox-gl');
+import mapboxgl from 'mapbox-gl';
 
-function markerService()
+export function markerService()
 {
-	var markerService = this;
+	const markerService = this;
 
 	markerService.markers = [];
 	markerService.markersHash = {};
 
-	markerService.createMarkersHash = function ()
-	{
-		markerService.markers.forEach(function (marker, index)
+	markerService.createMarkersHash = () =>
+		markerService.markers.forEach((marker, index) =>
 		{
-			var element = marker[0].getElement();
+			const element = marker[0].getElement();
 
 			markerService.markersHash[element.id] = index;
 			return true;
 		});
 
-		return true;
-	};
-
-	markerService.setMarkers = function (data)
+	markerService.setMarkers = data =>
 	{
-		var layer = data.config.params.table;
+		const layer = data.config.params.table;
 
 		switch (layer)
 		{
 			case 'office':
-				var office = [];
+				const office = [];
 
-				data.data.features.forEach(function (feature)
+				data.data.features.forEach(feature =>
 				{
-					var element = document.createElement('div');
+					const element = document.createElement('div');
 
 					element.id = layer;
 					element.className = layer + '-marker';
@@ -56,11 +51,11 @@ function markerService()
 				break;
 
 			case 'places':
-				var places = [];
+				const places = [];
 
-				data.data.features.forEach(function (feature)
+				data.data.features.forEach(feature =>
 				{
-					var element = document.createElement('div');
+					const element = document.createElement('div');
 
 					element.id = layer;
 					element.className = layer + '-marker';
@@ -82,11 +77,11 @@ function markerService()
 				break;
 
 			case 'trails':
-				var trails = [];
+				const trails = [];
 
-				data.data.features.forEach(function (feature)
+				data.data.features.forEach(feature =>
 				{
-					var element = document.createElement('div');
+					const element = document.createElement('div');
 
 					element.id = layer;
 					element.className = layer + '-marker';
@@ -113,8 +108,3 @@ function markerService()
 
 	return markerService;
 }
-
-module.exports = markerService;
-
-return true;
-})();

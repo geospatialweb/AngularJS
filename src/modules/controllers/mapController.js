@@ -1,12 +1,6 @@
-(function () {
 'use strict';
 
-function mapController()
+export function mapController()
 {
 	return this;
 }
-
-module.exports = mapController;
-
-return true;
-})();

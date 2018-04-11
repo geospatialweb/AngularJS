@@ -1,9 +1,8 @@
-(function () {
 'use strict';
 
-function mapTrailDirective($sce)
+export function mapTrailDirective($sce)
 {
-	var ddo = {
+	const ddo = {
 		restrict: 'E',
 		templateUrl: $sce.trustAsResourceUrl('partials/mapTrail.html'),
 		controller: 'trailController as trails'
@@ -11,10 +10,3 @@ function mapTrailDirective($sce)
 
 	return ddo;
 }
-
-mapTrailDirective.$inject = ['$sce'];
-
-module.exports = mapTrailDirective;
-
-return true;
-})();

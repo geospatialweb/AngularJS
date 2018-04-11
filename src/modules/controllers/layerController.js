@@ -1,11 +1,12 @@
-(function () {
 'use strict';
 
-function layerController($document, $timeout, $window, displayMarkerService, mapService, markerService)
-{
-	var layers = this;
+import {config} from '../../config/config';
 
-	layers.setLayer = function (layer, $event)
+export function layerController($document, $timeout, $window, displayMarkerService, mapService, markerService)
+{
+	const layers = this;
+
+	layers.setLayer = (layer, $event) =>
 	{
 		if ($event)
 			$event.stopPropagation();
@@ -16,7 +17,7 @@ function layerController($document, $timeout, $window, displayMarkerService, map
 			markerService.createMarkersHash();
 		}
 
-		var element = angular.element($document[0].querySelectorAll('map-layer ul.layers li.' + layer + ' div'));
+		const element = angular.element($document[0].querySelectorAll('map-layer ul.layers li.' + layer + ' div'));
 
 		element.hasClass('active') ? element.removeClass('active') : element.addClass('active');
 
@@ -29,12 +30,9 @@ function layerController($document, $timeout, $window, displayMarkerService, map
 			displayMarkerService.hideMarkers();
 
 			/* show active markers after changing map styles for aesthetic purposes */
-			$timeout(function ()
-			{
-				displayMarkerService.showMarkers();
-				return true;
-
-			}, 1200);
+			mapService.mapStyle === config.map.styles.default ?
+				$timeout(() => displayMarkerService.showMarkers(), 1250) :
+				$timeout(() => displayMarkerService.showMarkers(), 1500);
 
 		} else if (layer === 'biosphere' || layer === 'trails')
 		{
@@ -57,10 +55,8 @@ function layerController($document, $timeout, $window, displayMarkerService, map
 
 		} else if (layer === 'office' || layer === 'places')
 		{
-			if (element.hasClass('active'))
-				displayMarkerService.addMarkers(layer);
-
-			else
+			element.hasClass('active') ?
+				displayMarkerService.addMarkers(layer) :
 				displayMarkerService.removeMarkers(layer);
 
 		} else if (layer === 'resetMap')
@@ -71,10 +67,3 @@ function layerController($document, $timeout, $window, displayMarkerService, map
 
 	return layers;
 }
-
-layerController.$inject = ['$document', '$timeout', '$window', 'displayMarkerService', 'mapService', 'markerService'];
-
-module.exports = layerController;
-
-return true;
-})();

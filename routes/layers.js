@@ -1,20 +1,17 @@
-(function () {
 'use strict';
 
-var express = require('express'),
-	geojson = require('../modules/geojson'),
-	pg = require('pg'),
+const express = require('express');
+const geojson = require('../modules/geojson');
+const pg = require('pg');
 
-	router = express.Router();
-
-var layer = router.get('/', function (req, res)
+module.exports = express.Router().get('/', (req, res) =>
 {
-	/* local postgres instance 
-		change: process.env.DATABASE_URL_LOCAL;
+	/* local postgres instance:
+		process.env.DATABASE_URL_LOCAL;
 	*/
-	pg.connect(process.env.DATABASE_URL, function (error, client, release)
+	pg.connect(process.env.DATABASE_URL, (error, client, release) =>
 	{
-		var sql = 'SELECT ' + req.query.fields + ' FROM ' + req.query.table;
+		const sql = `SELECT ${req.query.fields} FROM ${req.query.table}`;
 
 		if (error)
 		{
@@ -22,7 +19,7 @@ var layer = router.get('/', function (req, res)
 			res.status(500).send(error);
 		
 		} else
-			client.query(sql, function (error, result)
+			client.query(sql, (error, result) =>
 			{
 				release();
 
@@ -45,8 +42,3 @@ var layer = router.get('/', function (req, res)
 
 	return true;
 });
-
-module.exports = layer;
-
-return true;
-})();

@@ -1,26 +1,26 @@
-(function () {
 'use strict';
 
-var geojson = function (features)
+module.exports = features =>
 {
-    var fc = {
+    const fc = {
         "type": "FeatureCollection",
         "features": []
     };
 
-    features.forEach(function (feature)
+    features.forEach(feature =>
     {
-        var geometry = JSON.parse(feature.st_asgeojson),
-            geojson = {
-                "type": "Feature",
-                "geometry": {
-                    "type": geometry.type,
-                    "coordinates": geometry.coordinates
-                },
-                "properties": {}
-            };
+        const geometry = JSON.parse(feature.st_asgeojson);
 
-        for (var prop in feature)
+        const geojson = {
+            "type": "Feature",
+            "geometry": {
+                "type": geometry.type,
+                "coordinates": geometry.coordinates
+            },
+            "properties": {}
+        };
+
+        for (const prop in feature)
         {
             if (prop !== 'st_asgeojson')
                 geojson.properties[prop] = feature[prop];
@@ -33,8 +33,3 @@ var geojson = function (features)
 
     return fc;
 };
-
-module.exports = geojson;
-
-return true;
-})();

@@ -1,13 +1,14 @@
-(function () {
 'use strict';
 
-function trailController(mapService)
+import {config} from '../../config/config';
+
+export function trailController(mapService)
 {
-	var trails = this;
+	const trails = this;
 
-	trails.selectedOption = 'Select Trail';
+	trails.selectedOption = config.trails.selectedOption;
 
-	trails.setTrail = function ($event)
+	trails.setTrail = $event =>
 	{
 		if ($event)
 			$event.stopPropagation();
@@ -15,51 +16,27 @@ function trailController(mapService)
 		switch (trails.selectedOption)
 		{
 			case 'Blue Mountain':
-				mapService.map.flyTo({
-					center: [-76.04, 44.508],
-					zoom: 12
-				});
-
+				mapService.map.flyTo(config.trails.Blue_Mountain);
 				break;
 
 			case 'Charleston Lake':
-				mapService.map.flyTo({
-					center: [-76.04, 44.508],
-					zoom: 12
-				});
-
+				mapService.map.flyTo(config.trails.Charleston_Lake);
 				break;
 
 			case 'Lemoine Point':
-				mapService.map.flyTo({
-					center: [-76.61, 44.223],
-					zoom: 14
-				});
-
+				mapService.map.flyTo(config.trails.Lemoine_Point);
 				break;
 
 			case 'Lyn Valley':
-				mapService.map.flyTo({
-					center: [-75.75, 44.575],
-					zoom: 12
-				});
-
+				mapService.map.flyTo(config.trails.Lyn_Valley);
 				break;
 
 			case 'Mac Johnson':
-				mapService.map.flyTo({
-					center: [-75.75, 44.575],
-					zoom: 12
-				});
-
+				mapService.map.flyTo(config.trails.Mac_Johnson);
 				break;
 
 			case 'Seeley\'s Bay':
-				mapService.map.flyTo({
-					center: [-76.22, 44.485],
-					zoom: 13
-				});
-
+				mapService.map.flyTo(config.trails.Seeleys_Bay);
 				break;
 		}
 
@@ -68,10 +45,3 @@ function trailController(mapService)
 
 	return trails;
 }
-
-trailController.$inject = ['mapService'];
-
-module.exports = trailController;
-
-return true;
-})();

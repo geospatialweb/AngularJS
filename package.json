@@ -2,15 +2,15 @@
   "name": "geospatial_web",
   "version": "0.2.0",
   "author": "John Campbell <johncampbell@geospatialweb.ca> <http://www.linkedin.com/in/geospatialweb>",
-  "description": "Node | Express | AngularJS | Mapbox GL | PostGIS | Webpack | Docker Web Mapping",
+  "description": "Node.js, Express.js, AngularJS, Mapbox GL, PostGIS, Webpack, Docker Web Mapping",
   "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/geospatialweb/devops.git"
   },
   "scripts": {
-    "dev": "webpack --mode development --config ./config/webpack_config.js --watch",
-    "prod": "webpack --mode production --config ./config/webpack_config.js"
+    "build": "webpack --mode production --config ./config/webpack.config.js",
+    "dev": "webpack --mode development --config ./config/webpack.config.dev.js --watch"
   },
   "dependencies": {
     "ajv": "^6.4.0",
@@ -24,6 +24,9 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
     "webpack": "^4.5.0",
     "webpack-cli": "^2.0.14"
   }
