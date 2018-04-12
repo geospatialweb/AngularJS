@@ -2,42 +2,32 @@
 
 const express = require('express');
 const geojson = require('../modules/geojson');
-const pg = require('pg');
+const {Pool} = require('pg');
 
 module.exports = express.Router().get('/', (req, res) =>
 {
-	/* local postgres instance:
-		process.env.DATABASE_URL_LOCAL;
-	*/
-	pg.connect(process.env.DATABASE_URL, (error, client, release) =>
-	{
-		const sql = `SELECT ${req.query.fields} FROM ${req.query.table}`;
+	const sql = `SELECT ${req.query.fields} FROM ${req.query.table}`;
 
-		if (error)
+	const pool = new Pool({
+		/* local instance process.env.DATABASE_URL_LOCAL */
+		connectionString: process.env.DATABASE_URL
+	})
+		.on('error', (err, client) =>
 		{
-			console.error(error);
-			res.status(500).send(error);
-		
-		} else
-			client.query(sql, (error, result) =>
-			{
-				release();
+			console.error('Connection Failed:\n', err);
+			return process.exit(-1);
+		});
 
-				if (error)
-				{
-					console.error(error);
-					res.status(500).send(error);
+	pool.query(sql, (err, rows) =>
+	{
+		err ?
+			console.error('Query Failed:\n', err) :
 
-				} else if (result.rowCount > 0)
-					res.status(200).send(geojson(result.rows));
+			rows.rowCount > 0 ?
+				res.status(200).send(geojson(rows.rows)) :
+				console.error('No rows found:\n', sql);
 
-				else
-					console.error('No rows returned for:\n', sql);
-
-				return true;
-			});
-
-		return true;
+		return pool.end();
 	});
 
 	return true;

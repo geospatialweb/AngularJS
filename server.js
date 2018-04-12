@@ -22,7 +22,7 @@ http.createServer(
 
         .use(favicon(resolve(process.env.SRC, config.favicon)))
 
-        .use(`/${config.routes.layers}`, require(resolve(process.env.ROUTES, config.routes.layers)))
+        .use(config.routes.layers, require(resolve(process.env.ROUTES, config.routes.layers.slice(1))))
 
         .set('timeout', process.env.TIMEOUT)
 
@@ -30,10 +30,10 @@ http.createServer(
 
         .set('port', process.env.PORT)
 )
-    .listen(process.env.PORT, process.env.HOST, error =>
+    .listen(process.env.PORT, process.env.HOST, err =>
     {
-        error ?
-            console.error(error) :
+        err ?
+            console.error('Server Failed:\n', err) :
 
             console.log(`Active on http://${process.env.LOCALHOST}:${process.env.PORT} at ` +
                 `${new Date().toDateString()} ${new Date().toTimeString()}`);

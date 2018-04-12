@@ -5,8 +5,6 @@ import mapboxgl from 'mapbox-gl';
 
 mapboxgl.accessToken = config.map.accessToken;
 
-mapService.$inject = ['$http', '$timeout', 'markerService', 'splashScreenService'];
-
 export function mapService($http, $timeout, markerService, splashScreenService)
 {
 	const mapService = this;
@@ -147,3 +145,5 @@ export function mapService($http, $timeout, markerService, splashScreenService)
 
 	return mapService;
 }
+
+mapService.$inject = ['$http', '$timeout', 'markerService', 'splashScreenService'];

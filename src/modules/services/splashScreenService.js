@@ -1,7 +1,5 @@
 'use strict';
 
-splashScreenService.$inject = ['$document'];
-
 export function splashScreenService($document)
 {
 	const splashScreenService = this;
@@ -26,3 +24,5 @@ export function splashScreenService($document)
 
 	return splashScreenService;
 }
+
+splashScreenService.$inject = ['$document'];

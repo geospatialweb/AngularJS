@@ -8,6 +8,6 @@ module.exports = {
 		logfile: 'logs/access.log'
 	},
 	routes: {
-		layers: 'layers'
+		layers: '/layers'
 	}
 };

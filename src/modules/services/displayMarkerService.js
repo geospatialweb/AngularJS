@@ -1,20 +1,16 @@
 'use strict';
 
-displayMarkerService.$inject = ['$document', 'mapService', 'markerService'];
-
 export function displayMarkerService($document, mapService, markerService)
 {
 	const displayMarkerService = this;
 
 	displayMarkerService.addMarkers = layer =>
-		markerService.markers[markerService.markersHash[layer]].map(marker =>
-			marker.addTo(mapService.map)
-		);
+		markerService.markers[markerService.markersHash[layer]]
+			.map(marker => marker.addTo(mapService.map));
 
 	displayMarkerService.removeMarkers = layer =>
-		markerService.markers[markerService.markersHash[layer]].map(marker =>
-			marker.remove()
-		);
+		markerService.markers[markerService.markersHash[layer]]
+			.map(marker => marker.remove());
 
 	displayMarkerService.hideMarkers = () =>
 		markerService.markers.map(marker =>
@@ -47,3 +43,5 @@ export function displayMarkerService($document, mapService, markerService)
 
 	return displayMarkerService;
 }
+
+displayMarkerService.$inject = ['$document', 'mapService', 'markerService'];

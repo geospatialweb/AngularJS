@@ -1,7 +1,5 @@
 'use strict';
 
-mapTrailDirective.$inject = ['$sce'];
-
 export function mapTrailDirective($sce)
 {
 	const ddo = {
@@ -12,3 +10,5 @@ export function mapTrailDirective($sce)
 
 	return ddo;
 }
+
+mapTrailDirective.$inject = ['$sce'];

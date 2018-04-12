@@ -1,7 +1,5 @@
 'use strict';
 
-splashScreenDirective.$inject = ['$sce', 'splashScreenService'];
-
 export function splashScreenDirective($sce, splashScreenService)
 {
 	const ddo = {
@@ -18,3 +16,5 @@ export function splashScreenDirective($sce, splashScreenService)
 
 	return ddo;
 }
+
+splashScreenDirective.$inject = ['$sce', 'splashScreenService'];
