@@ -113,6 +113,7 @@ map-layer ul.layers li.office div.active,
 map-layer ul.layers li.places div.active,
 map-layer ul.layers li.trails div.active {
     background: rgb(120,110,100);
+    color: rgb(216,216,216);
 }
 
 map-layer div.biosphere-icon {
