@@ -2,23 +2,28 @@
 
 import mapboxgl from 'mapbox-gl';
 
-export function markerService()
+export default class markerService
 {
-	const markerService = this;
+	constructor()
+	{
+		this.markers = [];
+		this.markersHash = {};
+	}
 
-	markerService.markers = [];
-	markerService.markersHash = {};
-
-	markerService.createMarkersHash = () =>
-		markerService.markers.map((marker, index) =>
+	createMarkersHash()
+	{
+		this.markers.map((marker, index) =>
 		{
 			const element = marker[0].getElement();
 
-			markerService.markersHash[element.id] = index;
+			this.markersHash[element.id] = index;
 			return true;
 		});
 
-	markerService.setMarkers = data =>
+		return true;
+	}
+
+	setMarkers(data)
 	{
 		const layer = data.config.params.table;
 
@@ -46,7 +51,7 @@ export function markerService()
 					return true;
 				});
 
-				markerService.markers.push(office);
+				this.markers.push(office);
 
 				break;
 
@@ -72,7 +77,7 @@ export function markerService()
 					return true;
 				});
 
-				markerService.markers.push(places);
+				this.markers.push(places);
 
 				break;
 
@@ -98,13 +103,11 @@ export function markerService()
 					return true;
 				});
 
-				markerService.markers.push(trails);
+				this.markers.push(trails);
 
 				break;
 		}
 
 		return true;
-	};
-
-	return markerService;
+	}
 }

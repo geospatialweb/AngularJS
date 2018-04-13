@@ -1,14 +1,11 @@
 'use strict';
 
-export function mapTrailDirective($sce)
+export default class mapTrailDirective
 {
-	const ddo = {
-		restrict: 'E',
-		templateUrl: $sce.trustAsResourceUrl('partials/mapTrail.html'),
-		controller: 'trailController as trails'
-	};
-
-	return ddo;
+	constructor()
+	{
+		this.restrict = 'E';
+		this.templateUrl = 'partials/mapTrail.html';
+		this.controller = 'trailController as trails';
+	}
 }
-
-mapTrailDirective.$inject = ['$sce'];

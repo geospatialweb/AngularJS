@@ -20,14 +20,14 @@
 			<a class='repo' href='https://github.com/geospatialweb/devops' target='_blank'>GitHub Repository</a>
 		</section>
 
-		<section class='mapContainer' ng-controller='mapController'>
-			<splash-screen></splash-screen>
+		<section class='mapContainer' ng-controller='splashScreenController'>
 			<div id='map'></div>
+			<splash-screen></splash-screen>
 			<map-layer></map-layer>
 			<map-trail></map-trail>
 		</section>
 
-		<script src='dist/main.js'></script>
-		<script src='dist/vendor.js'></script>
+		<script src='build/main.js'></script>
+		<script src='build/vendor.js'></script>
 	</body>
 </html>

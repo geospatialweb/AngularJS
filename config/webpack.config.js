@@ -24,6 +24,6 @@ module.exports = {
 	},
 
 	output: {
-		path: resolve('src', 'dist')
+		path: resolve('src', 'build')
 	}
 };

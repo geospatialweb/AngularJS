@@ -1,6 +1,6 @@
 'use strict';
 
-export const config = {
+export default {
 	map: {
 		accessToken: 'pk.eyJ1IjoiZ2Vvc3BhdGlhbHdlYiIsImEiOiJ6WGdOUFRvIn0.GoVRwZq5EfVsLNGyCqgZTw',
 		center: [-76.3, 44.45],
@@ -97,4 +97,4 @@ export const config = {
 		},
 		selectedOption: 'Select Trail'
 	}
-};
+}

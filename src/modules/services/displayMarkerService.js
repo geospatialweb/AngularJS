@@ -1,47 +1,65 @@
 'use strict';
 
-export function displayMarkerService($document, mapService, markerService)
+export default class displayMarkerService
 {
-	const displayMarkerService = this;
+	constructor($document, mapService, markerService) {
+		this.$document = $document;
+		this.mapService = mapService;
+		this.markerService = markerService;
+	}
 
-	displayMarkerService.addMarkers = layer =>
-		markerService.markers[markerService.markersHash[layer]]
-			.map(marker => marker.addTo(mapService.map));
+	addMarkers(layer)
+	{
+		this.markerService.markers[this.markerService.markersHash[layer]]
+			.map(marker => marker.addTo(this.mapService.map));
 
-	displayMarkerService.removeMarkers = layer =>
-		markerService.markers[markerService.markersHash[layer]]
+		return true;
+	}
+
+	removeMarkers(layer)
+	{
+		this.markerService.markers[this.markerService.markersHash[layer]]
 			.map(marker => marker.remove());
 
-	displayMarkerService.hideMarkers = () =>
-		markerService.markers.map(marker =>
+		return true;
+	}
+
+	hideMarkers()
+	{
+		this.markerService.markers.map(marker =>
 		{
 			const id = marker[0].getElement().id;
-			const element = angular.element($document[0].querySelectorAll(`div.${id}-marker`));
+			const element = angular.element(this.$document[0].querySelectorAll(`div.${id}-marker`));
 
 			if (element.length)
 			{
-				displayMarkerService.removeMarkers(id);
+				this.removeMarkers(id);
 				marker.hidden = true;
 			}
 
 			return true;
 		});
 
-	displayMarkerService.showMarkers = () =>
-		markerService.markers.map(marker =>
+		return true;
+	}
+
+	showMarkers()
+	{
+		this.markerService.markers.map(marker =>
 		{
 			if (marker.hidden)
 			{
 				const id = marker[0].getElement().id;
 
-				displayMarkerService.addMarkers(id);
+				this.addMarkers(id);
 				marker.hidden = false;
 			}
 
 			return true;
 		});
 
-	return displayMarkerService;
+		return true;
+	}
 }
 
 displayMarkerService.$inject = ['$document', 'mapService', 'markerService'];

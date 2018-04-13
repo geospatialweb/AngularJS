@@ -1,14 +1,11 @@
 'use strict';
 
-export function mapLayerDirective($sce)
+export default class mapLayerDirective
 {
-	const ddo = {
-		restrict: 'E',
-		templateUrl: $sce.trustAsResourceUrl('partials/mapLayer.html'),
-		controller: 'layerController as layers'
-	};
-
-	return ddo;
+	constructor()
+	{
+		this.restrict = 'E';
+		this.templateUrl = 'partials/mapLayer.html';
+		this.controller = 'layerController as layers';
+	}
 }
-
-mapLayerDirective.$inject = ['$sce'];

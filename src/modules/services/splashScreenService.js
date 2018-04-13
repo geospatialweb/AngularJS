@@ -1,28 +1,37 @@
 'use strict';
 
-export function splashScreenService($document)
+export default class splashScreenService
 {
-	const splashScreenService = this;
-
-	splashScreenService.setSplashScreen = element =>
-		splashScreenService.splashScreen = element;
-
-	splashScreenService.addSplashScreen = () =>
-		splashScreenService.splashScreen.addClass('visible');
-
-	splashScreenService.removeSplashScreen = () =>
-		splashScreenService.splashScreen.removeClass('visible');
-
-	splashScreenService.hideSplashScreen = () =>
+	constructor($document)
 	{
-		splashScreenService.splashScreen.removeClass('active');
+		this.$document = $document;
+		this.splashScreen = undefined;
+	}
 
-		angular.element($document[0].querySelectorAll('map-layer ul.layers li.biosphere div')).addClass('active');
-
+	setSplashScreen(element)
+	{
+		this.splashScreen = element;
 		return true;
-	};
+	}
 
-	return splashScreenService;
+	addSplashScreen()
+	{
+		this.splashScreen.addClass('visible');
+		return true;
+	}
+
+	removeSplashScreen()
+	{
+		this.splashScreen.removeClass('visible');
+		return true;
+	}
+
+	hideSplashScreen()
+	{
+		this.splashScreen.removeClass('active');
+		angular.element(this.$document[0].querySelectorAll('map-layer ul.layers li.biosphere div')).addClass('active');
+		return true;
+	}
 }
 
 splashScreenService.$inject = ['$document'];

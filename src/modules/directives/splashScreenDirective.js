@@ -1,20 +1,17 @@
 'use strict';
 
-export function splashScreenDirective($sce, splashScreenService)
+export default class splashScreenDirective
 {
-	const ddo = {
-		restrict: 'E',
-		templateUrl: $sce.trustAsResourceUrl('partials/splashScreen.html'),
-		link: splashScreenLink
-	};
-
-	function splashScreenLink(scope, element)
+	constructor()
 	{
-        splashScreenService.setSplashScreen(element.children());
+		this.restrict = 'E';
+		this.templateUrl = 'partials/splashScreen.html';
+		this.controller = 'splashScreenController as splash';
+	}
+
+	link(scope, element)
+	{
+        scope.splash.splashScreenService.setSplashScreen(element.children());
         return true;
     }
-
-	return ddo;
 }
-
-splashScreenDirective.$inject = ['$sce', 'splashScreenService'];

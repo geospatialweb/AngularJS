@@ -1,49 +1,49 @@
 'use strict';
 
-import {config} from '../../config/config';
+import config from '../../config/config';
 
-export function trailController(mapService)
+export default class trailController
 {
-	const trails = this;
+	constructor(mapService)
+	{
+		this.mapService = mapService;
+		this.selectedOption = config.trails.selectedOption;
+	}
 
-	trails.selectedOption = config.trails.selectedOption;
-
-	trails.setTrail = $event =>
+	setTrail($event)
 	{
 		if ($event)
 			$event.stopPropagation();
 
-		switch (trails.selectedOption)
+		switch (this.selectedOption)
 		{
 			case 'Blue Mountain':
-				mapService.map.flyTo(config.trails['Blue Mountain']);
+				this.mapService.map.flyTo(config.trails['Blue Mountain']);
 				break;
 
 			case 'Charleston Lake':
-				mapService.map.flyTo(config.trails['Charleston Lake']);
+				this.mapService.map.flyTo(config.trails['Charleston Lake']);
 				break;
 
 			case 'Lemoine Point':
-				mapService.map.flyTo(config.trails['Lemoine Point']);
+				this.mapService.map.flyTo(config.trails['Lemoine Point']);
 				break;
 
 			case 'Lyn Valley':
-				mapService.map.flyTo(config.trails['Lyn Valley']);
+				this.mapService.map.flyTo(config.trails['Lyn Valley']);
 				break;
 
 			case 'Mac Johnson':
-				mapService.map.flyTo(config.trails['Mac Johnson']);
+				this.mapService.map.flyTo(config.trails['Mac Johnson']);
 				break;
 
 			case 'Seeley\'s Bay':
-				mapService.map.flyTo(config.trails['Seeley\'s Bay']);
+				this.mapService.map.flyTo(config.trails['Seeley\'s Bay']);
 				break;
 		}
 
 		return true;
-	};	
-
-	return trails;
+	}
 }
 
 trailController.$inject = ['mapService'];

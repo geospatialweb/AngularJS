@@ -1,71 +1,77 @@
 'use strict';
 
-import {config} from '../../config/config';
+import config from '../../config/config';
 
-export function layerController($document, $timeout, $window, displayMarkerService, mapService, markerService)
+export default class layerController
 {
-	const layers = this;
+	constructor($document, $timeout, $window, displayMarkerService, mapService, markerService)
+	{
+		this.$document = $document;
+		this.$timeout = $timeout;
+		this.$window = $window;
+		this.displayMarkerService = displayMarkerService;
+		this.mapService = mapService;
+		this.markerService = markerService;
+	}
 
-	layers.setLayer = (layer, $event) =>
+	setLayer(layer, $event)
 	{
 		if ($event)
 			$event.stopPropagation();
 
-		if (angular.equals(mapService.layersHash, {}) && angular.equals(markerService.markersHash, {}))
+		if (angular.equals(this.mapService.layersHash, {}) && angular.equals(this.markerService.markersHash, {}))
 		{
-			mapService.createLayersHash();
-			markerService.createMarkersHash();
+			this.mapService.createLayersHash();
+			this.markerService.createMarkersHash();
 		}
 
-		const element = angular.element($document[0].querySelectorAll(`map-layer ul.layers li.${layer} div`));
+		const element = angular.element(this.$document[0].querySelectorAll(`map-layer ul.layers li.${layer} div`));
 
 		element.hasClass('active') ? element.removeClass('active') : element.addClass('active');
 
 		if (layer === 'terrain')
 		{
 			/* change between 'dark' and 'outdoors' map styles (basemaps) */
-			mapService.changeStyle();
+			this.mapService.changeStyle();
 
 			/* hide active markers when changing map styles for aesthetic purposes */
-			displayMarkerService.hideMarkers();
+			this.displayMarkerService.hideMarkers();
 
 			/* show active markers after changing map styles for aesthetic purposes */
-			mapService.mapStyle === config.map.styles.default ?
-				$timeout(() => displayMarkerService.showMarkers(), 1250) :
-				$timeout(() => displayMarkerService.showMarkers(), 1500);
+			this.mapService.mapStyle === config.map.styles.default ?
+				this.$timeout(() => this.displayMarkerService.showMarkers(), 1250) :
+				this.$timeout(() => this.displayMarkerService.showMarkers(), 1500);
 
 		} else if (layer === 'biosphere' || layer === 'trails')
 		{
 			if (element.hasClass('active'))
 			{				
-				mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
-				mapService.layers[mapService.layersHash[layer]].layout.visibility = 'visible';
+				this.mapService.map.setLayoutProperty(layer, 'visibility', 'visible');
+				this.mapService.layers[this.mapService.layersHash[layer]].layout.visibility = 'visible';
 
 				if (layer === 'trails')
-					displayMarkerService.addMarkers(layer);
+					this.displayMarkerService.addMarkers(layer);
 
 			} else
 			{
-				mapService.map.setLayoutProperty(layer, 'visibility', 'none');
-				mapService.layers[mapService.layersHash[layer]].layout.visibility = 'none';
+				this.mapService.map.setLayoutProperty(layer, 'visibility', 'none');
+				this.mapService.layers[this.mapService.layersHash[layer]].layout.visibility = 'none';
 
 				if (layer === 'trails')
-					displayMarkerService.removeMarkers(layer);
+					this.displayMarkerService.removeMarkers(layer);
 			}
 
 		} else if (layer === 'office' || layer === 'places')
 		{
 			element.hasClass('active') ?
-				displayMarkerService.addMarkers(layer) :
-				displayMarkerService.removeMarkers(layer);
+				this.displayMarkerService.addMarkers(layer) :
+				this.displayMarkerService.removeMarkers(layer);
 
 		} else if (layer === 'resetMap')
-			$window.location.reload(true);
+			this.$window.location.reload(true);
 
 		return true;
-	};
-
-	return layers;
+	}
 }
 
 layerController.$inject = ['$document', '$timeout', '$window', 'displayMarkerService', 'mapService', 'markerService'];
