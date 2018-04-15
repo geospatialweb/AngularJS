@@ -2,30 +2,30 @@
 
 import angular from 'angular';
 
-import layerController from './controllers/layerController';
-import trailController from './controllers/trailController';
-import splashScreenController from './controllers/splashScreenController';
+import LayerController from './controllers/LayerController';
+import TrailController from './controllers/TrailController';
+import SplashScreenController from './controllers/SplashScreenController';
 
-import mapLayerDirective from './directives/mapLayerDirective';
-import mapTrailDirective from './directives/mapTrailDirective';
-import splashScreenDirective from './directives/splashScreenDirective';
+import MapLayerDirective from './directives/MapLayerDirective';
+import MapTrailDirective from './directives/MapTrailDirective';
+import SplashScreenDirective from './directives/SplashScreenDirective';
 
-import mapService from './services/mapService';
-import markerService from './services/markerService';
-import displayMarkerService from './services/displayMarkerService';
-import splashScreenService from './services/splashScreenService';
+import MapService from './services/MapService';
+import MarkerService from './services/MarkerService';
+import DisplayMarkerService from './services/DisplayMarkerService';
+import SplashScreenService from './services/SplashScreenService';
 
 angular.module('app', [])
-	.controller('LayerController', layerController)
-	.controller('TrailController', trailController)
-	.controller('SplashScreenController', splashScreenController)
+	.controller('LayerController', LayerController)
+	.controller('TrailController', TrailController)
+	.controller('SplashScreenController', SplashScreenController)
 
-	.directive('mapLayer', () => new mapLayerDirective)
-	.directive('mapTrail', () => new mapTrailDirective)
-	.directive('splashScreen', () => new splashScreenDirective)
+	.directive('mapLayer', () => new MapLayerDirective)
+	.directive('mapTrail', () => new MapTrailDirective)
+	.directive('splashScreen', () => new SplashScreenDirective)
 
-	.service('mapService', mapService)
-	.service('markerService', markerService)
-	.service('displayMarkerService', displayMarkerService)
-	.service('splashScreenService', splashScreenService)
+	.service('mapService', MapService)
+	.service('markerService', MarkerService)
+	.service('displayMarkerService', DisplayMarkerService)
+	.service('splashScreenService', SplashScreenService)
 ;
