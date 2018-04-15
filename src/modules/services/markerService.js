@@ -2,7 +2,7 @@
 
 import mapboxgl from 'mapbox-gl';
 
-export default class markerService
+export default class MarkerService
 {
 	constructor()
 	{
@@ -29,7 +29,7 @@ export default class markerService
 
 		switch (layer)
 		{
-			case 'office':
+			case 'office': {
 				const office = [];
 
 				data.data.features.map(feature =>
@@ -54,8 +54,8 @@ export default class markerService
 				this.markers.push(office);
 
 				break;
-
-			case 'places':
+			}
+			case 'places': {
 				const places = [];
 
 				data.data.features.map(feature =>
@@ -80,8 +80,8 @@ export default class markerService
 				this.markers.push(places);
 
 				break;
-
-			case 'trails':
+			}
+			case 'trails': {
 				const trails = [];
 
 				data.data.features.map(feature =>
@@ -106,6 +106,7 @@ export default class markerService
 				this.markers.push(trails);
 
 				break;
+			}
 		}
 
 		return true;

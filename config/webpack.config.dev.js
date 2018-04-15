@@ -20,8 +20,8 @@ module.exports = {
 
 	optimization: {
 		splitChunks: {
-		  chunks: 'initial',
-		  name: 'vendor'
+			chunks: 'initial',
+			name: 'vendor'
 		}
 	},
 

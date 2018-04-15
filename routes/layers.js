@@ -12,7 +12,7 @@ module.exports = express.Router().get('/', (req, res) =>
 		/* local instance process.env.DATABASE_URL_LOCAL */
 		connectionString: process.env.DATABASE_URL
 	})
-		.on('error', (err, client) =>
+		.on('error', err =>
 		{
 			console.error('Connection Failed:\n', err);
 			return process.exit(-1);

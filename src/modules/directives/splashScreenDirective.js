@@ -1,17 +1,17 @@
 'use strict';
 
-export default class splashScreenDirective
+export default class SplashScreenDirective
 {
 	constructor()
 	{
 		this.restrict = 'E';
 		this.templateUrl = 'partials/splashScreen.html';
-		this.controller = 'splashScreenController as splash';
+		this.controller = 'SplashScreenController as splashScreen';
 	}
 
 	link(scope, element)
 	{
-        scope.splash.splashScreenService.setSplashScreen(element.children());
+        scope.splashScreen.splashScreenService.setSplashScreen(element.children());
         return true;
     }
 }

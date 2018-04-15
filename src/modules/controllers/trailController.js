@@ -2,7 +2,7 @@
 
 import config from '../../config/config';
 
-export default class trailController
+export default class TrailController
 {
 	constructor(mapService)
 	{
@@ -46,4 +46,4 @@ export default class trailController
 	}
 }
 
-trailController.$inject = ['mapService'];
+TrailController.$inject = ['mapService'];

@@ -1,8 +1,9 @@
 'use strict';
 
-export default class displayMarkerService
+export default class DisplayMarkerService
 {
-	constructor($document, mapService, markerService) {
+	constructor($document, mapService, markerService)
+	{
 		this.$document = $document;
 		this.mapService = mapService;
 		this.markerService = markerService;
@@ -62,4 +63,4 @@ export default class displayMarkerService
 	}
 }
 
-displayMarkerService.$inject = ['$document', 'mapService', 'markerService'];
+DisplayMarkerService.$inject = ['$document', 'mapService', 'markerService'];

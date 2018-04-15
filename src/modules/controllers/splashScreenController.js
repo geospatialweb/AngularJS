@@ -1,6 +1,6 @@
 'use strict';
 
-export default class splashScreenController
+export default class SplashScreenController
 {
 	constructor(splashScreenService)
 	{
@@ -8,4 +8,4 @@ export default class splashScreenController
 	}
 }
 
-splashScreenController.$inject = ['splashScreenService'];
+SplashScreenController.$inject = ['splashScreenService'];

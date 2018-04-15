@@ -5,7 +5,7 @@ import mapboxgl from 'mapbox-gl';
 
 mapboxgl.accessToken = config.map.accessToken;
 
-export default class mapService
+export default class MapService
 {
 	constructor($http, $timeout, markerService, splashScreenService)
 	{
@@ -154,4 +154,4 @@ export default class mapService
 	}
 }
 
-mapService.$inject = ['$http', '$timeout', 'markerService', 'splashScreenService'];
+MapService.$inject = ['$http', '$timeout', 'markerService', 'splashScreenService'];

@@ -1,11 +1,11 @@
 'use strict';
 
-export default class mapLayerDirective
+export default class MapLayerDirective
 {
 	constructor()
 	{
 		this.restrict = 'E';
 		this.templateUrl = 'partials/mapLayer.html';
-		this.controller = 'layerController as layers';
+		this.controller = 'LayerController as layers';
 	}
 }

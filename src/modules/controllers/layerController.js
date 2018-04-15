@@ -2,7 +2,7 @@
 
 import config from '../../config/config';
 
-export default class layerController
+export default class LayerController
 {
 	constructor($document, $timeout, $window, displayMarkerService, mapService, markerService)
 	{
@@ -74,4 +74,4 @@ export default class layerController
 	}
 }
 
-layerController.$inject = ['$document', '$timeout', '$window', 'displayMarkerService', 'mapService', 'markerService'];
+LayerController.$inject = ['$document', '$timeout', '$window', 'displayMarkerService', 'mapService', 'markerService'];

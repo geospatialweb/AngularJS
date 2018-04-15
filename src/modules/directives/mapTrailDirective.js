@@ -1,11 +1,11 @@
 'use strict';
 
-export default class mapTrailDirective
+export default class MapTrailDirective
 {
 	constructor()
 	{
 		this.restrict = 'E';
 		this.templateUrl = 'partials/mapTrail.html';
-		this.controller = 'trailController as trails';
+		this.controller = 'TrailController as trails';
 	}
 }

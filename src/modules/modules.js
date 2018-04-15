@@ -16,9 +16,9 @@ import displayMarkerService from './services/displayMarkerService';
 import splashScreenService from './services/splashScreenService';
 
 angular.module('app', [])
-	.controller('layerController', layerController)
-	.controller('trailController', trailController)
-	.controller('splashScreenController', splashScreenController)
+	.controller('LayerController', layerController)
+	.controller('TrailController', trailController)
+	.controller('SplashScreenController', splashScreenController)
 
 	.directive('mapLayer', () => new mapLayerDirective)
 	.directive('mapTrail', () => new mapTrailDirective)
