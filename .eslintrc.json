@@ -4,7 +4,10 @@
         "es6": true,
         "node": true
     },
-    "extends": ["eslint:recommended", "angular"],
+    "extends": ["eslint:recommended"],
+    "globals": {
+        "angular": true
+    },
     "parserOptions": {
         "sourceType": "module"
     },

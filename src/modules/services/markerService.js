@@ -29,7 +29,8 @@ export default class MarkerService
 
 		switch (layer)
 		{
-			case 'office': {
+			case 'office':
+			{
 				const office = [];
 
 				data.data.features.map(feature =>
@@ -55,7 +56,8 @@ export default class MarkerService
 
 				break;
 			}
-			case 'places': {
+			case 'places':
+			{
 				const places = [];
 
 				data.data.features.map(feature =>
@@ -81,7 +83,8 @@ export default class MarkerService
 
 				break;
 			}
-			case 'trails': {
+			case 'trails':
+			{
 				const trails = [];
 
 				data.data.features.map(feature =>
