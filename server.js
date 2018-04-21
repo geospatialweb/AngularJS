@@ -6,30 +6,30 @@ const config = require('./config/config');
 const express = require('express');
 const favicon = require('serve-favicon');
 const fs = require('fs');
-const http = require('http');
 const morgan = require('morgan');
 const resolve = require('path').resolve;
 
-http.createServer(
-    express()
-        .use(morgan(config.morgan.format, {
-            stream: fs.createWriteStream(resolve(config.morgan.logfile), {
-                flags: config.morgan.flags
-            })
-        }))
+express()
+    .use(morgan(config.morgan.format, {
+        stream: fs.createWriteStream(resolve(config.morgan.logfile), {
+            flags: config.morgan.flags
+        })
+    }))
 
-        .use(express.static(resolve(process.env.SRC)))
+    .use(express.static(resolve(process.env.SRC)))
 
-        .use(favicon(resolve(process.env.SRC, config.favicon)))
+    .use(favicon(resolve(process.env.SRC, config.favicon)))
 
-        .use(config.routes.layers, require(resolve(process.env.ROUTES, config.routes.layers.slice(1))))
+    .use(config.layers.route, require(resolve(process.env.ROUTES, config.layers.route.slice(1))))
 
-        .set('timeout', process.env.TIMEOUT)
+    .set('env', process.env.NODE_ENV)
 
-        .set('host', process.env.HOST)
+    .set('host', process.env.HOST)
 
-        .set('port', process.env.PORT)
-)
+    .set('port', process.env.PORT)
+
+    .set('timeout', process.env.TIMEOUT)
+
     .listen(process.env.PORT, process.env.HOST, err =>
     {
         err ?

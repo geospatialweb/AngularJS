@@ -3,7 +3,15 @@
 const resolve = require('path').resolve;
 
 module.exports = {
-	devtool: 'eval-source-map',
+	mode: 'development',
+
+	devtool: 'inline-source-map',
+
+	entry: resolve('./src/index.js'),
+
+	output: {
+		path: resolve('src', 'build')
+	},
 
 	module: {
 		rules: [{
@@ -23,9 +31,5 @@ module.exports = {
 			chunks: 'initial',
 			name: 'vendor'
 		}
-	},
-
-	output: {
-		path: resolve('src', 'build')
 	}
 };

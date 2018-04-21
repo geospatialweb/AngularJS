@@ -1,6 +1,6 @@
 'use strict';
 
-import config from '../../config/config';
+import config from '../../../config/config';
 import mapboxgl from 'mapbox-gl';
 
 mapboxgl.accessToken = config.map.accessToken;

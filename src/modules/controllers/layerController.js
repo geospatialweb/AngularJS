@@ -1,6 +1,6 @@
 'use strict';
 
-import config from '../../config/config';
+import config from '../../../config/config';
 
 export default class LayerController
 {
@@ -39,8 +39,8 @@ export default class LayerController
 
 			/* show active markers after changing map styles for aesthetic purposes */
 			this.mapService.mapStyle === config.map.styles.default ?
-				this.$timeout(() => this.displayMarkerService.showMarkers(), 1250) :
-				this.$timeout(() => this.displayMarkerService.showMarkers(), 1500);
+				this.$timeout(() => this.displayMarkerService.showMarkers(), 1200) :
+				this.$timeout(() => this.displayMarkerService.showMarkers(), 1400);
 
 		} else if (layer === 'biosphere' || layer === 'trails')
 		{

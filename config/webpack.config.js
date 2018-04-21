@@ -3,6 +3,14 @@
 const resolve = require('path').resolve;
 
 module.exports = {
+	mode: 'production',
+
+	entry: resolve('./src/index.js'),
+
+	output: {
+		path: resolve('src', 'build')
+	},
+
 	module: {
 		rules: [{
 			test: /\.js$/,
@@ -21,9 +29,5 @@ module.exports = {
 			chunks: 'initial',
 			name: 'vendor'
 		}
-	},
-
-	output: {
-		path: resolve('src', 'build')
 	}
 };
