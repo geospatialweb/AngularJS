@@ -1,0 +1,16 @@
+127.0.0.1 - - [21/Apr/2018:06:05:16 +0000] "GET / HTTP/1.1" 200 1289
+127.0.0.1 - - [21/Apr/2018:06:05:16 +0000] "GET /styles/main.css HTTP/1.1" 200 3365
+127.0.0.1 - - [21/Apr/2018:06:05:16 +0000] "GET /build/main.js HTTP/1.1" 200 15611
+127.0.0.1 - - [21/Apr/2018:06:05:16 +0000] "GET /build/vendor.js HTTP/1.1" 200 807967
+127.0.0.1 - - [21/Apr/2018:06:05:16 +0000] "GET /assets/logo.png HTTP/1.1" 200 20600
+127.0.0.1 - - [21/Apr/2018:06:05:16 +0000] "GET /partials/mapTrail.html HTTP/1.1" 200 370
+127.0.0.1 - - [21/Apr/2018:06:05:16 +0000] "GET /partials/splashScreen.html HTTP/1.1" 200 28
+127.0.0.1 - - [21/Apr/2018:06:05:16 +0000] "GET /partials/mapLayer.html HTTP/1.1" 200 1104
+127.0.0.1 - - [21/Apr/2018:06:05:16 +0000] "GET /assets/trails.png HTTP/1.1" 200 1062
+127.0.0.1 - - [21/Apr/2018:06:05:16 +0000] "GET /assets/biosphere.png HTTP/1.1" 200 608
+127.0.0.1 - - [21/Apr/2018:06:05:16 +0000] "GET /assets/places.png HTTP/1.1" 200 904
+127.0.0.1 - - [21/Apr/2018:06:05:16 +0000] "GET /assets/office.png HTTP/1.1" 200 1092
+127.0.0.1 - - [21/Apr/2018:06:05:18 +0000] "GET /layers?fields=name,+description,+ST_AsGeoJSON(geom)&table=places HTTP/1.1" 200 11728
+127.0.0.1 - - [21/Apr/2018:06:05:18 +0000] "GET /layers?fields=name,+description,+lat,+lng,+ST_AsGeoJSON(geom)&table=trails HTTP/1.1" 200 6222
+127.0.0.1 - - [21/Apr/2018:06:05:21 +0000] "GET /layers?fields=name,+description,+ST_AsGeoJSON(geom)&table=office HTTP/1.1" 200 248
+127.0.0.1 - - [21/Apr/2018:06:05:21 +0000] "GET /layers?fields=name,+description,+ST_AsGeoJSON(geom)&table=biosphere HTTP/1.1" 200 600
